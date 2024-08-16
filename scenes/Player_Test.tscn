@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dn57h06nvqlu1"]
 
-[ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_u722v"]
+[ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_fnfun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nls3r"]
 
@@ -12,7 +12,7 @@ size = Vector2(20, 20)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -311)
 
-[node name="PlayerBody" parent="." instance=ExtResource("1_u722v")]
+[node name="PlayerBody" parent="." instance=ExtResource("1_fnfun")]
 position = Vector2(0, -155)
 
 [node name="Ground" type="StaticBody2D" parent="."]
@@ -22,4 +22,14 @@ scale = Vector2(20, 0.5)
 shape = SubResource("RectangleShape2D_nls3r")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Ground"]
+mesh = SubResource("QuadMesh_qucg8")
+
+[node name="Ground2" type="StaticBody2D" parent="."]
+position = Vector2(246, -62)
+scale = Vector2(20, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2"]
+shape = SubResource("RectangleShape2D_nls3r")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground2"]
 mesh = SubResource("QuadMesh_qucg8")

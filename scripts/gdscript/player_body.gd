@@ -17,10 +17,11 @@ extends CharacterBody2D
 @export var sprint_speed := 80.0
 @export var coyote_time := 0.02
 @export var hover_amount := 2.0
-@export var hover_recovery := 1.34
+@export var hover_recovery := 5.56
 @export var hover_force := 340.0
 
 @export var camera: Camera2D
+@export var ceiling_ray: RayCast2D
 
 var final_velocity: Vector2
 var target_camera_position: Vector2
@@ -43,10 +44,9 @@ var t_velocity_y: float
 var temp_result: Vector2
 
 func _ready():
-	just_jumped = true
-	can_hover = false
-	hover_a = hover_amount
-
+	just_jumped=true
+	can_hover=false
+	hover_a=hover_amount
 
 func _process(delta) -> void:
 	final_velocity = _calculate_move_vector(delta)
@@ -56,7 +56,6 @@ func _process(delta) -> void:
 	_update_upper_collider_position(delta)
 	_update_lower_collider_position(delta)
 	_move(final_velocity)
-	
 
 func _calculate_move_vector(delta : float) -> Vector2:
 	if !is_on_floor():
@@ -74,19 +73,19 @@ func _calculate_move_vector(delta : float) -> Vector2:
 		else:
 			in_air = false
 	
-	if is_on_floor() && Input.is_action_pressed("Forward") || can_still_jump && Input.is_action_pressed("Forward"):	
-		t_velocity_y -= jump_force
+	if is_on_floor() && Input.is_action_pressed("Forward") && !ceiling_ray.is_colliding() || can_still_jump && Input.is_action_pressed("Forward") && !ceiling_ray.is_colliding():	
+		t_velocity_y-=jump_force
 		landing_partical_CPU.emitting = true
 		just_jumped = true
 		if can_still_jump == true:
-			can_still_jump = false
+			can_still_jump=false
 	
 	if !just_jumped && !is_on_floor():
 		if c_time < coyote_time:
-			c_time += 0.15 * delta
-			can_still_jump = true
+			c_time+=0.15*delta
+			can_still_jump=true
 		else:
-			can_still_jump = false
+			can_still_jump=false
 	
 	result.y = t_velocity_y
 	
@@ -96,33 +95,28 @@ func _calculate_move_vector(delta : float) -> Vector2:
 		t_velocity_y+=200.0 
 	
 	t_velocity_x = (int(Input.is_action_pressed("Right"))-int(Input.is_action_pressed("Left")))*walk_speed
-	
 	if !is_on_floor():
 		result.x = lerp(result.x, t_velocity_x, 12.23*delta)
-	else:
+	elif is_on_floor():
 		result.x = lerp(result.x, t_velocity_x, 18.23*delta)
-	
 	return result
-
 
 func _draw() -> void:
 	_draw_debug_elements()
 
-
 func _update_interactions() -> void:
 	pass
 
-
 func _update_hover_logic(delta : float) -> void:
 	if !is_on_floor() && hover_a > 0.15: 
-		can_hover = true
+		can_hover=true
 	else:
-		can_hover = false
+		can_hover=false
 	
 	if is_on_floor():
-		can_recover_hover = true
+		can_recover_hover=true
 	else:
-		can_recover_hover = false
+		can_recover_hover=false
 	
 	if can_hover && Input.is_action_pressed("Sprint"):
 		hover_a-=1.2*delta
@@ -147,23 +141,15 @@ func _update_hover_logic(delta : float) -> void:
 		hover_GUI_mesh.visible=true;
 	
 	hover_GUI_mesh.scale.x=hover_a
-	
-	
 func _update_falling_effect(t_velocity_y : float) -> void:
 	if t_velocity_y > 893:
 		falling_partical_CPU.emitting = true
 	else:
 		falling_partical_CPU.emitting = false
-		
-		
 func _update_upper_collider_position(delta: float) -> void:
 	col_shape_2.position = lerp(col_shape_2.position, Vector2(0.0, -30.0), 12.0*delta)
-	
-	
 func _update_lower_collider_position(delta: float) -> void:
 	col_shape_1.position = lerp(col_shape_1.position, Vector2(0.0, -10.0), 12.0*delta)
-	
-	
 func _on_land(target_velocity_x : float) -> void: #called when the player lands...
 	if target_velocity_x != 0.0:
 		landing_partical_CPU.direction.y = -2.0
@@ -172,12 +158,8 @@ func _on_land(target_velocity_x : float) -> void: #called when the player lands.
 		landing_partical_CPU.direction.y = -1.0
 	landing_partical_CPU.emitting = true
 	col_shape_2.position+=Vector2(0.0, 20.3)
-	
-	
 func _move(target_velocity: Vector2) -> void: #sets target velocity and moves player...
 	velocity = target_velocity;
 	move_and_slide()
-	
-	
 func _draw_debug_elements():
 	pass

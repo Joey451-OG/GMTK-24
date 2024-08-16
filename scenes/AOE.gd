@@ -1,39 +1,30 @@
 extends Node2D
 
-@export var distance_from_center := 5
+@onready var box_list = [$Box]
+@onready var point_cloud = [
+$orbital_zone/pivot/Node2D, 
+$orbital_zone/pivot/Node2D2,
+$orbital_zone/pivot/Node2D3, 
+$orbital_zone/pivot/Node2D4, 
+$orbital_zone/pivot/Node2D5, 
+$orbital_zone/pivot/Node2D6, 
+$orbital_zone/pivot/Node2D7, 
+$orbital_zone/pivot/Node2D8
+]
 
-@onready var box_list = [$Box, $Box2, $Box3]
-var point_cloud = []
-var addedChildren = false
-
-func _ready() -> void:
-	_gen_point_cloud(3, 1)
+@onready var pivot = $orbital_zone/pivot
 
 func _process(delta) -> void:
 	_update_box_list()
+	_rotate_point_cloud(delta, 1.4)
 	for _box in box_list:
-		_calculate_box_logic(_box)
-	_gen_point_cloud(3, 1000)
+		_calculate_box_logic(_box, point_cloud[0].global_position, delta)
 
-func _gen_point_cloud(num_of_points: int, temp) -> void:
-	var distance = 360 / num_of_points
-	var starting_angle = 0
-	
-	for i in range(num_of_points):
-		point_cloud.append(Marker2D.new())
-		if !addedChildren:
-			self.add_child(point_cloud[i])
-		point_cloud[i].position = Vector2(distance_from_center * cos(deg_to_rad(starting_angle)),
-								 -(distance_from_center * sin(deg_to_rad(starting_angle))))
-		starting_angle += distance
-	
-	addedChildren = true
-	starting_angle = 0
-	starting_angle += temp
-		
+func _rotate_point_cloud(delta : float, mag : float) -> void:
+	pivot.rotation+=mag*delta
 
-func _calculate_box_logic(target) -> void:
-	box_list[0].position = point_cloud[0].position
+func _calculate_box_logic(box, target_point : Vector2, delta) -> void:
+	box.position=lerp(box.position, target_point, 4.4*delta)
 
 func _update_box_list() -> void:
 	pass #add boxes to box list when needed...

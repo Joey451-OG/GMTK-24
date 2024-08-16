@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxv0perxpy21p"]
+[gd_scene load_steps=12 format=3 uid="uid://dws5qvgdi3ubp"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/player_body.gd" id="1_ai1k4"]
 
@@ -35,7 +35,7 @@ height = 38.0
 [sub_resource type="QuadMesh" id="QuadMesh_y7wqc"]
 size = Vector2(30.7, 6.83)
 
-[node name="PlayerBody" type="CharacterBody2D" node_paths=PackedStringArray("col_shape_1", "col_shape_2", "hover_partical_CPU_stationary", "hover_partical_CPU_trail", "falling_partical_CPU", "landing_partical_CPU", "hover_GUI_mesh")]
+[node name="PlayerBody" type="CharacterBody2D" node_paths=PackedStringArray("col_shape_1", "col_shape_2", "hover_partical_CPU_stationary", "hover_partical_CPU_trail", "falling_partical_CPU", "landing_partical_CPU", "hover_GUI_mesh", "ceiling_ray")]
 script = ExtResource("1_ai1k4")
 col_shape_1 = NodePath("CollisionShape2D")
 col_shape_2 = NodePath("CollisionShape2D2")
@@ -44,7 +44,7 @@ hover_partical_CPU_trail = NodePath("Hover_Effect_1/Hover_Effect_2")
 falling_partical_CPU = NodePath("Falling_Effect")
 landing_partical_CPU = NodePath("Land_Effect")
 hover_GUI_mesh = NodePath("GUI_Elements/MeshInstance2D")
-hover_recovery = 5.56
+ceiling_ray = NodePath("C_Ray")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
@@ -152,3 +152,8 @@ debug_color = Color(2.88785e-07, 0.57542, 0.823341, 0.42)
 [node name="MeshInstance2D" type="MeshInstance2D" parent="GUI_Elements"]
 position = Vector2(0, -71)
 mesh = SubResource("QuadMesh_y7wqc")
+
+[node name="C_Ray" type="RayCast2D" parent="."]
+position = Vector2(0, -40)
+rotation = -3.14789
+target_position = Vector2(0, 13)
