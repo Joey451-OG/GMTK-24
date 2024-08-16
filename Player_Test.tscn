@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn57h06nvqlu1"]
+
+[ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_u722v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nls3r"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_qucg8"]
+size = Vector2(20, 20)
+
+[node name="PlayerTest" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -311)
+
+[node name="PlayerBody" parent="." instance=ExtResource("1_u722v")]
+position = Vector2(0, -155)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+scale = Vector2(20, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_nls3r")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground"]
+mesh = SubResource("QuadMesh_qucg8")

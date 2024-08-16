@@ -1,0 +1,154 @@
+[gd_scene load_steps=12 format=3 uid="uid://dws5qvgdi3ubp"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/player_body.gd" id="1_ai1k4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2yqc3"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_3jw7b"]
+size = Vector2(20, 20)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gwps6"]
+
+[sub_resource type="Gradient" id="Gradient_m8ssf"]
+colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0.899258, 0.899258, 0.899258, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uowro"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_by72q"]
+width = 2
+height = 2
+color_ramp = SubResource("Gradient_m8ssf")
+noise = SubResource("FastNoiseLite_uowro")
+
+[sub_resource type="Curve" id="Curve_7r8d1"]
+max_value = 100.0
+_data = [Vector2(0, 6.59341), 0.0, 0.0, 0, 0, Vector2(0.960674, 1.0989), -30.5632, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_cvyej"]
+_data = [Vector2(0, 0.868132), 0.0, -0.669173, 0, 0, Vector2(1, 0.021978), -1.61586, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_el8f7"]
+height = 38.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_y7wqc"]
+size = Vector2(30.7, 6.83)
+
+[node name="PlayerBody" type="CharacterBody2D" node_paths=PackedStringArray("col_shape_1", "col_shape_2", "hover_partical_CPU_stationary", "hover_partical_CPU_trail", "falling_partical_CPU", "landing_partical_CPU", "hover_GUI_mesh")]
+script = ExtResource("1_ai1k4")
+col_shape_1 = NodePath("CollisionShape2D")
+col_shape_2 = NodePath("CollisionShape2D2")
+hover_partical_CPU_stationary = NodePath("Hover_Effect_1")
+hover_partical_CPU_trail = NodePath("Hover_Effect_1/Hover_Effect_2")
+falling_partical_CPU = NodePath("Falling_Effect")
+landing_partical_CPU = NodePath("Land_Effect")
+hover_GUI_mesh = NodePath("GUI_Elements/MeshInstance2D")
+hover_recovery = 5.56
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_2yqc3")
+
+[node name="Debug_Col_Shape" type="MeshInstance2D" parent="CollisionShape2D"]
+mesh = SubResource("QuadMesh_3jw7b")
+texture = SubResource("PlaceholderTexture2D_gwps6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_2yqc3")
+
+[node name="Debug_Col_Shape" type="MeshInstance2D" parent="CollisionShape2D2"]
+mesh = SubResource("QuadMesh_3jw7b")
+texture = SubResource("PlaceholderTexture2D_gwps6")
+
+[node name="Land_Effect" type="CPUParticles2D" parent="."]
+rotation = -0.0026161
+emitting = false
+amount = 7
+one_shot = true
+speed_scale = 2.5
+explosiveness = 1.0
+randomness = 1.0
+texture = SubResource("NoiseTexture2D_by72q")
+direction = Vector2(0, -1)
+spread = 88.64
+gravity = Vector2(0, 13.05)
+initial_velocity_min = 50.5
+initial_velocity_max = 80.81
+damping_min = 12.121
+damping_max = 12.121
+damping_curve = SubResource("Curve_7r8d1")
+angle_min = 158.9
+angle_max = 449.8
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_cvyej")
+
+[node name="Falling_Effect" type="CPUParticles2D" parent="."]
+rotation = -0.0026161
+emitting = false
+amount = 23
+speed_scale = 1.85
+randomness = 1.0
+texture = SubResource("NoiseTexture2D_by72q")
+emission_shape = 1
+emission_sphere_radius = 10.05
+direction = Vector2(0, -1)
+spread = 88.64
+gravity = Vector2(0, 0)
+angle_min = 158.9
+angle_max = 449.8
+scale_amount_min = 9.0
+scale_amount_max = 9.0
+scale_amount_curve = SubResource("Curve_cvyej")
+
+[node name="Hover_Effect_1" type="CPUParticles2D" parent="."]
+rotation = -0.0026161
+emitting = false
+amount = 23
+speed_scale = 1.85
+randomness = 1.0
+local_coords = true
+texture = SubResource("NoiseTexture2D_by72q")
+emission_shape = 1
+emission_sphere_radius = 15.22
+direction = Vector2(0, -1)
+spread = 88.64
+gravity = Vector2(0, 0)
+angle_min = 158.9
+angle_max = 449.8
+scale_amount_min = 9.0
+scale_amount_max = 9.0
+scale_amount_curve = SubResource("Curve_cvyej")
+
+[node name="Hover_Effect_2" type="CPUParticles2D" parent="Hover_Effect_1"]
+emitting = false
+amount = 23
+speed_scale = 1.85
+randomness = 1.0
+texture = SubResource("NoiseTexture2D_by72q")
+emission_shape = 1
+emission_sphere_radius = 10.05
+direction = Vector2(0, 1)
+spread = 88.64
+gravity = Vector2(0, 0)
+initial_velocity_min = 80.81
+initial_velocity_max = 80.81
+angle_min = 158.9
+angle_max = 449.8
+scale_amount_min = 9.0
+scale_amount_max = 9.0
+scale_amount_curve = SubResource("Curve_cvyej")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -19)
+shape = SubResource("CapsuleShape2D_el8f7")
+debug_color = Color(2.88785e-07, 0.57542, 0.823341, 0.42)
+
+[node name="GUI_Elements" type="Node2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="GUI_Elements"]
+position = Vector2(0, -71)
+mesh = SubResource("QuadMesh_y7wqc")
