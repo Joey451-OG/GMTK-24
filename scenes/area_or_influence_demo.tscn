@@ -1,6 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://iuq1db2md4b8"]
+[gd_scene load_steps=8 format=3 uid="uid://5s0mqo1prjy8"]
 
-[ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="1_3g7na"]
+[ext_resource type="PackedScene" path="res://scenes/box.tscn" id="1_3g7na"]
+[ext_resource type="Script" path="res://scenes/AOE.gd" id="1_7uic2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3odem"]
+radius = 293.825
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pcfhc"]
+radius = 106.042
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tnd51"]
 size = Vector2(1407, 26)
@@ -10,42 +17,34 @@ size = Vector2(1407, 26)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_r3rt7"]
 gradient = SubResource("Gradient_1twvn")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3odem"]
-radius = 293.825
+[node name="AOE" type="Node2D"]
+script = ExtResource("1_7uic2")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pcfhc"]
-radius = 143.031
+[node name="orbital_zone" type="Area2D" parent="."]
 
-[node name="Box" type="Node2D"]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(613.5, 623)
-shape = SubResource("RectangleShape2D_tnd51")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D"]
-position = Vector2(0, 5.99999)
-scale = Vector2(366, 37.9999)
-texture = SubResource("GradientTexture1D_r3rt7")
-
-[node name="affect area" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="affect area"]
-position = Vector2(614, 522)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="orbital_zone"]
 shape = SubResource("CircleShape2D_3odem")
 debug_color = Color(0.97072, 0, 0.452826, 0.42)
 
-[node name="Area2D" type="Area2D" parent="affect area"]
+[node name="exclusion_zone" type="Area2D" parent="orbital_zone"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="affect area/Area2D"]
-position = Vector2(614, 522)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="orbital_zone/exclusion_zone"]
 shape = SubResource("CircleShape2D_pcfhc")
 debug_color = Color(6.73831e-07, 0.62626, 0.512775, 0.42)
 
-[node name="Box" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_3g7na")]
-position = Vector2(135, 518)
-target = NodePath("../Marker2D")
+[node name="Box" parent="." instance=ExtResource("1_3g7na")]
+position = Vector2(-529, 46)
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(484, 352)
+[node name="Temp_enviorment" type="Node2D" parent="."]
+position = Vector2(-664, -472)
+
+[node name="Ground" type="StaticBody2D" parent="Temp_enviorment"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Temp_enviorment/Ground"]
+position = Vector2(613.5, 623)
+shape = SubResource("RectangleShape2D_tnd51")
+
+[node name="Sprite2D" type="Sprite2D" parent="Temp_enviorment/Ground/CollisionShape2D"]
+position = Vector2(0, 5.99999)
+scale = Vector2(366, 37.9999)
+texture = SubResource("GradientTexture1D_r3rt7")
