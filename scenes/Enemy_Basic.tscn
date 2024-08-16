@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://djyl8clvhiejq"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/enemy_basic.gd" id="1_amh3p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oiqjp"]
+size = Vector2(20, 40)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ylkhb"]
+size = Vector2(20, 40)
+
+[sub_resource type="Gradient" id="Gradient_1aaxj"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.868853, 0, 0.224501, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xd2hn"]
+gradient = SubResource("Gradient_1aaxj")
+
+[node name="EnemyBasic" type="CharacterBody2D"]
+position = Vector2(0, -20)
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_amh3p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_oiqjp")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("QuadMesh_ylkhb")
+texture = SubResource("GradientTexture1D_xd2hn")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 128

@@ -36,6 +36,8 @@ height = 38.0
 size = Vector2(30.7, 6.83)
 
 [node name="PlayerBody" type="CharacterBody2D" node_paths=PackedStringArray("col_shape_1", "col_shape_2", "hover_partical_CPU_stationary", "hover_partical_CPU_trail", "falling_partical_CPU", "landing_partical_CPU", "hover_GUI_mesh", "ceiling_ray")]
+collision_layer = 129
+collision_mask = 129
 script = ExtResource("1_ai1k4")
 col_shape_1 = NodePath("CollisionShape2D")
 col_shape_2 = NodePath("CollisionShape2D2")
@@ -157,3 +159,4 @@ mesh = SubResource("QuadMesh_y7wqc")
 position = Vector2(0, -40)
 rotation = -3.14789
 target_position = Vector2(0, 13)
+collision_mask = 128
