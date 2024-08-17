@@ -1,18 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://5s0mqo1prjy8"]
+[gd_scene load_steps=3 format=3 uid="uid://5s0mqo1prjy8"]
 
-[ext_resource type="PackedScene" uid="uid://buq73rgfnkcnj" path="res://scenes/box.tscn" id="1_3g7na"]
 [ext_resource type="Script" path="res://scenes/AOE.gd" id="1_7uic2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3odem"]
 radius = 293.825
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnd51"]
-size = Vector2(1407, 26)
-
-[sub_resource type="Gradient" id="Gradient_1twvn"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_r3rt7"]
-gradient = SubResource("Gradient_1twvn")
 
 [node name="AOE" type="Node2D"]
 script = ExtResource("1_7uic2")
@@ -85,25 +76,3 @@ position = Vector2(125, -126)
 
 [node name="Node2D6" type="Node2D" parent="orbital_zone/pivot_6"]
 position = Vector2(-1, 178)
-
-[node name="Box" parent="." instance=ExtResource("1_3g7na")]
-position = Vector2(-529, 46)
-
-[node name="Temp_enviorment" type="Node2D" parent="."]
-position = Vector2(-664, -472)
-
-[node name="Ground" type="StaticBody2D" parent="Temp_enviorment"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Temp_enviorment/Ground"]
-position = Vector2(613.5, 623)
-shape = SubResource("RectangleShape2D_tnd51")
-
-[node name="Sprite2D" type="Sprite2D" parent="Temp_enviorment/Ground/CollisionShape2D"]
-position = Vector2(0, 5.99999)
-scale = Vector2(366, 37.9999)
-texture = SubResource("GradientTexture1D_r3rt7")
-
-[node name="Camera2D" type="Camera2D" parent="Temp_enviorment"]
-position = Vector2(678, 472)
-
-[connection signal="clicked" from="Box" to="." method="_update_box_list"]

@@ -163,3 +163,6 @@ func _move(target_velocity: Vector2) -> void: #sets target velocity and moves pl
 	move_and_slide()
 func _draw_debug_elements():
 	pass
+
+func _on_box_clicked(node : Node2D, id : int):
+	$AOE._update_box_list(node, id)
