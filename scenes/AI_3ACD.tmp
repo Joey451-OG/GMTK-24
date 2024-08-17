@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://upcmgaw6pmpo"]
+[gd_scene load_steps=7 format=3 uid="uid://upcmgaw6pmpo"]
 
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_vqnyw"]
 [ext_resource type="PackedScene" uid="uid://iuq1db2md4b8" path="res://scenes/area_or_influence_demo.tscn" id="2_1y5uc"]
@@ -9,12 +9,6 @@
 
 [sub_resource type="QuadMesh" id="QuadMesh_qucg8"]
 size = Vector2(20, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ab230"]
-size = Vector2(48, 45.0774)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uikcq"]
-size = Vector2(46, 87)
 
 [node name="PlayerTest2" type="Node2D"]
 
@@ -65,71 +59,25 @@ shape = SubResource("RectangleShape2D_nls3r")
 mesh = SubResource("QuadMesh_qucg8")
 
 [node name="Box" parent="." instance=ExtResource("3_2vwrb")]
-position = Vector2(-454, -401)
-metadata/id = 0
-
-[node name="hitbox" type="Area2D" parent="Box"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Box/hitbox"]
-position = Vector2(0, 0.459972)
-shape = SubResource("RectangleShape2D_ab230")
-
-[node name="Box2" parent="." instance=ExtResource("3_2vwrb")]
-position = Vector2(-236, -435)
-metadata/id = 0
-
-[node name="hitbox" type="Area2D" parent="Box2"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Box2/hitbox"]
-position = Vector2(0, 0.459972)
-shape = SubResource("RectangleShape2D_ab230")
-
-[node name="Box3" parent="." instance=ExtResource("3_2vwrb")]
-position = Vector2(361, -237)
-metadata/id = 0
-
-[node name="hitbox" type="Area2D" parent="Box3"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Box3/hitbox"]
-position = Vector2(0, 0.459972)
-shape = SubResource("RectangleShape2D_ab230")
-
-[node name="Box4" parent="." instance=ExtResource("3_2vwrb")]
 position = Vector2(-509, -69)
 metadata/id = 0
 
-[node name="hitbox" type="Area2D" parent="Box4"]
+[node name="Box2" parent="." instance=ExtResource("3_2vwrb")]
+position = Vector2(410, -106)
+metadata/id = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Box4/hitbox"]
-position = Vector2(0, 0.459972)
-shape = SubResource("RectangleShape2D_ab230")
+[node name="Box3" parent="." instance=ExtResource("3_2vwrb")]
+position = Vector2(-535, -235)
+metadata/id = 0
 
-[node name="Base_Baddie" parent="." node_paths=PackedStringArray("col_area", "player_object") instance=ExtResource("4_5w8em")]
+[node name="Base_Baddie" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("4_5w8em")]
 position = Vector2(268, -67)
-col_area = NodePath("Baddie_Hit_Box")
 wandering_speed = 170.0
 fighting_speed = 120.0
 fire_speed = 80.0
 player_object = NodePath("../PlayerBody")
 
-[node name="Baddie_Hit_Box" type="Area2D" parent="Base_Baddie"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Base_Baddie/Baddie_Hit_Box"]
-position = Vector2(-10, -42.5)
-shape = SubResource("RectangleShape2D_uikcq")
-debug_color = Color(0.791003, 0.428352, 0, 0.42)
-
 [connection signal="area_entered" from="PlayerBody" to="Base_Baddie" method="_on_player_body_area_entered"]
-[connection signal="area_entered" from="Box" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box" to="PlayerBody" method="_on_box_clicked"]
-[connection signal="area_entered" from="Box/hitbox" to="Box" method="_hit_box_area_entered"]
-[connection signal="area_entered" from="Box2" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box2" to="PlayerBody" method="_on_box_clicked"]
-[connection signal="area_entered" from="Box2/hitbox" to="Box2" method="_hit_box_area_entered"]
-[connection signal="area_entered" from="Box3" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box3" to="PlayerBody" method="_on_box_clicked"]
-[connection signal="area_entered" from="Box3/hitbox" to="Box3" method="_hit_box_area_entered"]
-[connection signal="area_entered" from="Box4" to="Base_Baddie" method="_on_box_area_entered"]
-[connection signal="clicked" from="Box4" to="PlayerBody" method="_on_box_clicked"]
-[connection signal="area_entered" from="Box4/hitbox" to="Box4" method="_hit_box_area_entered"]
-[connection signal="area_entered" from="Base_Baddie/Baddie_Hit_Box" to="Base_Baddie" method="_on_baddie_hit_box_area_entered"]

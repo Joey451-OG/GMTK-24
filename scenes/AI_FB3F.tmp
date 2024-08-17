@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://upcmgaw6pmpo"]
+
+[ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_vqnyw"]
+[ext_resource type="PackedScene" uid="uid://iuq1db2md4b8" path="res://scenes/area_or_influence_demo.tscn" id="2_1y5uc"]
+[ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="3_2vwrb"]
+[ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="4_5w8em"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nls3r"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_qucg8"]
+size = Vector2(20, 20)
+
+[node name="PlayerTest2" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -311)
+
+[node name="PlayerBody" parent="." instance=ExtResource("1_vqnyw")]
+position = Vector2(0, -155)
+
+[node name="AOE" parent="PlayerBody" instance=ExtResource("2_1y5uc")]
+pivot_num = 5
+scale_factor = 0.6
+
+[node name="Ground" type="StaticBody2D" parent="."]
+scale = Vector2(51.8, 0.5)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_nls3r")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground"]
+mesh = SubResource("QuadMesh_qucg8")
+
+[node name="Ground2" type="StaticBody2D" parent="."]
+position = Vector2(246, -62)
+scale = Vector2(20, 0.5)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2"]
+shape = SubResource("RectangleShape2D_nls3r")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground2"]
+mesh = SubResource("QuadMesh_qucg8")
+
+[node name="Ground3" type="StaticBody2D" parent="."]
+position = Vector2(450, -196)
+rotation = 1.5708
+scale = Vector2(20, 0.5)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground3"]
+shape = SubResource("RectangleShape2D_nls3r")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground3"]
+mesh = SubResource("QuadMesh_qucg8")
+
+[node name="Box" parent="." instance=ExtResource("3_2vwrb")]
+position = Vector2(-509, -69)
+metadata/id = 0
+
+[node name="Box2" parent="." instance=ExtResource("3_2vwrb")]
+position = Vector2(410, -106)
+metadata/id = 0
+
+[node name="Box3" parent="." instance=ExtResource("3_2vwrb")]
+position = Vector2(-535, -235)
+metadata/id = 0
+
+[node name="Base_Baddie" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("4_5w8em")]
+position = Vector2(268, -67)
+player_object = NodePath("../PlayerBody")
+
+[connection signal="area_entered" from="PlayerBody" to="Base_Baddie" method="_on_player_body_area_entered"]
+[connection signal="clicked" from="Box" to="PlayerBody" method="_on_box_clicked"]
+[connection signal="clicked" from="Box2" to="PlayerBody" method="_on_box_clicked"]
+[connection signal="clicked" from="Box3" to="PlayerBody" method="_on_box_clicked"]
