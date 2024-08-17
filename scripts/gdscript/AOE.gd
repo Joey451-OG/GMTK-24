@@ -16,10 +16,7 @@ signal exit_bullet_time
 @export var despawn_time := 5; 
 @export var despawn_partical := CPUParticles2D
 
-@export var launch_gui := MeshInstance2D
-
 @onready var box_list = {}
-@onready var thrown_box_list = []
 
 @onready var pivot_3 = [$orbital_zone/pivot_3/Node2D, $orbital_zone/pivot_3/Node2D2, $orbital_zone/pivot_3/Node2D3]
 @onready var pivot_4 = [$orbital_zone/pivot_4/Node2D, $orbital_zone/pivot_4/Node2D2, $orbital_zone/pivot_4/Node2D3, $orbital_zone/pivot_4/Node2D4]
@@ -38,8 +35,6 @@ var velocity_vector : Vector2
 var selected_box_velocity : Vector2
 var selected_box_time : float
 
-func _ready():
-	launch_gui.visible = false
 
 func _process(delta) -> void:
 	_rotate_point_cloud(delta, 1.4)
@@ -47,12 +42,11 @@ func _process(delta) -> void:
 	for box in box_list.keys():
 		_calculate_box_logic(box_list[box], clouds[pivot_num - 3][begin_i].global_position, delta)
 		begin_i += 1
-	_update_launch_gui(delta, Vector2.ZERO)
+	
 	if tracked_box != null:
 		if number_of_tracked_boxes <= 1:
 			_tracked_box(delta)
 		if tracked_box.get_meta("isThrown"):
-			thrown_box_list.append(tracked_box)
 			selected_box_time += (2.4) * delta
 			selected_box_velocity = velocity_vector
 			if selected_box_time > despawn_time:
@@ -60,13 +54,11 @@ func _process(delta) -> void:
 				selected_box_time = 0.0
 		else: 
 			selected_box_velocity = Vector2.ZERO
-		
-	_update_thrown_boxes(delta)
+			
+		if tracked_box != null:
+			tracked_box.position += (thrown_speed * -selected_box_velocity) * delta
+			
 	
-
-func _update_thrown_boxes(delta : float) -> void:
-	for _box in thrown_box_list:
-		_box.position += (thrown_speed * -selected_box_velocity) * delta
 
 func _rotate_point_cloud(delta : float, mag : float) -> void:
 	world_7[pivot_num - 3].rotation += mag * delta
@@ -80,7 +72,6 @@ func _tracked_box(delta: float):
 	
 	# freeze the box's position upon entering bullet time
 	if tracked_box.get_meta("notInBT") and !tracked_box.get_meta("isThrown"): tracked_box.position = lerp(tracked_box.position, get_global_mouse_position(), 14.4 * delta)
-	_update_launch_gui(delta, Vector2.ZERO)
 	
 	# Scale up or down based on scroll whell
 	if Input.is_action_just_pressed("scrollUp"):
@@ -89,14 +80,13 @@ func _tracked_box(delta: float):
 	elif Input.is_action_just_pressed("scrollDown"):
 		tracked_box.scale *= 1 - scale_factor # lerp eventually
 		thrown_speed *= 1 + scale_factor
+	
 	# Bullet Time
 	elif Input.is_action_pressed("rightClick"):
 		enter_bullet_time.emit()
-		launch_gui.visible = true
 		if bt_amount > 0.00000001:
 			# begin charging
 			velocity_vector = get_local_mouse_position() - tracked_box.global_position
-			_update_launch_gui(delta, velocity_vector)
 			#print(velocity_vector)
 			
 			#slow down time
@@ -109,11 +99,9 @@ func _tracked_box(delta: float):
 			# add code once done below
 			tracked_box.set_meta("isThrown", true)
 			tracked_box.set_meta("notInBT", false)
-			_update_launch_gui(delta, Vector2.ZERO)
 			
 	elif Input.is_action_just_released("rightClick"):
 		# reset bulllet time and fling das Block!
-		launch_gui.visible = false
 		exit_bullet_time.emit()
 		Engine.time_scale = 1
 		bt_amount = bullet_time_amount
@@ -125,14 +113,15 @@ func _tracked_box(delta: float):
 	#clamp(s)
 	tracked_box.scale = Vector2(clampf(tracked_box.scale.x, scale_clamp[0], scale_clamp[1]), clampf(tracked_box.scale.y, scale_clamp[0], scale_clamp[1]))
 	thrown_speed = clampf(thrown_speed, scale_clamp[0], scale_clamp[1])
+	print(thrown_speed)
 	
 # Signaled Functions
 func _update_box_list(box, id) -> void:
-	if box.get_meta("id") not in box_list.keys() and box_list.size() < pivot_num and !box.get_meta("isThrown"):
+	if box.get_meta("id") not in box_list.keys() and box_list.size() < pivot_num:
 		box_list[id] = box
 		tracked_box = null
 		number_of_tracked_boxes = 0
-	elif box.get_meta("id") in box_list.keys() and number_of_tracked_boxes < 1 and !box.get_meta("isThrown"):
+	elif box.get_meta("id") in box_list.keys() and number_of_tracked_boxes < 1:
 		# remove box from list and create a reference to the box
 		tracked_box = box_list[id]
 		box_list.erase(id)
@@ -144,6 +133,3 @@ func _despawn_box_object(target : Node2D):
 	tracked_box = null
 	target.queue_free()
 	number_of_tracked_boxes = 0
-	
-func _update_launch_gui(delta : float, direction : Vector2):
-	launch_gui.position = direction + (get_global_mouse_position() - self.global_position)
