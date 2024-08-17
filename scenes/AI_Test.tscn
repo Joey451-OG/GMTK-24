@@ -107,9 +107,6 @@ shape = SubResource("RectangleShape2D_ab230")
 [node name="Base_Baddie" parent="." node_paths=PackedStringArray("col_area", "player_object") instance=ExtResource("4_5w8em")]
 position = Vector2(268, -67)
 col_area = NodePath("Baddie_Hit_Box")
-wandering_speed = 170.0
-fighting_speed = 120.0
-fire_speed = 80.0
 player_object = NodePath("../PlayerBody")
 
 [node name="Baddie_Hit_Box" type="Area2D" parent="Base_Baddie"]

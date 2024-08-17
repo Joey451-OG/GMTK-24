@@ -59,7 +59,6 @@ mesh = SubResource("QuadMesh_qucg8")
 [node name="Box" parent="." instance=ExtResource("2_280rl")]
 position = Vector2(153, -592)
 metadata/id = 0
-metadata/isFired = false
 
 [node name="box_hit_box" type="Area2D" parent="Box"]
 
@@ -69,7 +68,6 @@ shape = SubResource("RectangleShape2D_1skss")
 [node name="Box2" parent="." instance=ExtResource("2_280rl")]
 position = Vector2(382, -568)
 metadata/id = 0
-metadata/isFired = false
 
 [node name="box_hit_box" type="Area2D" parent="Box2"]
 
@@ -79,7 +77,6 @@ shape = SubResource("RectangleShape2D_1skss")
 [node name="Box3" parent="." instance=ExtResource("2_280rl")]
 position = Vector2(412, -366)
 metadata/id = 0
-metadata/isFired = false
 
 [node name="box_hit_box" type="Area2D" parent="Box3"]
 
@@ -89,7 +86,6 @@ shape = SubResource("RectangleShape2D_1skss")
 [node name="Box4" parent="." instance=ExtResource("2_280rl")]
 position = Vector2(582, -406)
 metadata/id = 0
-metadata/isFired = false
 
 [node name="box_hit_box" type="Area2D" parent="Box4"]
 
