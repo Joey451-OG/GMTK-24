@@ -7,7 +7,6 @@ radius = 293.825
 
 [node name="AOE" type="Node2D"]
 script = ExtResource("1_7uic2")
-scale_clamp = [0.1, 10.0]
 
 [node name="orbital_zone" type="Area2D" parent="."]
 

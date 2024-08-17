@@ -30,6 +30,7 @@ environment = SubResource("Environment_72f62")
 position = Vector2(0, -155)
 
 [node name="AOE" parent="PlayerBody" instance=ExtResource("2_ooey3")]
+scale_factor = 0.6
 
 [node name="Ground" type="StaticBody2D" parent="."]
 scale = Vector2(51.8, 0.5)
