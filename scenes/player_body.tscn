@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://dws5qvgdi3ubp"]
+[gd_scene load_steps=29 format=3 uid="uid://dws5qvgdi3ubp"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/player_body.gd" id="1_ai1k4"]
 [ext_resource type="Script" path="res://scripts/gdscript/ui.gd" id="2_kajg5"]
 [ext_resource type="Texture2D" uid="uid://do34cnsr7o8j6" path="res://assets/discord_dev_temp.PNG" id="3_uywir"]
+[ext_resource type="Texture2D" uid="uid://cy1wcv442sae2" path="res://assets/IMG_0991.PNG" id="4_sxuhd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yqc3"]
 
@@ -68,6 +69,22 @@ region = Rect2(128, 0, 32, 32)
 atlas = ExtResource("3_uywir")
 region = Rect2(160, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikfb8"]
+atlas = ExtResource("4_sxuhd")
+region = Rect2(0, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5cmd6"]
+atlas = ExtResource("4_sxuhd")
+region = Rect2(800, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2v4jf"]
+atlas = ExtResource("4_sxuhd")
+region = Rect2(1600, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfyrw"]
+atlas = ExtResource("4_sxuhd")
+region = Rect2(2400, 0, 800, 800)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_cfan4"]
 animations = [{
 "frames": [{
@@ -90,7 +107,24 @@ animations = [{
 "texture": SubResource("AtlasTexture_o8ohx")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikfb8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5cmd6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2v4jf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfyrw")
+}],
+"loop": true,
+"name": &"running",
 "speed": 5.0
 }]
 
@@ -227,7 +261,7 @@ collision_mask = 128
 position = Vector2(0, -33)
 scale = Vector2(2.03125, 2.03125)
 sprite_frames = SubResource("SpriteFrames_cfan4")
-frame_progress = 0.845912
+animation = &"idle"
 
 [node name="hitbox" type="Area2D" parent="."]
 
