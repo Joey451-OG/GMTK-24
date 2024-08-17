@@ -1,5 +1,6 @@
 extends CharacterBody2D
 @export var wandering_speed := 170.0
+@export var fighting_speed := 120.0
 @export var fire_speed := 80.0
 
 @export var player_object : Node2D
@@ -12,6 +13,11 @@ extends CharacterBody2D
 
 @onready var view_cast = $Vision_cast
 
+var projectile_list = []
+var projectile_velocity_data_list = []
+
+var projectile_asset = preload("res://scenes/box.tscn")
+
 var current_state := STATES.WANDER
 var current_speed := 0.0
 var playerFound := false
@@ -22,6 +28,9 @@ var x_direction
 var y_direction
 
 var dir_to_player_x
+var dir_to_player_y
+
+var proj_index : int
 
 enum STATES{
 	WANDER,
@@ -36,6 +45,7 @@ func _process(delta):
 	_rotate_vision_ray(delta)
 	_manage_states(delta)
 	_move_character(delta)
+	_update_spawned_projectiles(delta)
 
 func _rotate_vision_ray(delta : float):
 	view_cast.target_position = (player_object.position + Vector2(0.0,35.0)) - self.global_position
@@ -47,6 +57,8 @@ func _manage_states(delta : float) -> void:
 		current_state = STATES.FIGHT
 
 func _move_character(delta : float) -> void:
+	dir_to_player_x = (player_object.global_position.x - self.global_position.x)
+	dir_to_player_y = (player_object.global_position.y - self.global_position.y)
 	if current_state == STATES.WANDER:
 		if x_direction == 0.0:
 			x_direction = wandering_speed
@@ -54,12 +66,15 @@ func _move_character(delta : float) -> void:
 			x_direction = wandering_speed
 		elif rc_right.is_colliding() or !rc_right_f.is_colliding():
 			x_direction = -wandering_speed
-	elif current_state == STATES.FIGHT:
-		dir_to_player_x = (player_object.global_position.x - self.global_position.x)
+	if current_state == STATES.FIGHT:
 		if (self.position.distance_to(player_object.global_position) > 280.0):
 			x_direction = (dir_to_player_x/self.position.distance_to(player_object.global_position))*wandering_speed
+		elif (self.position.distance_to(player_object.global_position) < 200.0):
+			x_direction = -(dir_to_player_x/self.position.distance_to(player_object.global_position))*fighting_speed
 		else:
 			x_direction = 0.0
+			if Input.is_action_just_pressed("leftClick"):
+				_spawn_projectile(projectile_asset, Vector2(dir_to_player_x/self.position.distance_to(player_object.global_position), dir_to_player_y/self.position.distance_to(player_object.global_position)))
 	
 	if !is_on_floor():
 		y_direction += (60 * 60) * delta
@@ -69,3 +84,13 @@ func _move_character(delta : float) -> void:
 	velocity.x = x_direction
 	velocity.y = y_direction
 	move_and_slide()
+
+func _spawn_projectile(asset, direction : Vector2):
+	projectile_list.append(projectile_asset.instantiate())
+	add_child(projectile_list[proj_index])
+	proj_index += 1
+	projectile_velocity_data_list.append(direction)
+
+func _update_spawned_projectiles(delta : float):
+	for p in projectile_list:
+		p.position += (projectile_velocity_data_list[0] * fire_speed * delta)
