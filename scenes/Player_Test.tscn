@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [gd_scene load_steps=9 format=3 uid="uid://b72qdjnuimpoy"]
 
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_fnfun"]
@@ -7,13 +6,6 @@
 [ext_resource type="Script" path="res://scripts/gdscript/radio.gd" id="4_1j0nf"]
 [ext_resource type="AudioStream" uid="uid://ilsyk0xbkj48" path="res://music/track.mp3" id="5_31fgw"]
 [ext_resource type="AudioStream" uid="uid://dcfg5yrjy6rvl" path="res://music/bullet_time_loop.wav" id="6_fdfwf"]
-=======
-[gd_scene load_steps=6 format=3 uid="uid://dn57h06nvqlu1"]
-
-[ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_fnfun"]
-[ext_resource type="PackedScene" uid="uid://buq73rgfnkcnj" path="res://scenes/box.tscn" id="2_280rl"]
-[ext_resource type="PackedScene" uid="uid://5s0mqo1prjy8" path="res://scenes/area_or_influence_demo.tscn" id="2_ooey3"]
->>>>>>> 52c106b54b5a8691a2116261a59418bc2e1fa987
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nls3r"]
 
@@ -80,7 +72,6 @@ position = Vector2(423, -293)
 metadata/id = 0
 
 [node name="Box7" parent="." instance=ExtResource("2_280rl")]
-visible = false
 position = Vector2(-513, -375)
 metadata/id = 0
 

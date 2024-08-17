@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5s0mqo1prjy8"]
+[gd_scene load_steps=8 format=3 uid="uid://iuq1db2md4b8"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/AOE.gd" id="1_7uic2"]
 
@@ -118,5 +118,3 @@ angle_min = 158.9
 angle_max = 449.8
 scale_amount_max = 8.0
 scale_amount_curve = SubResource("Curve_6xmgn")
-
-[node name="dev_vel_RC" type="RayCast2D" parent="."]
