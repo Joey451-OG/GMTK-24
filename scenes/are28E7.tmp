@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://iuq1db2md4b8"]
+[gd_scene load_steps=8 format=3 uid="uid://iuq1db2md4b8"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/AOE.gd" id="1_7uic2"]
 
@@ -25,13 +25,9 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.195604, 0, 0, Vector2(1, 0.021978), -3.11189, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="QuadMesh" id="QuadMesh_ksn0i"]
-size = Vector2(20, 20)
-
-[node name="AOE" type="Node2D" node_paths=PackedStringArray("despawn_partical", "launch_gui")]
+[node name="AOE" type="Node2D" node_paths=PackedStringArray("despawn_partical")]
 script = ExtResource("1_7uic2")
 despawn_partical = NodePath("Despawn_Effect")
-launch_gui = NodePath("Launch_Gui")
 
 [node name="orbital_zone" type="Area2D" parent="."]
 
@@ -122,6 +118,3 @@ angle_min = 158.9
 angle_max = 449.8
 scale_amount_max = 8.0
 scale_amount_curve = SubResource("Curve_6xmgn")
-
-[node name="Launch_Gui" type="MeshInstance2D" parent="."]
-mesh = SubResource("QuadMesh_ksn0i")

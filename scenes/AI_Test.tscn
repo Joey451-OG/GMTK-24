@@ -70,9 +70,14 @@ metadata/id = 0
 position = Vector2(-535, -235)
 metadata/id = 0
 
+<<<<<<< Updated upstream
 [node name="Base_Baddie" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("4_5w8em")]
 position = Vector2(268, -67)
 player_object = NodePath("../PlayerBody")
+=======
+[node name="Base_Baddie" parent="." instance=ExtResource("4_5w8em")]
+position = Vector2(288, -67)
+>>>>>>> Stashed changes
 
 [connection signal="area_entered" from="PlayerBody" to="Base_Baddie" method="_on_player_body_area_entered"]
 [connection signal="clicked" from="Box" to="PlayerBody" method="_on_box_clicked"]
