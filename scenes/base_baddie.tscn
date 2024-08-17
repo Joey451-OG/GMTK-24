@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bpqtja67jsgat"]
+[gd_scene load_steps=15 format=3 uid="uid://clh0138n0di41"]
 
 [ext_resource type="Texture2D" uid="uid://d07ltv0ic271d" path="res://assets/mailbox_1.png" id="1_jh0i4"]
-[ext_resource type="Script" path="res://scenes/baddie.gd" id="1_tsaa8"]
+[ext_resource type="Script" path="res://scripts/gdscript/baddie.gd" id="1_tsaa8"]
 [ext_resource type="Texture2D" uid="uid://oh0yubd52w8x" path="res://assets/mailbox_2.png" id="2_112qr"]
 [ext_resource type="Texture2D" uid="uid://ti2wwadddu2s" path="res://assets/mailbox_3.png" id="3_mjfhc"]
 [ext_resource type="Texture2D" uid="uid://b5hx1abbcnorw" path="res://assets/mailbox_4.png" id="4_bklrp"]
@@ -60,8 +60,6 @@ height = 32.0
 
 [node name="Base_Baddie" type="CharacterBody2D"]
 script = ExtResource("1_tsaa8")
-wandering_speed = null
-fire_speed = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-7, -22)

@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	
 func _handle_vision():
 	if player_tracker_rc.is_colliding():
-		
+		pass ##ERROR HERE EARILER
 	
 func _on_timer_timeout() -> void:
 	if playerFound == false:
