@@ -2,7 +2,7 @@ extends Node2D
 
 @export var pivot_num := 3
 @export var scale_factor := 0.2
-@export var box_throw_velocity := 2
+@export var thrown_speed := 2.0
 @export var time_scale := 0.2
 @export var bullet_time_amount := 20
 @export var bullet_time_drain_rate := 0.2
@@ -16,15 +16,14 @@ extends Node2D
 @onready var pivot_4 = [$orbital_zone/pivot_4/Node2D, $orbital_zone/pivot_4/Node2D2, $orbital_zone/pivot_4/Node2D3, $orbital_zone/pivot_4/Node2D4]
 @onready var pivot_5 = [$orbital_zone/pivot_5/Node2D, $orbital_zone/pivot_5/Node2D2, $orbital_zone/pivot_5/Node2D3, $orbital_zone/pivot_5/Node2D4, $orbital_zone/pivot_5/Node2D5]
 @onready var pivot_6 = [$orbital_zone/pivot_6/Node2D, $orbital_zone/pivot_6/Node2D2, $orbital_zone/pivot_6/Node2D3, $orbital_zone/pivot_6/Node2D4, $orbital_zone/pivot_6/Node2D5, $orbital_zone/pivot_6/Node2D6]
-@onready var pivot = $orbital_zone/pivot_3
 @onready var clouds := [pivot_3, pivot_4, pivot_5, pivot_6]
+@onready var world_7 := [$orbital_zone/pivot_3, $orbital_zone/pivot_4, $orbital_zone/pivot_5, $orbital_zone/pivot_6]
 @onready var bt_drain_rate = 1 - bullet_time_drain_rate
 @onready var bt_amount = bullet_time_amount
 
 var tracked_box : Node2D
 var number_of_tracked_boxes := 0
 var scale_clamp := [0.6, 10.0]
-var notInBT := true
 var velocity_vector : Vector2
 
 var selected_box_velocity : Vector2
@@ -51,11 +50,12 @@ func _process(delta) -> void:
 			selected_box_velocity = Vector2.ZERO
 			
 		if tracked_box != null:
-			tracked_box.position += (box_throw_velocity * -selected_box_velocity) * delta
+			tracked_box.position += (thrown_speed * -selected_box_velocity) * delta
+			
 	
 
 func _rotate_point_cloud(delta : float, mag : float) -> void:
-	pivot.rotation += mag * delta
+	world_7[pivot_num - 3].rotation += mag * delta
 
 func _calculate_box_logic(box, target_point : Vector2, delta) -> void:
 	box.position = lerp(box.position, target_point, 4.4 * delta)
@@ -65,12 +65,15 @@ func _tracked_box(delta: float):
 	tracked_box.glowish.visible = true
 	
 	# freeze the box's position upon entering bullet time
-	if notInBT: tracked_box.position = lerp(tracked_box.position, get_global_mouse_position(), 14.4 * delta)
+	if tracked_box.get_meta("notInBT") and !tracked_box.get_meta("isThrown"): tracked_box.position = lerp(tracked_box.position, get_global_mouse_position(), 14.4 * delta)
+	
 	# Scale up or down based on scroll whell
 	if Input.is_action_just_pressed("scrollUp"):
 		tracked_box.scale *= scale_factor + 1 # lerp this eventually
+		thrown_speed *= 1 - scale_factor
 	elif Input.is_action_just_pressed("scrollDown"):
 		tracked_box.scale *= 1 - scale_factor # lerp eventually
+		thrown_speed *= 1 + scale_factor
 	
 	# Bullet Time
 	elif Input.is_action_pressed("rightClick"):
@@ -82,12 +85,13 @@ func _tracked_box(delta: float):
 			#slow down time
 			Engine.time_scale = time_scale
 			bt_amount *= bt_drain_rate
-			notInBT = false
+			tracked_box.set_meta("notInBT", false)
 		else:
 			# same as below elif without recharging the bullet time
 			Engine.time_scale = 1
 			# add code once done below
 			tracked_box.set_meta("isThrown", true)
+			tracked_box.set_meta("notInBT", false)
 			
 	elif Input.is_action_just_released("rightClick"):
 		# reset bulllet time and fling das Block!
@@ -97,10 +101,12 @@ func _tracked_box(delta: float):
 		
 		# add a physics object to the box and apply velocity_vector
 		tracked_box.set_meta("isThrown", true)
+		tracked_box.set_meta("notInBT", false)
 	
 	#clamp(s)
 	tracked_box.scale = Vector2(clampf(tracked_box.scale.x, scale_clamp[0], scale_clamp[1]), clampf(tracked_box.scale.y, scale_clamp[0], scale_clamp[1]))
-	
+	thrown_speed = clampf(thrown_speed, scale_clamp[0], scale_clamp[1])
+	print(thrown_speed)
 	
 # Signaled Functions
 func _update_box_list(box, id) -> void:
@@ -108,7 +114,7 @@ func _update_box_list(box, id) -> void:
 		box_list[id] = box
 		tracked_box = null
 		number_of_tracked_boxes = 0
-	elif box.get_meta("id") in box_list.keys():
+	elif box.get_meta("id") in box_list.keys() and number_of_tracked_boxes < 1:
 		# remove box from list and create a reference to the box
 		tracked_box = box_list[id]
 		box_list.erase(id)
@@ -119,3 +125,4 @@ func _despawn_box_object(target : Node2D):
 	despawn_partical.emitting = true
 	tracked_box = null
 	target.queue_free()
+	number_of_tracked_boxes = 0
