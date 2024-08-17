@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://dws5qvgdi3ubp"]
+[gd_scene load_steps=16 format=3 uid="uid://cxv0perxpy21p"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/player_body.gd" id="1_ai1k4"]
 [ext_resource type="Script" path="res://scripts/gdscript/ui.gd" id="2_kajg5"]
-[ext_resource type="PackedScene" uid="uid://5s0mqo1prjy8" path="res://scenes/area_or_influence_demo.tscn" id="3_aanvb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yqc3"]
 
@@ -182,6 +181,3 @@ cursor_asset = NodePath("Cursor")
 rotation = 2.35619
 mesh = SubResource("QuadMesh_nid8f")
 texture = SubResource("GradientTexture1D_u3x74")
-
-[node name="AOE" parent="." instance=ExtResource("3_aanvb")]
-position = Vector2(-1, -20)

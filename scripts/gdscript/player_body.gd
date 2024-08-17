@@ -43,6 +43,7 @@ var t_velocity_y: float
 
 var temp_result: Vector2
 
+
 func _ready():
 	just_jumped=true
 	can_hover=false

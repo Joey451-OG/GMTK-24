@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 			clicked.emit(self, id) 
 		else:
 			clicked.emit(self, self.get_meta("id"))
+		
 		print("CLICKED BOX:", self.get_meta("id"))
 	
 
