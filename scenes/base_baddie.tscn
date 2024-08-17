@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bpqtja67jsgat"]
+[gd_scene load_steps=15 format=3 uid="uid://clh0138n0di41"]
 
 [ext_resource type="Texture2D" uid="uid://d07ltv0ic271d" path="res://assets/mailbox_1.png" id="1_jh0i4"]
 [ext_resource type="Script" path="res://scenes/baddie.gd" id="1_tsaa8"]
@@ -81,9 +81,11 @@ position = Vector2(0, -17)
 
 [node name="Left" type="RayCast2D" parent="Wall_checks"]
 target_position = Vector2(-31, 0)
+collision_mask = 128
 
 [node name="Right" type="RayCast2D" parent="Wall_checks"]
 target_position = Vector2(31, 0)
+collision_mask = 128
 
 [node name="Floor_checks" type="Node2D" parent="."]
 position = Vector2(0, -17)
@@ -91,15 +93,18 @@ position = Vector2(0, -17)
 [node name="Floot_RC_Left" type="RayCast2D" parent="Floor_checks"]
 position = Vector2(-5, 0)
 target_position = Vector2(0, 17)
+collision_mask = 128
 
 [node name="Floot_RC_Right" type="RayCast2D" parent="Floor_checks"]
 position = Vector2(5, 0)
 target_position = Vector2(0, 17)
+collision_mask = 128
 
 [node name="PlayerTrackerPivot" type="Node2D" parent="."]
 position = Vector2(0, -17)
 
 [node name="PlayerTrackerRC" type="RayCast2D" parent="PlayerTrackerPivot"]
 target_position = Vector2(59, 0)
+collision_mask = 128
 
 [node name="ChaseTimer" type="Timer" parent="."]

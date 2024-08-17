@@ -33,25 +33,21 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	_handle_vision()
 	_track_player()
-	_handle_movement()
+	_handle_movement(delta)
 	move_and_slide()
 	pass
 
-func _handle_movement():
+
+func _handle_movement(delta : float):
 	var direction = self.global_position - player_object.global_position
 	if current_state == STATES.WANDER:
 		if !$Floor_checks/Floot_RC_Right.is_colliding():
 			current_speed = -wandering_speed
-		if !$Floor_checks/Floot_RC_Left.is_colliding():
-			current_speed = wandering_speed
-		if $Wall_checks/Left.is_colliding():
-			current_speed = -wandering_speed
-		if $Wall_checks/Right.is_colliding():
+		elif !$Floor_checks/Floot_RC_Left.is_colliding():
 			current_speed = wandering_speed
 	velocity.x = current_speed
-	
+
 func _track_player():
-		
 	var dir_to_player : Vector2 = Vector2(player_object.position.x, player_object.position.y - 12)\
 	 - player_tracker_rc.position
 	player_tracker_pivot.look_at(dir_to_player)
