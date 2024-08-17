@@ -1,11 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b72qdjnuimpoy"]
+[gd_scene load_steps=6 format=3 uid="uid://dn57h06nvqlu1"]
 
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_fnfun"]
-[ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="2_280rl"]
-[ext_resource type="PackedScene" uid="uid://iuq1db2md4b8" path="res://scenes/area_or_influence_demo.tscn" id="2_ooey3"]
-[ext_resource type="Script" path="res://scripts/gdscript/radio.gd" id="4_1j0nf"]
-[ext_resource type="AudioStream" uid="uid://ilsyk0xbkj48" path="res://music/track.mp3" id="5_31fgw"]
-[ext_resource type="AudioStream" uid="uid://dcfg5yrjy6rvl" path="res://music/bullet_time_loop.wav" id="6_fdfwf"]
+[ext_resource type="PackedScene" uid="uid://buq73rgfnkcnj" path="res://scenes/box.tscn" id="2_280rl"]
+[ext_resource type="PackedScene" uid="uid://5s0mqo1prjy8" path="res://scenes/area_or_influence_demo.tscn" id="2_ooey3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nls3r"]
 
@@ -96,14 +93,11 @@ position = Vector2(419, -599)
 metadata/id = 0
 
 [node name="Radio" type="Node" parent="."]
-script = ExtResource("4_1j0nf")
 
 [node name="Title" type="AudioStreamPlayer" parent="Radio"]
-stream = ExtResource("5_31fgw")
 volume_db = 6.925
 
 [node name="BulletTimeLoop" type="AudioStreamPlayer" parent="Radio"]
-stream = ExtResource("6_fdfwf")
 
 [connection signal="enter_bullet_time" from="PlayerBody/AOE" to="Radio" method="_on_aoe_enter_bullet_time"]
 [connection signal="exit_bullet_time" from="PlayerBody/AOE" to="Radio" method="_on_aoe_exit_bullet_time"]
