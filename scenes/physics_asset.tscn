@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgjbuv4rvir2o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbgu3"]
+size = Vector2(42, 38.6377)
+
+[node name="Physics_Object" type="RigidBody2D"]
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sbgu3")

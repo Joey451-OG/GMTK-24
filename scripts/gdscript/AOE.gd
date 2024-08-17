@@ -22,6 +22,7 @@ var tracked_box : Node2D
 var number_of_tracked_boxes := 0
 var scale_clamp := [0.6, 10.0]
 var notInBT := true
+var velocity_vector : Vector2
 
 
 func _process(delta) -> void:
@@ -31,8 +32,14 @@ func _process(delta) -> void:
 		_calculate_box_logic(box_list[box], clouds[pivot_num - 3][begin_i].global_position, delta)
 		begin_i += 1
 	
-	if tracked_box != null and number_of_tracked_boxes <= 1:
-		_tracked_box(delta)
+	if tracked_box != null:
+		if number_of_tracked_boxes <= 1:
+			_tracked_box(delta)
+	
+		if tracked_box.get_meta("isThrown"):
+			tracked_box.position += 30 * -velocity_vector * delta
+		else: 
+			velocity_vector = Vector2(0, 0)
 
 func _rotate_point_cloud(delta : float, mag : float) -> void:
 	pivot.rotation += mag * delta
@@ -42,14 +49,13 @@ func _calculate_box_logic(box, target_point : Vector2, delta) -> void:
 
 func _tracked_box(delta: float):
 	# variables
-	var velocity_vector
+	var physics_object = preload("res://scenes/physics_asset.tscn").instantiate()
 	
 	# turn the glow effect on to show which box is selected
 	tracked_box.glowish.visible = true
 	
 	# freeze the box's position upon entering bullet time
 	if notInBT: tracked_box.position = lerp(tracked_box.position, get_global_mouse_position(), 14.4 * delta)
-	
 	# Scale up or down based on scroll whell
 	if Input.is_action_just_pressed("scrollUp"):
 		tracked_box.scale *= scale_factor + 1 # lerp this eventually
@@ -68,20 +74,25 @@ func _tracked_box(delta: float):
 			bt_amount *= bt_drain_rate
 			notInBT = false
 		else:
+			
+			# same as below elif without recharging the bullet time
 			Engine.time_scale = 1
-			notInBT = true
+			
+			# add code once done below
+			tracked_box.set_meta("isThrown", true)
 			
 	elif Input.is_action_just_released("rightClick"):
 		# reset bulllet time and fling das Block!
 		
 		Engine.time_scale = 1
-		notInBT = true
 		bt_amount = bullet_time_amount
+		
+		# add a physics object to the box and apply velocity_vector
+		tracked_box.set_meta("isThrown", true)
 	
 	#clamp(s)
 	tracked_box.scale = Vector2(clampf(tracked_box.scale.x, scale_clamp[0], scale_clamp[1]), clampf(tracked_box.scale.y, scale_clamp[0], scale_clamp[1]))
 	
-	print(bt_amount)
 	
 # Signaled Functions
 func _update_box_list(box, id) -> void:

@@ -20,6 +20,7 @@ gradient = SubResource("Gradient_jet82")
 [node name="Box" type="Node2D"]
 scale = Vector2(1, 1.08702)
 script = ExtResource("1_cyl5u")
+metadata/isThrown = false
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 128
