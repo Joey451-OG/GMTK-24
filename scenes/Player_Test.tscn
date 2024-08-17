@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b72qdjnuimpoy"]
+[gd_scene load_steps=6 format=3 uid="uid://dn57h06nvqlu1"]
 
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_fnfun"]
-[ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="2_280rl"]
-[ext_resource type="PackedScene" uid="uid://iuq1db2md4b8" path="res://scenes/area_or_influence_demo.tscn" id="2_ooey3"]
+[ext_resource type="PackedScene" uid="uid://buq73rgfnkcnj" path="res://scenes/box.tscn" id="2_280rl"]
+[ext_resource type="PackedScene" uid="uid://5s0mqo1prjy8" path="res://scenes/area_or_influence_demo.tscn" id="2_ooey3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nls3r"]
 
@@ -18,6 +18,7 @@ position = Vector2(0, -311)
 position = Vector2(0, -155)
 
 [node name="AOE" parent="PlayerBody" instance=ExtResource("2_ooey3")]
+pivot_num = 5
 scale_factor = 0.6
 
 [node name="Ground" type="StaticBody2D" parent="."]
@@ -44,12 +45,62 @@ shape = SubResource("RectangleShape2D_nls3r")
 mesh = SubResource("QuadMesh_qucg8")
 
 [node name="Box" parent="." instance=ExtResource("2_280rl")]
-position = Vector2(-458, -97)
+position = Vector2(-509, -69)
 metadata/id = 0
 
 [node name="Box2" parent="." instance=ExtResource("2_280rl")]
-position = Vector2(453, -157)
+position = Vector2(410, -106)
+metadata/id = 0
+
+[node name="Box3" parent="." instance=ExtResource("2_280rl")]
+position = Vector2(-535, -235)
+metadata/id = 0
+
+[node name="Box4" parent="." instance=ExtResource("2_280rl")]
+position = Vector2(576, -129)
+metadata/id = 0
+
+[node name="Box5" parent="." instance=ExtResource("2_280rl")]
+position = Vector2(-398, -240)
+metadata/id = 0
+
+[node name="Box6" parent="." instance=ExtResource("2_280rl")]
+position = Vector2(423, -293)
+metadata/id = 0
+
+[node name="Box7" parent="." instance=ExtResource("2_280rl")]
+position = Vector2(-513, -375)
+metadata/id = 0
+
+[node name="Box8" parent="." instance=ExtResource("2_280rl")]
+position = Vector2(406, -412)
+metadata/id = 0
+
+[node name="Box9" parent="." instance=ExtResource("2_280rl")]
+position = Vector2(-539, -541)
+metadata/id = 0
+
+[node name="Box10" parent="." instance=ExtResource("2_280rl")]
+position = Vector2(572, -435)
+metadata/id = 0
+
+[node name="Box11" parent="." instance=ExtResource("2_280rl")]
+position = Vector2(-402, -546)
+metadata/id = 0
+
+[node name="Box12" parent="." instance=ExtResource("2_280rl")]
+position = Vector2(419, -599)
 metadata/id = 0
 
 [connection signal="clicked" from="Box" to="PlayerBody" method="_on_box_clicked"]
 [connection signal="clicked" from="Box2" to="PlayerBody" method="_on_box_clicked"]
+[connection signal="clicked" from="Box3" to="PlayerBody" method="_on_box_clicked"]
+[connection signal="clicked" from="Box4" to="PlayerBody" method="_on_box_clicked"]
+[connection signal="clicked" from="Box5" to="PlayerBody" method="_on_box_clicked"]
+[connection signal="clicked" from="Box6" to="PlayerBody" method="_on_box_clicked"]
+[connection signal="clicked" from="Box7" to="PlayerBody" method="_on_box_clicked"]
+[connection signal="clicked" from="Box8" to="PlayerBody" method="_on_box_clicked"]
+[connection signal="clicked" from="Box9" to="PlayerBody" method="_on_box_clicked"]
+[connection signal="clicked" from="Box10" to="PlayerBody" method="_on_box_clicked"]
+[connection signal="clicked" from="Box11" to="PlayerBody" method="_on_box_clicked"]
+[connection signal="clicked" from="Box12" to="PlayerBody" method="_on_box_clicked"]
