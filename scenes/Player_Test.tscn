@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dn57h06nvqlu1"]
+[gd_scene load_steps=4 format=3 uid="uid://dn57h06nvqlu1"]
 
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_fnfun"]
-[ext_resource type="PackedScene" uid="uid://djyl8clvhiejq" path="res://scenes/Enemy_Basic.tscn" id="2_x5yhb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nls3r"]
 
@@ -38,7 +37,3 @@ shape = SubResource("RectangleShape2D_nls3r")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Ground2"]
 mesh = SubResource("QuadMesh_qucg8")
-
-[node name="EnemyBasic" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_x5yhb")]
-position = Vector2(200, -174)
-player = NodePath("../PlayerBody")

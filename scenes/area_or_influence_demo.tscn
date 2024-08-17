@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://iuq1db2md4b8"]
+[gd_scene load_steps=7 format=3 uid="uid://5s0mqo1prjy8"]
 
-[ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="1_3g7na"]
+[ext_resource type="PackedScene" uid="uid://buq73rgfnkcnj" path="res://scenes/box.tscn" id="1_3g7na"]
 [ext_resource type="Script" path="res://scenes/AOE.gd" id="1_7uic2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3odem"]
