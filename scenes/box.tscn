@@ -1,6 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://gtw41siuxe3q"]
-
-[ext_resource type="Script" path="res://scripts/gdscript/box.gd" id="1_cyl5u"]
+[gd_scene load_steps=6 format=3 uid="uid://buq73rgfnkcnj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qqcc4"]
 size = Vector2(191, 145)
@@ -17,11 +15,14 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_waypf"]
 gradient = SubResource("Gradient_jet82")
 
-[node name="Box" type="Node2D"]
-scale = Vector2(1, 1.08702)
-script = ExtResource("1_cyl5u")
+[node name="box" type="RigidBody2D"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+scale = Vector2(0.210143, 0.259716)
+shape = SubResource("RectangleShape2D_qqcc4")
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1, 1.08702)
 collision_layer = 128
 collision_mask = 128
 
@@ -36,6 +37,3 @@ texture = SubResource("GradientTexture1D_uqfot")
 [node name="Sprite2D" type="Sprite2D" parent="Area2D/CollisionShape2D2"]
 scale = Vector2(0.763672, 148.5)
 texture = SubResource("GradientTexture1D_waypf")
-
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
