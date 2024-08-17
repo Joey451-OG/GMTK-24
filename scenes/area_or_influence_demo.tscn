@@ -118,3 +118,5 @@ angle_min = 158.9
 angle_max = 449.8
 scale_amount_max = 8.0
 scale_amount_curve = SubResource("Curve_6xmgn")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
