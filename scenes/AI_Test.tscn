@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://upcmgaw6pmpo"]
 
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_vqnyw"]
-[ext_resource type="PackedScene" uid="uid://5s0mqo1prjy8" path="res://scenes/area_or_influence_demo.tscn" id="2_1y5uc"]
-[ext_resource type="PackedScene" uid="uid://buq73rgfnkcnj" path="res://scenes/box.tscn" id="3_2vwrb"]
+[ext_resource type="PackedScene" uid="uid://iuq1db2md4b8" path="res://scenes/area_or_influence_demo.tscn" id="2_1y5uc"]
+[ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="3_2vwrb"]
 [ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="4_5w8em"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nls3r"]
@@ -70,9 +70,10 @@ metadata/id = 0
 position = Vector2(-535, -235)
 metadata/id = 0
 
-[node name="Base_Baddie" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("4_5w8em")]
+[node name="Base_Baddie" parent="." instance=ExtResource("4_5w8em")]
 position = Vector2(288, -67)
-player_object = NodePath("../PlayerBody")
+wandering_speed = 40.0
+fire_speed = 80.0
 
 [connection signal="clicked" from="Box" to="PlayerBody" method="_on_box_clicked"]
 [connection signal="clicked" from="Box2" to="PlayerBody" method="_on_box_clicked"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dws5qvgdi3ubp"]
+[gd_scene load_steps=23 format=3 uid="uid://dws5qvgdi3ubp"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/player_body.gd" id="1_ai1k4"]
 [ext_resource type="Script" path="res://scripts/gdscript/ui.gd" id="2_kajg5"]
+[ext_resource type="Texture2D" uid="uid://do34cnsr7o8j6" path="res://assets/discord_dev_temp.PNG" id="3_uywir"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yqc3"]
 
@@ -42,6 +43,56 @@ colors = PackedColorArray(0.135447, 0.685817, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_u3x74"]
 gradient = SubResource("Gradient_yave6")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3fq1"]
+atlas = ExtResource("3_uywir")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yx6yp"]
+atlas = ExtResource("3_uywir")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0o0pa"]
+atlas = ExtResource("3_uywir")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v12xn"]
+atlas = ExtResource("3_uywir")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lie1"]
+atlas = ExtResource("3_uywir")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8ohx"]
+atlas = ExtResource("3_uywir")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cfan4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3fq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yx6yp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0o0pa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v12xn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lie1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8ohx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="PlayerBody" type="CharacterBody2D" node_paths=PackedStringArray("col_shape_1", "col_shape_2", "hover_partical_CPU_stationary", "hover_partical_CPU_trail", "falling_partical_CPU", "landing_partical_CPU", "hover_GUI_mesh")]
 collision_layer = 129
@@ -167,3 +218,9 @@ texture = SubResource("GradientTexture1D_u3x74")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 collision_mask = 128
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -33)
+scale = Vector2(2.03125, 2.03125)
+sprite_frames = SubResource("SpriteFrames_cfan4")
+frame_progress = 0.715581

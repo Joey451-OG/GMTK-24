@@ -1,8 +1,10 @@
 extends Node2D
 
+# signals
 # these control the bullet time music - Aveca
 signal enter_bullet_time
 signal exit_bullet_time
+
 
 @export var pivot_num := 3
 @export var scale_factor := 0.2
@@ -85,7 +87,7 @@ func _tracked_box(delta: float):
 		if bt_amount > 0.00000001:
 			# begin charging
 			velocity_vector = get_local_mouse_position() - tracked_box.global_position
-			print(velocity_vector)
+			#print(velocity_vector)
 			
 			#slow down time
 			Engine.time_scale = time_scale
