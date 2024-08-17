@@ -69,6 +69,7 @@ position = Vector2(423, -293)
 metadata/id = 0
 
 [node name="Box7" parent="." instance=ExtResource("2_280rl")]
+visible = false
 position = Vector2(-513, -375)
 metadata/id = 0
 
