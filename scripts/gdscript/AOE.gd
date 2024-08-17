@@ -20,7 +20,7 @@ extends Node2D
 
 var tracked_box : Node2D
 var number_of_tracked_boxes := 0
-var scale_clamp := [0.6, 20.0]
+var scale_clamp := [0.6, 10.0]
 var notInBT := true
 
 
