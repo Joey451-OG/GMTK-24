@@ -57,4 +57,4 @@ animations = [{
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.59375, 1.59375)
 sprite_frames = SubResource("SpriteFrames_2ww75")
-frame_progress = 0.520541
+frame_progress = 0.0170259

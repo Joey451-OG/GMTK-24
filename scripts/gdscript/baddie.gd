@@ -1,8 +1,9 @@
 extends CharacterBody2D
 @export var wandering_speed := 170.0
 @export var fire_speed := 80.0
-
+@export var col_area : Area2D
 @export var player_object : Node2D
+@export var isAlive := true
 
 @onready var rc_right = $Wall_checks/Right
 @onready var rc_left = $Wall_checks/Left
@@ -15,8 +16,8 @@ extends CharacterBody2D
 var current_state := STATES.WANDER
 var current_speed := 0.0
 var playerFound := false
-var other_area
-var self_area
+var wasHit := false
+var resetTime = 0.1
 
 var x_direction
 var y_direction
@@ -36,6 +37,13 @@ func _process(delta):
 	_rotate_vision_ray(delta)
 	_manage_states(delta)
 	_move_character(delta)
+	
+	# really bad hack to reset wasHit every few milisecs
+	if resetTime > 0:
+		resetTime -= 0.00001
+	else:
+		resetTime = 0.001
+		wasHit = false
 
 func _rotate_vision_ray(delta : float):
 	view_cast.target_position = (player_object.position + Vector2(0.0,35.0)) - self.global_position
@@ -69,3 +77,17 @@ func _move_character(delta : float) -> void:
 	velocity.x = x_direction
 	velocity.y = y_direction
 	move_and_slide()
+
+
+
+func _on_baddie_hit_box_area_entered(area: Area2D) -> void:
+	wasHit = true
+
+
+func _on_box_area_entered(box, inID) -> void:
+	if box.get_meta("isFired"):
+		
+		if wasHit:
+			wasHit = false
+			# KILL EM
+			self.queue_free()

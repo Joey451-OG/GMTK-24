@@ -58,8 +58,6 @@ func _process(delta) -> void:
 			
 		if tracked_box != null:
 			tracked_box.position += (thrown_speed * -selected_box_velocity) * delta
-			if !tracked_box.get_meta("isFired"):
-				tracked_box.set_meta("isFired", true)
 			
 	
 
@@ -102,6 +100,8 @@ func _tracked_box(delta: float):
 			# add code once done below
 			tracked_box.set_meta("isThrown", true)
 			tracked_box.set_meta("notInBT", false)
+			if !tracked_box.get_meta("isFired"):
+				tracked_box.set_meta("isFired", true)
 			
 	elif Input.is_action_just_released("rightClick"):
 		# reset bulllet time and fling das Block!
@@ -112,6 +112,8 @@ func _tracked_box(delta: float):
 		# add a physics object to the box and apply velocity_vector
 		tracked_box.set_meta("isThrown", true)
 		tracked_box.set_meta("notInBT", false)
+		if !tracked_box.get_meta("isFired"):
+				tracked_box.set_meta("isFired", true)
 	
 	#clamp(s)
 	tracked_box.scale = Vector2(clampf(tracked_box.scale.x, scale_clamp[0], scale_clamp[1]), clampf(tracked_box.scale.y, scale_clamp[0], scale_clamp[1]))

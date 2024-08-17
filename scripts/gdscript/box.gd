@@ -29,7 +29,7 @@ func _on_area_2d_mouse_entered() -> void:
 func _on_area_2d_mouse_exited() -> void:
 	glowish.visible = false
 	canClick = false
-
+	
 
 func _hit_box_area_entered(area: Area2D) -> void:
 	area_entered.emit(self, get_instance_id())
