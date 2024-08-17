@@ -45,13 +45,8 @@ mesh = SubResource("QuadMesh_qucg8")
 
 [node name="Box2" parent="." instance=ExtResource("2_280rl")]
 position = Vector2(453, -152.197)
-scale = Vector2(1, 1)
 metadata/id = 0
 
 [node name="Box" parent="." instance=ExtResource("2_280rl")]
 position = Vector2(-458, -97)
-scale = Vector2(1, 1)
 metadata/id = 0
-
-[connection signal="clicked" from="Box2" to="PlayerBody" method="_on_box_clicked"]
-[connection signal="clicked" from="Box" to="PlayerBody" method="_on_box_clicked"]
