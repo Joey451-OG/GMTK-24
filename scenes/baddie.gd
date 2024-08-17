@@ -28,6 +28,7 @@ var current_state = STATES.WANDER
 
 func _ready():
 	chase_timer.timeout.connect(_on_timer_timeout)
+	printerr("Make sure you are running the AI_Test Scene!!!")
 
 func _physics_process(delta: float) -> void:
 	_handle_vision()
@@ -50,8 +51,7 @@ func _handle_movement():
 	velocity.x = current_speed
 	
 func _track_player():
-	if player_object == null:
-		return
+		
 	var dir_to_player : Vector2 = Vector2(player_object.position.x, player_object.position.y - 12)\
 	 - player_tracker_rc.position
 	player_tracker_pivot.look_at(dir_to_player)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://clh0138n0di41"]
+[gd_scene load_steps=15 format=3 uid="uid://bpqtja67jsgat"]
 
 [ext_resource type="Texture2D" uid="uid://d07ltv0ic271d" path="res://assets/mailbox_1.png" id="1_jh0i4"]
 [ext_resource type="Script" path="res://scenes/baddie.gd" id="1_tsaa8"]
