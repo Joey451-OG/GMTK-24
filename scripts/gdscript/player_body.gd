@@ -21,7 +21,7 @@ extends CharacterBody2D
 @export var hover_force := 340.0
 
 @export var camera: Camera2D
-@export var ceiling_ray: RayCast2D
+@export var ceiling_collider: Area2D
 
 var final_velocity: Vector2
 var target_camera_position: Vector2
@@ -36,6 +36,7 @@ var can_hover: bool
 var can_recover_hover: bool
 var is_hovering: bool
 var hover_a: float
+var can_impact: bool
 
 var result: Vector2
 var t_velocity_x: float
@@ -74,7 +75,7 @@ func _calculate_move_vector(delta : float) -> Vector2:
 		else:
 			in_air = false
 	
-	if is_on_floor() && Input.is_action_pressed("Forward") && !ceiling_ray.is_colliding() || can_still_jump && Input.is_action_pressed("Forward") && !ceiling_ray.is_colliding():	
+	if is_on_floor() && Input.is_action_pressed("Forward") || can_still_jump && Input.is_action_pressed("Forward"):	
 		t_velocity_y-=jump_force
 		landing_partical_CPU.emitting = true
 		just_jumped = true
@@ -93,7 +94,7 @@ func _calculate_move_vector(delta : float) -> Vector2:
 	if is_on_ceiling():
 		if is_hovering:
 			hover_a = 0.0
-		t_velocity_y+=200.0 
+		t_velocity_y+=20.0 
 	
 	t_velocity_x = (int(Input.is_action_pressed("Right"))-int(Input.is_action_pressed("Left")))*walk_speed
 	if !is_on_floor():
@@ -109,7 +110,7 @@ func _update_interactions() -> void:
 	pass
 
 func _update_hover_logic(delta : float) -> void:
-	if !is_on_floor() && hover_a > 0.15: 
+	if !is_on_floor() && hover_a > 0.15:
 		can_hover=true
 	else:
 		can_hover=false

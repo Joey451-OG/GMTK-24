@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cxv0perxpy21p"]
+[gd_scene load_steps=15 format=3 uid="uid://dws5qvgdi3ubp"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/player_body.gd" id="1_ai1k4"]
 [ext_resource type="Script" path="res://scripts/gdscript/ui.gd" id="2_kajg5"]
@@ -30,9 +30,6 @@ point_count = 2
 _data = [Vector2(0, 0.868132), 0.0, -0.669173, 0, 0, Vector2(1, 0.021978), -1.61586, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_el8f7"]
-height = 38.0
-
 [sub_resource type="QuadMesh" id="QuadMesh_y7wqc"]
 size = Vector2(30.7, 6.83)
 
@@ -46,7 +43,7 @@ colors = PackedColorArray(0.135447, 0.685817, 1, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_u3x74"]
 gradient = SubResource("Gradient_yave6")
 
-[node name="PlayerBody" type="CharacterBody2D" node_paths=PackedStringArray("col_shape_1", "col_shape_2", "hover_partical_CPU_stationary", "hover_partical_CPU_trail", "falling_partical_CPU", "landing_partical_CPU", "hover_GUI_mesh", "ceiling_ray")]
+[node name="PlayerBody" type="CharacterBody2D" node_paths=PackedStringArray("col_shape_1", "col_shape_2", "hover_partical_CPU_stationary", "hover_partical_CPU_trail", "falling_partical_CPU", "landing_partical_CPU", "hover_GUI_mesh")]
 collision_layer = 129
 collision_mask = 129
 script = ExtResource("1_ai1k4")
@@ -57,7 +54,6 @@ hover_partical_CPU_trail = NodePath("Hover_Effect_1/Hover_Effect_2")
 falling_partical_CPU = NodePath("Falling_Effect")
 landing_partical_CPU = NodePath("Land_Effect")
 hover_GUI_mesh = NodePath("GUI_Elements/MeshInstance2D")
-ceiling_ray = NodePath("C_Ray")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
@@ -153,24 +149,11 @@ scale_amount_min = 9.0
 scale_amount_max = 9.0
 scale_amount_curve = SubResource("Curve_cvyej")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -19)
-shape = SubResource("CapsuleShape2D_el8f7")
-debug_color = Color(2.88785e-07, 0.57542, 0.823341, 0.42)
-
 [node name="GUI_Elements" type="Node2D" parent="."]
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="GUI_Elements"]
 position = Vector2(0, -71)
 mesh = SubResource("QuadMesh_y7wqc")
-
-[node name="C_Ray" type="RayCast2D" parent="."]
-position = Vector2(0, -40)
-rotation = -3.14789
-target_position = Vector2(0, 13)
-collision_mask = 128
 
 [node name="UI" type="Node2D" parent="." node_paths=PackedStringArray("cursor_asset")]
 z_index = 10
@@ -181,3 +164,6 @@ cursor_asset = NodePath("Cursor")
 rotation = 2.35619
 mesh = SubResource("QuadMesh_nid8f")
 texture = SubResource("GradientTexture1D_u3x74")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 128
