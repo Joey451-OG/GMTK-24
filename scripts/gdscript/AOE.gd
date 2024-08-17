@@ -2,7 +2,6 @@ extends Node2D
 
 @export var pivot_num := 3
 @export var scale_factor := 0.2
-@export var scale_clamp := [0.1, 20.0]
 
 
 @onready var box_list = {}
@@ -17,7 +16,8 @@ extends Node2D
 @onready var clouds := [pivot_3, pivot_4, pivot_5, pivot_6]
 
 var tracked_box : Node2D
-
+var number_of_tracked_boxes := 0
+var scale_clamp := [0.6, 20.0]
 
 func _process(delta) -> void:
 	_rotate_point_cloud(delta, 1.4)
@@ -26,7 +26,7 @@ func _process(delta) -> void:
 		_calculate_box_logic(box_list[box], clouds[pivot_num - 3][begin_i].global_position, delta)
 		begin_i += 1
 	
-	if tracked_box != null:
+	if tracked_box != null and number_of_tracked_boxes <= 1:
 		_tracked_box(delta)
 
 func _rotate_point_cloud(delta : float, mag : float) -> void:
@@ -45,13 +45,17 @@ func _tracked_box(delta: float):
 	
 	tracked_box.scale = Vector2(clampf(tracked_box.scale.x, scale_clamp[0], scale_clamp[1]), clampf(tracked_box.scale.y, scale_clamp[0], scale_clamp[1]))
 	
-
+	print(tracked_box.scale)
+	
 # Signaled Functions
 func _update_box_list(box, id) -> void:
 	if box.get_meta("id") not in box_list.keys():
 		box_list[id] = box
 		tracked_box = null
+		number_of_tracked_boxes = 0
 	else:
 		# remove box from list and create a reference to the box
 		tracked_box = box_list[id]
 		box_list.erase(id)
+		number_of_tracked_boxes += 1
+		
