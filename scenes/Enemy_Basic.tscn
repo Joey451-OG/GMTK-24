@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://djyl8clvhiejq"]
+[gd_scene load_steps=6 format=3 uid="uid://cfrhnebl3htev"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/enemy_basic.gd" id="1_amh3p"]
 
@@ -29,4 +29,5 @@ mesh = SubResource("QuadMesh_ylkhb")
 texture = SubResource("GradientTexture1D_xd2hn")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(-68, 0)
 collision_mask = 128
