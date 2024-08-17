@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://clh0138n0di41"]
+[gd_scene load_steps=15 format=3 uid="uid://clh0138n0di41"]
 
 [ext_resource type="Texture2D" uid="uid://d07ltv0ic271d" path="res://assets/mailbox_1.png" id="1_jh0i4"]
 [ext_resource type="Script" path="res://scripts/gdscript/baddie.gd" id="1_tsaa8"]
@@ -58,10 +58,9 @@ _data = {
 radius = 4.0
 height = 64.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gc6gi"]
-size = Vector2(944.531, 642.25)
-
 [node name="Base_Baddie" type="CharacterBody2D"]
+collision_layer = 128
+collision_mask = 128
 script = ExtResource("1_tsaa8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -85,9 +84,11 @@ position = Vector2(0, -17)
 
 [node name="Left" type="RayCast2D" parent="Wall_checks"]
 target_position = Vector2(-31, 0)
+collision_mask = 128
 
 [node name="Right" type="RayCast2D" parent="Wall_checks"]
 target_position = Vector2(31, 0)
+collision_mask = 128
 
 [node name="Floor_checks" type="Node2D" parent="."]
 position = Vector2(0, -17)
@@ -95,22 +96,15 @@ position = Vector2(0, -17)
 [node name="Floot_RC_Left" type="RayCast2D" parent="Floor_checks"]
 position = Vector2(-5, 0)
 target_position = Vector2(0, 17)
+collision_mask = 128
 
 [node name="Floot_RC_Right" type="RayCast2D" parent="Floor_checks"]
 position = Vector2(5, 0)
 target_position = Vector2(0, 17)
+collision_mask = 128
 
-[node name="PlayerTrackerPivot" type="Node2D" parent="."]
-position = Vector2(0, -17)
-
-[node name="PlayerTrackerArea" type="Area2D" parent="PlayerTrackerPivot"]
-position = Vector2(967, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerTrackerPivot/PlayerTrackerArea"]
-position = Vector2(-477, -15)
-shape = SubResource("RectangleShape2D_gc6gi")
-debug_color = Color(0.472685, 0.440808, 1, 0.42)
+[node name="Vision_cast" type="RayCast2D" parent="."]
+position = Vector2(0, -58)
+collision_mask = 128
 
 [node name="ChaseTimer" type="Timer" parent="."]
-
-[connection signal="area_entered" from="PlayerTrackerPivot/PlayerTrackerArea" to="." method="_on_area_2d_area_entered"]

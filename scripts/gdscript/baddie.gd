@@ -1,70 +1,71 @@
 extends CharacterBody2D
-@export var wandering_speed := 40.0
+@export var wandering_speed := 170.0
 @export var fire_speed := 80.0
+
 @export var player_object : Node2D
 
-@onready var chase_timer: Timer = $ChaseTimer
-@onready var player_tracker_pivot: Node2D = $PlayerTrackerPivot
-@onready var player_tracker_area: Area2D = $PlayerTrackerPivot/PlayerTrackerArea
+@onready var rc_right = $Wall_checks/Right
+@onready var rc_left = $Wall_checks/Left
 
+@onready var rc_right_f = $Floor_checks/Floot_RC_Right
+@onready var rc_left_f = $Floor_checks/Floot_RC_Left
+
+@onready var view_cast = $Vision_cast
+
+var current_state := STATES.WANDER
 var current_speed := 0.0
 var playerFound := false
 var other_area
 var self_area
+
+var x_direction
+var y_direction
+
+var dir_to_player_x
 
 enum STATES{
 	WANDER,
 	FIGHT
 }
 
-var current_state = STATES.WANDER
-
 func _ready():
-	self.set_meta("isColliding", false)
-	chase_timer.timeout.connect(_on_timer_timeout)
-	printerr("Make sure you are running the AI_Test Scene!!!")
+	x_direction = wandering_speed
+	y_direction = 0.0
 
-	
-func _physics_process(delta: float) -> void:
-	_handle_vision()
-	_track_player()
-	_handle_movement(delta)
-	move_and_slide()
-	pass
+func _process(delta):
+	_rotate_vision_ray(delta)
+	_manage_states(delta)
+	_move_character(delta)
 
+func _rotate_vision_ray(delta : float):
+	view_cast.target_position = (player_object.position + Vector2(0.0,35.0)) - self.global_position
 
-func _handle_movement(delta : float):
-	var direction = self.global_position - player_object.global_position
-	if current_state == STATES.WANDER:
-		if !$Floor_checks/Floot_RC_Right.is_colliding():
-			current_speed = -wandering_speed
-		elif !$Floor_checks/Floot_RC_Left.is_colliding():
-			current_speed = wandering_speed
-	velocity.x = current_speed
-
-func _track_player():
-	player_tracker_pivot.look_at(player_object.global_position)
-
-	
-func _handle_vision():
-	if self.get_meta("isColliding") and other_area.overlaps_area(self_area) and self_area.overlaps_area(other_area):
-		print("FOUND PLAYER!!!")
-		current_state = STATES.FIGHT
-		playerFound = true
-	else:
-		playerFound = false
-		
-	
-func _on_timer_timeout() -> void:
-	if playerFound == false:
+func _manage_states(delta : float) -> void:
+	if view_cast.get_collider() != player_object:
 		current_state = STATES.WANDER
+	elif view_cast.get_collider() == player_object:
+		current_state = STATES.FIGHT
 
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	self_area = area
-	self.set_meta("isColliding", true)
-
-
-
-func _on_player_body_area_entered(area: Area2D) -> void:
-	other_area = area
+func _move_character(delta : float) -> void:
+	if current_state == STATES.WANDER:
+		if x_direction == 0.0:
+			x_direction = wandering_speed
+		if rc_left.is_colliding() or !rc_left_f.is_colliding():
+			x_direction = wandering_speed
+		elif rc_right.is_colliding() or !rc_right_f.is_colliding():
+			x_direction = -wandering_speed
+	elif current_state == STATES.FIGHT:
+		dir_to_player_x = (player_object.global_position.x - self.global_position.x)
+		if (self.position.distance_to(player_object.global_position) > 280.0):
+			x_direction = (dir_to_player_x/self.position.distance_to(player_object.global_position))*wandering_speed
+		else:
+			x_direction = 0.0
+	
+	if !is_on_floor():
+		y_direction += (60 * 60) * delta
+	else:
+		y_direction = 0.0
+	
+	velocity.x = x_direction
+	velocity.y = y_direction
+	move_and_slide()
