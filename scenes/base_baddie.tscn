@@ -1,0 +1,107 @@
+[gd_scene load_steps=15 format=3 uid="uid://bpqtja67jsgat"]
+
+[ext_resource type="Texture2D" uid="uid://d07ltv0ic271d" path="res://assets/mailbox_1.png" id="1_jh0i4"]
+[ext_resource type="Script" path="res://scenes/baddie.gd" id="1_tsaa8"]
+[ext_resource type="Texture2D" uid="uid://oh0yubd52w8x" path="res://assets/mailbox_2.png" id="2_112qr"]
+[ext_resource type="Texture2D" uid="uid://ti2wwadddu2s" path="res://assets/mailbox_3.png" id="3_mjfhc"]
+[ext_resource type="Texture2D" uid="uid://b5hx1abbcnorw" path="res://assets/mailbox_4.png" id="4_bklrp"]
+[ext_resource type="Texture2D" uid="uid://c4aojahg56wfg" path="res://assets/mailbox_5.png" id="5_rpjeg"]
+[ext_resource type="Texture2D" uid="uid://2yl1ka2h03ab" path="res://assets/mailbox_6.png" id="6_gyl7i"]
+[ext_resource type="Texture2D" uid="uid://b0i580dd7ljo0" path="res://assets/mailbox_7.png" id="7_85qyf"]
+[ext_resource type="Texture2D" uid="uid://c8k1237vr0utp" path="res://assets/mailbox_8.png" id="8_sa46g"]
+[ext_resource type="Texture2D" uid="uid://bca3lb7a4ehwn" path="res://assets/mailbox_9.png" id="9_tgqlj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q8y8g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jh0i4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_112qr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mjfhc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bklrp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rpjeg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gyl7i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_85qyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_sa46g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_tgqlj")
+}],
+"loop": true,
+"name": &"dev_mailbox",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_qceuj"]
+resource_name = "dev_mailbox"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0fdo"]
+_data = {
+"dev_mailbox": SubResource("Animation_qceuj")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sxfid"]
+radius = 5.0
+height = 32.0
+
+[node name="Base_Baddie" type="CharacterBody2D"]
+script = ExtResource("1_tsaa8")
+wandering_speed = null
+fire_speed = null
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-7, -22)
+sprite_frames = SubResource("SpriteFrames_q8y8g")
+animation = &"dev_mailbox"
+frame_progress = 0.91845
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y0fdo")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_sxfid")
+
+[node name="Wall_checks" type="Node2D" parent="."]
+position = Vector2(0, -17)
+
+[node name="Left" type="RayCast2D" parent="Wall_checks"]
+target_position = Vector2(-31, 0)
+
+[node name="Right" type="RayCast2D" parent="Wall_checks"]
+target_position = Vector2(31, 0)
+
+[node name="Floor_checks" type="Node2D" parent="."]
+position = Vector2(0, -17)
+
+[node name="Floot_RC_Left" type="RayCast2D" parent="Floor_checks"]
+position = Vector2(-5, 0)
+target_position = Vector2(0, 17)
+
+[node name="Floot_RC_Right" type="RayCast2D" parent="Floor_checks"]
+position = Vector2(5, 0)
+target_position = Vector2(0, 17)
+
+[node name="PlayerTrackerPivot" type="Node2D" parent="."]
+position = Vector2(0, -17)
+
+[node name="PlayerTrackerRC" type="RayCast2D" parent="PlayerTrackerPivot"]
+target_position = Vector2(-59, 0)
+
+[node name="ChaseTimer" type="Timer" parent="."]
