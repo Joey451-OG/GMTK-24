@@ -34,6 +34,7 @@ var velocity_vector : Vector2
 
 var selected_box_velocity : Vector2
 var selected_box_time : float
+var list_old_ids = [0]
 
 
 func _process(delta) -> void:
@@ -57,6 +58,8 @@ func _process(delta) -> void:
 			
 		if tracked_box != null:
 			tracked_box.position += (thrown_speed * -selected_box_velocity) * delta
+			if !tracked_box.get_meta("isFired"):
+				tracked_box.set_meta("isFired", true)
 			
 	
 
@@ -113,7 +116,7 @@ func _tracked_box(delta: float):
 	#clamp(s)
 	tracked_box.scale = Vector2(clampf(tracked_box.scale.x, scale_clamp[0], scale_clamp[1]), clampf(tracked_box.scale.y, scale_clamp[0], scale_clamp[1]))
 	thrown_speed = clampf(thrown_speed, scale_clamp[0], scale_clamp[1])
-	print(thrown_speed)
+	#print(thrown_speed)
 	
 # Signaled Functions
 func _update_box_list(box, id) -> void:
@@ -126,7 +129,8 @@ func _update_box_list(box, id) -> void:
 		tracked_box = box_list[id]
 		box_list.erase(id)
 		number_of_tracked_boxes += 1
-
+		list_old_ids.append(box.get_meta("id"))
+		
 func _despawn_box_object(target : Node2D):
 	despawn_partical.global_position = target.global_position
 	despawn_partical.emitting = true
