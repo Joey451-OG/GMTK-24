@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dws5qvgdi3ubp"]
+[gd_scene load_steps=24 format=3 uid="uid://dws5qvgdi3ubp"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/player_body.gd" id="1_ai1k4"]
 [ext_resource type="Script" path="res://scripts/gdscript/ui.gd" id="2_kajg5"]
@@ -93,6 +93,10 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a5evw"]
+radius = 9.0
+height = 56.0
 
 [node name="PlayerBody" type="CharacterBody2D" node_paths=PackedStringArray("col_shape_1", "col_shape_2", "hover_partical_CPU_stationary", "hover_partical_CPU_trail", "falling_partical_CPU", "landing_partical_CPU", "hover_GUI_mesh")]
 collision_layer = 129
@@ -223,4 +227,12 @@ collision_mask = 128
 position = Vector2(0, -33)
 scale = Vector2(2.03125, 2.03125)
 sprite_frames = SubResource("SpriteFrames_cfan4")
-frame_progress = 0.715581
+frame_progress = 0.845912
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -29)
+shape = SubResource("CapsuleShape2D_a5evw")
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

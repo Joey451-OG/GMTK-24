@@ -44,6 +44,8 @@ var t_velocity_y: float
 
 var temp_result: Vector2
 
+# signals
+signal area_entered(area: Area2D)
 
 func _ready():
 	just_jumped=true
@@ -168,3 +170,7 @@ func _draw_debug_elements():
 
 func _on_box_clicked(node : Node2D, id : int):
 	$AOE._update_box_list(node, id)
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	area_entered.emit(area)

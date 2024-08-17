@@ -70,11 +70,11 @@ metadata/id = 0
 position = Vector2(-535, -235)
 metadata/id = 0
 
-[node name="Base_Baddie" parent="." instance=ExtResource("4_5w8em")]
-position = Vector2(288, -67)
-wandering_speed = 40.0
-fire_speed = 80.0
+[node name="Base_Baddie" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("4_5w8em")]
+position = Vector2(268, -67)
+player_object = NodePath("../PlayerBody")
 
+[connection signal="area_entered" from="PlayerBody" to="Base_Baddie" method="_on_player_body_area_entered"]
 [connection signal="clicked" from="Box" to="PlayerBody" method="_on_box_clicked"]
 [connection signal="clicked" from="Box2" to="PlayerBody" method="_on_box_clicked"]
 [connection signal="clicked" from="Box3" to="PlayerBody" method="_on_box_clicked"]
