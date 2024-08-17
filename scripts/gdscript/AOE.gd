@@ -2,10 +2,13 @@ extends Node2D
 
 @export var pivot_num := 3
 @export var scale_factor := 0.2
+@export var box_throw_velocity := 2
 @export var time_scale := 0.2
 @export var bullet_time_amount := 20
 @export var bullet_time_drain_rate := 0.2
 
+@export var despawn_time := 5; 
+@export var despawn_partical := CPUParticles2D
 
 @onready var box_list = {}
 
@@ -24,6 +27,9 @@ var scale_clamp := [0.6, 10.0]
 var notInBT := true
 var velocity_vector : Vector2
 
+var selected_box_velocity : Vector2
+var selected_box_time : float
+
 
 func _process(delta) -> void:
 	_rotate_point_cloud(delta, 1.4)
@@ -35,11 +41,18 @@ func _process(delta) -> void:
 	if tracked_box != null:
 		if number_of_tracked_boxes <= 1:
 			_tracked_box(delta)
-	
 		if tracked_box.get_meta("isThrown"):
-			tracked_box.position += 30 * -velocity_vector * delta
+			selected_box_time += (2.4) * delta
+			selected_box_velocity = velocity_vector
+			if selected_box_time > despawn_time:
+				_despawn_box_object(tracked_box)
+				selected_box_time = 0.0
 		else: 
-			velocity_vector = Vector2(0, 0)
+			selected_box_velocity = Vector2.ZERO
+			
+		if tracked_box != null:
+			tracked_box.position += (box_throw_velocity * -selected_box_velocity) * delta
+	
 
 func _rotate_point_cloud(delta : float, mag : float) -> void:
 	pivot.rotation += mag * delta
@@ -48,9 +61,6 @@ func _calculate_box_logic(box, target_point : Vector2, delta) -> void:
 	box.position = lerp(box.position, target_point, 4.4 * delta)
 
 func _tracked_box(delta: float):
-	# variables
-	var physics_object = preload("res://scenes/physics_asset.tscn").instantiate()
-	
 	# turn the glow effect on to show which box is selected
 	tracked_box.glowish.visible = true
 	
@@ -74,12 +84,10 @@ func _tracked_box(delta: float):
 			bt_amount *= bt_drain_rate
 			notInBT = false
 		else:
-			
 			# same as below elif without recharging the bullet time
 			Engine.time_scale = 1
-			
 			# add code once done below
-			#tracked_box.set_meta("isThrown", true)
+			tracked_box.set_meta("isThrown", true)
 			
 	elif Input.is_action_just_released("rightClick"):
 		# reset bulllet time and fling das Block!
@@ -88,7 +96,7 @@ func _tracked_box(delta: float):
 		bt_amount = bullet_time_amount
 		
 		# add a physics object to the box and apply velocity_vector
-		#tracked_box.set_meta("isThrown", true)
+		tracked_box.set_meta("isThrown", true)
 	
 	#clamp(s)
 	tracked_box.scale = Vector2(clampf(tracked_box.scale.x, scale_clamp[0], scale_clamp[1]), clampf(tracked_box.scale.y, scale_clamp[0], scale_clamp[1]))
@@ -96,13 +104,18 @@ func _tracked_box(delta: float):
 	
 # Signaled Functions
 func _update_box_list(box, id) -> void:
-	if box.get_meta("id") not in box_list.keys():
+	if box.get_meta("id") not in box_list.keys() and box_list.size() < pivot_num:
 		box_list[id] = box
 		tracked_box = null
 		number_of_tracked_boxes = 0
-	else:
+	elif box.get_meta("id") in box_list.keys():
 		# remove box from list and create a reference to the box
 		tracked_box = box_list[id]
 		box_list.erase(id)
 		number_of_tracked_boxes += 1
-		
+
+func _despawn_box_object(target : Node2D):
+	despawn_partical.global_position = target.global_position
+	despawn_partical.emitting = true
+	tracked_box = null
+	target.queue_free()
