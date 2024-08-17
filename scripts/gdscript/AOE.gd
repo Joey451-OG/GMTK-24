@@ -20,6 +20,8 @@ extends Node2D
 @onready var world_7 := [$orbital_zone/pivot_3, $orbital_zone/pivot_4, $orbital_zone/pivot_5, $orbital_zone/pivot_6]
 @onready var bt_drain_rate = 1 - bullet_time_drain_rate
 @onready var bt_amount = bullet_time_amount
+@onready var dev_vel_rc: RayCast2D = $dev_vel_RC
+
 
 var tracked_box : Node2D
 var number_of_tracked_boxes := 0
@@ -51,7 +53,7 @@ func _process(delta) -> void:
 			
 		if tracked_box != null:
 			tracked_box.position += (thrown_speed * -selected_box_velocity) * delta
-			
+			dev_vel_rc.target_position += (thrown_speed * -selected_box_velocity) * delta
 	
 
 func _rotate_point_cloud(delta : float, mag : float) -> void:
@@ -85,6 +87,7 @@ func _tracked_box(delta: float):
 			#slow down time
 			Engine.time_scale = time_scale
 			bt_amount *= bt_drain_rate
+			thrown_speed += bt_drain_rate / 10000
 			tracked_box.set_meta("notInBT", false)
 		else:
 			# same as below elif without recharging the bullet time
@@ -126,3 +129,4 @@ func _despawn_box_object(target : Node2D):
 	tracked_box = null
 	target.queue_free()
 	number_of_tracked_boxes = 0
+	dev_vel_rc.target_position = Vector2(0, 0)
