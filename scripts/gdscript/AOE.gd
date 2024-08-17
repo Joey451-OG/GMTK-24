@@ -1,5 +1,9 @@
 extends Node2D
 
+# these control the bullet time music - Aveca
+signal enter_bullet_time
+signal exit_bullet_time
+
 @export var pivot_num := 3
 @export var scale_factor := 0.2
 @export var thrown_speed := 2.0
@@ -77,6 +81,7 @@ func _tracked_box(delta: float):
 	
 	# Bullet Time
 	elif Input.is_action_pressed("rightClick"):
+		enter_bullet_time.emit()
 		if bt_amount > 0.00000001:
 			# begin charging
 			velocity_vector = get_local_mouse_position() - tracked_box.global_position
@@ -95,7 +100,7 @@ func _tracked_box(delta: float):
 			
 	elif Input.is_action_just_released("rightClick"):
 		# reset bulllet time and fling das Block!
-		
+		exit_bullet_time.emit()
 		Engine.time_scale = 1
 		bt_amount = bullet_time_amount
 		
