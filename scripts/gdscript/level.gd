@@ -19,8 +19,8 @@ var tracked_box : Node2D
 var selected_box_time : float
 var list_of_working_boxes := []
 
-func _physics_process(delta: float) -> void:
-	if tracked_box != null: 
+func _process(delta: float) -> void:
+	if tracked_box != null:  
 		_scale_box(delta)
 		_charge_projectile(delta)
 	
