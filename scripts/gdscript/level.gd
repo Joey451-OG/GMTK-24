@@ -9,11 +9,11 @@ extends Node2D
 @onready var bt_amount = bullet_time_amount
 @onready var bt_drain_rate = 1 - bullet_time_drain_rate
 
+var scale_clamp := [0.6, 4.0]
 var tracked_box : Node2D
 
 func _process(delta: float) -> void:
 	if tracked_box != null : _scale_box(delta)
-
 
 func _scale_box(detla: float):
 	# turn the glow effect on to show which box is selected
@@ -23,9 +23,12 @@ func _scale_box(detla: float):
 	if Input.is_action_just_pressed("scrollUp"):
 		tracked_box.scale *= scale_factor + 1 # lerp this eventually
 		thrown_speed *= 1 - scale_factor
+		$PlayerBody/GunScene._get_marker().position.x *= scale_factor + 1
+		
 	elif Input.is_action_just_pressed("scrollDown"):
 		tracked_box.scale *= 1 - scale_factor # lerp eventually
 		thrown_speed *= 1 + scale_factor
+		$PlayerBody/GunScene._get_marker().position.x *= 1 - scale_factor
 	
 	# Bullet Time
 	elif Input.is_action_pressed("rightClick"):
@@ -56,6 +59,11 @@ func _scale_box(detla: float):
 		tracked_box.set_meta("notInBT", false)
 		if !tracked_box.get_meta("isFired"):
 				tracked_box.set_meta("isFired", true)
+				
+	#clamp(s)
+	tracked_box.scale = Vector2(clampf(tracked_box.scale.x, scale_clamp[0], scale_clamp[1]), clampf(tracked_box.scale.y, scale_clamp[0], scale_clamp[1]))
+	thrown_speed = clampf(thrown_speed, scale_clamp[0], scale_clamp[1])
+	$PlayerBody/GunScene._get_marker().position.x = clampf($PlayerBody/GunScene._get_marker().position.x, 60.0, 160.0)
 
 
 func _recive_box(box):

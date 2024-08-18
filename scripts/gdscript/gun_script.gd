@@ -44,3 +44,9 @@ func _capture_box(box, id):
 		target_box = box
 		isHoldingBox = true
 		send_package.emit(box)
+
+func _get_marker() -> Marker2D:
+	return marker_2d
+
+func _set_marker(m) -> void:
+	marker_2d = m
