@@ -87,7 +87,7 @@ func _tracked_box(delta: float):
 		enter_bullet_time.emit()
 		if bt_amount > 0.00000001:
 			# begin charging
-			velocity_vector = get_local_mouse_position() - tracked_box.global_position
+			velocity_vector = get_global_mouse_position() - tracked_box.global_position
 			#print(velocity_vector)
 			
 			#slow down time
@@ -139,3 +139,6 @@ func _despawn_box_object(target : Node2D):
 	tracked_box = null
 	target.queue_free()
 	number_of_tracked_boxes = 0
+	
+func _debug_ray():
+	pass

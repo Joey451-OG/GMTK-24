@@ -1,7 +1,9 @@
 extends CharacterBody2D
 @export var wandering_speed := 170.0
-@export var fighting_speed := 120.0
+@export var fighting_speed := 100.0
 @export var fire_speed := 80.0
+@export var fighting_range_limit_h := 500.0
+@export var fighting_range_limit_l := 400.0
 @export var col_area : Area2D
 @export var player_object : Node2D
 @export var isAlive := true
@@ -66,7 +68,7 @@ func _manage_states(delta : float) -> void:
 
 func _move_character(delta : float) -> void:
 	dir_to_player_x = (player_object.global_position.x - self.global_position.x)
-	dir_to_player_y = (player_object.global_position.y - self.global_position.y)
+	dir_to_player_y = (player_object.global_position.y - self.global_position.y) - 10.0
 	if current_state == STATES.WANDER:
 		if x_direction == 0.0:
 			x_direction = wandering_speed
@@ -75,9 +77,9 @@ func _move_character(delta : float) -> void:
 		elif rc_right.is_colliding() or !rc_right_f.is_colliding():
 			x_direction = -wandering_speed
 	if current_state == STATES.FIGHT:
-		if (self.position.distance_to(player_object.global_position) > 280.0):
+		if (self.position.distance_to(player_object.global_position) > fighting_range_limit_h):
 			x_direction = (dir_to_player_x/self.position.distance_to(player_object.global_position))*wandering_speed
-		elif (self.position.distance_to(player_object.global_position) < 200.0):
+		elif (self.position.distance_to(player_object.global_position) < fighting_range_limit_l):
 			x_direction = -(dir_to_player_x/self.position.distance_to(player_object.global_position))*fighting_speed
 		else:
 			x_direction = 0.0
@@ -93,11 +95,8 @@ func _move_character(delta : float) -> void:
 	velocity.y = y_direction
 	move_and_slide()
 
-
-
 func _on_baddie_hit_box_area_entered(area: Area2D) -> void:
 	wasHit = true
-
 
 func _on_box_area_entered(box, inID) -> void:
 	if box.get_meta("isFired"):
@@ -109,10 +108,12 @@ func _on_box_area_entered(box, inID) -> void:
 			
 func _spawn_projectile(asset, direction : Vector2):
 	projectile_list.append(projectile_asset.instantiate())
-	add_child(projectile_list[proj_index])
+	get_tree().root.add_child(projectile_list[proj_index])
+	projectile_list[-1].global_position = $bullet_point.global_position
+	
 	proj_index += 1
 	projectile_velocity_data_list.append(direction)
 
 func _update_spawned_projectiles(delta : float):
 	for p in projectile_list:
-		p.position += (projectile_velocity_data_list[0] * fire_speed * delta)
+		p.global_position += (projectile_velocity_data_list[0] * fire_speed * delta)
