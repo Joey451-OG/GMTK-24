@@ -3,15 +3,13 @@ extends Node2D
 @onready var marker_2d: Marker2D = $Pivot_Point/Box_SnapPos
 @onready var target_box : Node2D
 
-var isHoldingBox := false
 var isInPosition := false
+var wasAnimationPlayed := false
 var t_angle: float
 
 signal send_package(Node2D)
 
 func _process(delta):
-	if Input.is_action_just_pressed("leftClick") and isHoldingBox:
-		_fire_animation()
 	_rotate_gun()
 	_update_position(delta)
 	t_angle = $Pivot_Point.rotation
@@ -34,15 +32,16 @@ func _update_position(delta : float) -> void:
 func _get_firing_angle() -> float:
 	return t_angle
 func _fire_animation() -> void:
-	$Pivot_Point/Mesh.position -= Vector2(15.0,0.0)
-func _get_fire_position()-> Marker2D:
+	if !wasAnimationPlayed: # hacky solution to stop the animation from playing until the bullet is fired [see level.gd _fire_projectile()] -Joey 
+		$Pivot_Point/Mesh.position -= Vector2(15.0,0.0)
+		wasAnimationPlayed = true
+func _get_fire_position()-> Marker2D: # Orphaned code, it's being used atm -Joey
 	return $Pivot_Point/Bullet_Point
 
 # signal functions
 func _capture_box(box, id):
 	if target_box == null:
 		target_box = box
-		isHoldingBox = true
 		send_package.emit(box)
 
 func _get_marker() -> Marker2D:

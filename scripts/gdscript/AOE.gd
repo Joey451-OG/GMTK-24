@@ -13,7 +13,7 @@ signal exit_bullet_time
 @export var bullet_time_amount := 20
 @export var bullet_time_drain_rate := 0.2
 
-@export var despawn_time := 5; 
+@export var despawn_time := 5.0 
 @export var despawn_partical := CPUParticles2D
 
 @onready var box_list = {}

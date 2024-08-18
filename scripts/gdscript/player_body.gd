@@ -145,15 +145,19 @@ func _update_hover_logic(delta : float) -> void:
 		hover_GUI_mesh.visible=true;
 	
 	hover_GUI_mesh.scale.x=hover_a
+
 func _update_falling_effect(t_velocity_y : float) -> void:
 	if t_velocity_y > 893:
 		falling_partical_CPU.emitting = true
 	else:
 		falling_partical_CPU.emitting = false
+
 func _update_upper_collider_position(delta: float) -> void:
 	col_shape_2.position = lerp(col_shape_2.position, Vector2(0.0, -30.0), 12.0*delta)
+
 func _update_lower_collider_position(delta: float) -> void:
 	col_shape_1.position = lerp(col_shape_1.position, Vector2(0.0, -10.0), 12.0*delta)
+
 func _on_land(target_velocity_x : float) -> void: #called when the player lands...
 	if target_velocity_x != 0.0:
 		landing_partical_CPU.direction.y = -2.0
@@ -162,9 +166,11 @@ func _on_land(target_velocity_x : float) -> void: #called when the player lands.
 		landing_partical_CPU.direction.y = -1.0
 	landing_partical_CPU.emitting = true
 	col_shape_2.position+=Vector2(0.0, 20.3)
+
 func _move(target_velocity: Vector2) -> void: #sets target velocity and moves player...
 	velocity = target_velocity;
 	move_and_slide()
+
 func _draw_debug_elements():
 	pass
 
