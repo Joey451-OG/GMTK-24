@@ -1,0 +1,189 @@
+[gd_scene load_steps=12 format=3 uid="uid://c0xl3a3eq066s"]
+
+[ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_u0mve"]
+[ext_resource type="PackedScene" uid="uid://iuq1db2md4b8" path="res://scenes/area_or_influence_demo.tscn" id="2_fdhrw"]
+[ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="3_il8n3"]
+[ext_resource type="Script" path="res://scripts/gdscript/radio.gd" id="4_sup4y"]
+[ext_resource type="AudioStream" uid="uid://b320h1l6hydw" path="res://music/track.mp3" id="5_2wk0j"]
+[ext_resource type="AudioStream" uid="uid://c1d0h81alhcy" path="res://music/bullet_time_loop.wav" id="6_8muir"]
+[ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="7_vc1nn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q50ga"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_15mbp"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ri33f"]
+size = Vector2(46, 87)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rsflv"]
+size = Vector2(48, 44.1574)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(2, 223)
+scale = Vector2(51.8, 0.5)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_q50ga")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground"]
+mesh = SubResource("QuadMesh_15mbp")
+
+[node name="Ground2" type="StaticBody2D" parent="."]
+position = Vector2(499, 197)
+scale = Vector2(18.57, -7.56069)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2"]
+shape = SubResource("RectangleShape2D_q50ga")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground2"]
+mesh = SubResource("QuadMesh_15mbp")
+
+[node name="Ground3" type="StaticBody2D" parent="."]
+position = Vector2(-66, -30)
+scale = Vector2(18.57, -7.56069)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground3"]
+shape = SubResource("RectangleShape2D_q50ga")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground3"]
+mesh = SubResource("QuadMesh_15mbp")
+
+[node name="Ground4" type="StaticBody2D" parent="."]
+position = Vector2(-477, 184)
+scale = Vector2(9.41522, -32.6544)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground4"]
+shape = SubResource("RectangleShape2D_q50ga")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground4"]
+mesh = SubResource("QuadMesh_15mbp")
+
+[node name="Base_Baddie" parent="." node_paths=PackedStringArray("col_area", "player_object") instance=ExtResource("3_il8n3")]
+position = Vector2(613, 114)
+col_area = NodePath("Baddie_Hit_Box")
+player_object = NodePath("../PlayerBody")
+
+[node name="Baddie_Hit_Box" type="Area2D" parent="Base_Baddie"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base_Baddie/Baddie_Hit_Box"]
+position = Vector2(-10, -42.5)
+shape = SubResource("RectangleShape2D_ri33f")
+debug_color = Color(0.791003, 0.428352, 0, 0.42)
+
+[node name="Base_Baddie2" parent="." node_paths=PackedStringArray("col_area", "player_object") instance=ExtResource("3_il8n3")]
+position = Vector2(27, -114)
+col_area = NodePath("Baddie_Hit_Box")
+player_object = NodePath("../PlayerBody")
+
+[node name="Baddie_Hit_Box" type="Area2D" parent="Base_Baddie2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base_Baddie2/Baddie_Hit_Box"]
+position = Vector2(-10, -42.5)
+shape = SubResource("RectangleShape2D_ri33f")
+debug_color = Color(0.791003, 0.428352, 0, 0.42)
+
+[node name="Base_Baddie3" parent="." node_paths=PackedStringArray("col_area", "player_object") instance=ExtResource("3_il8n3")]
+position = Vector2(-512, -152)
+col_area = NodePath("Baddie_Hit_Box")
+player_object = NodePath("../PlayerBody")
+
+[node name="Baddie_Hit_Box" type="Area2D" parent="Base_Baddie3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base_Baddie3/Baddie_Hit_Box"]
+position = Vector2(-10, -42.5)
+shape = SubResource("RectangleShape2D_ri33f")
+debug_color = Color(0.791003, 0.428352, 0, 0.42)
+
+[node name="PlayerBody" parent="." instance=ExtResource("1_u0mve")]
+position = Vector2(1, 200)
+
+[node name="AOE" parent="PlayerBody" instance=ExtResource("2_fdhrw")]
+pivot_num = 6
+scale_factor = 0.6
+
+[node name="Radio" type="Node" parent="."]
+script = ExtResource("4_sup4y")
+
+[node name="Title" type="AudioStreamPlayer" parent="Radio"]
+stream = ExtResource("5_2wk0j")
+volume_db = 6.925
+
+[node name="BulletTimeLoop" type="AudioStreamPlayer" parent="Radio"]
+stream = ExtResource("6_8muir")
+
+[node name="Box" parent="." instance=ExtResource("7_vc1nn")]
+position = Vector2(-290, 177)
+
+[node name="Area2D2" type="Area2D" parent="Box"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box/Area2D2"]
+position = Vector2(0, -1.52588e-05)
+shape = SubResource("RectangleShape2D_rsflv")
+
+[node name="Box2" parent="." instance=ExtResource("7_vc1nn")]
+position = Vector2(241, 185)
+
+[node name="Area2D2" type="Area2D" parent="Box2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box2/Area2D2"]
+position = Vector2(0, -1.52588e-05)
+shape = SubResource("RectangleShape2D_rsflv")
+
+[node name="Box3" parent="." instance=ExtResource("7_vc1nn")]
+position = Vector2(426, 89)
+
+[node name="Area2D2" type="Area2D" parent="Box3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box3/Area2D2"]
+position = Vector2(0, -1.52588e-05)
+shape = SubResource("RectangleShape2D_rsflv")
+
+[node name="Box4" parent="." instance=ExtResource("7_vc1nn")]
+position = Vector2(-105, -142)
+
+[node name="Area2D2" type="Area2D" parent="Box4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box4/Area2D2"]
+position = Vector2(0, -1.52588e-05)
+shape = SubResource("RectangleShape2D_rsflv")
+
+[node name="Box5" parent="." instance=ExtResource("7_vc1nn")]
+position = Vector2(-430, -171)
+
+[node name="Area2D2" type="Area2D" parent="Box5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box5/Area2D2"]
+position = Vector2(0, -1.52588e-05)
+shape = SubResource("RectangleShape2D_rsflv")
+
+[connection signal="area_entered" from="Base_Baddie/Baddie_Hit_Box" to="Base_Baddie" method="_on_baddie_hit_box_area_entered"]
+[connection signal="area_entered" from="Base_Baddie2/Baddie_Hit_Box" to="Base_Baddie2" method="_on_baddie_hit_box_area_entered"]
+[connection signal="area_entered" from="Base_Baddie3/Baddie_Hit_Box" to="Base_Baddie3" method="_on_baddie_hit_box_area_entered"]
+[connection signal="area_entered" from="Box" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box" to="PlayerBody/AOE" method="_update_box_list"]
+[connection signal="area_entered" from="Box/Area2D2" to="Box" method="_hit_box_area_entered"]
+[connection signal="area_entered" from="Box2" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box2" to="PlayerBody/AOE" method="_update_box_list"]
+[connection signal="area_entered" from="Box2/Area2D2" to="Box2" method="_hit_box_area_entered"]
+[connection signal="area_entered" from="Box3" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box3" to="PlayerBody/AOE" method="_update_box_list"]
+[connection signal="area_entered" from="Box3/Area2D2" to="Box3" method="_hit_box_area_entered"]
+[connection signal="area_entered" from="Box4" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box4" to="PlayerBody/AOE" method="_update_box_list"]
+[connection signal="area_entered" from="Box4/Area2D2" to="Box4" method="_hit_box_area_entered"]
+[connection signal="area_entered" from="Box5" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box5" to="PlayerBody/AOE" method="_update_box_list"]
+[connection signal="area_entered" from="Box5/Area2D2" to="Box5" method="_hit_box_area_entered"]
