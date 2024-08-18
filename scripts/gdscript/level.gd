@@ -34,17 +34,17 @@ func _scale_box(detla: float):
 	if Input.is_action_just_pressed("scrollUp"):
 		tracked_box.scale *= scale_factor + 1 # lerp this eventually
 		thrown_speed *= 1 - scale_factor
-		$PlayerBody/GunScene._get_marker().position.x *= scale_factor + 1
+		$PlayerBody/GunScene._get_marker().position.x *= (scale_factor / 2) + 1
 		
 	elif Input.is_action_just_pressed("scrollDown"):
 		tracked_box.scale *= 1 - scale_factor # lerp eventually
 		thrown_speed *= 1 + scale_factor
-		$PlayerBody/GunScene._get_marker().position.x *= 1 - scale_factor
+		$PlayerBody/GunScene._get_marker().position.x *= 1 - (scale_factor / 2) 
 	
 	#clamp(s)
 	tracked_box.scale = Vector2(clampf(tracked_box.scale.x, scale_clamp[0], scale_clamp[1]), clampf(tracked_box.scale.y, scale_clamp[0], scale_clamp[1]))
 	thrown_speed = clampf(thrown_speed, scale_clamp[0], scale_clamp[1])
-	$PlayerBody/GunScene._get_marker().position.x = clampf($PlayerBody/GunScene._get_marker().position.x, 60.0, 160.0)
+	$PlayerBody/GunScene._get_marker().position.x = clampf($PlayerBody/GunScene._get_marker().position.x, 90.0, 190.0)
 
 func _bullet_time(delta: float):
 	# Bullet Time

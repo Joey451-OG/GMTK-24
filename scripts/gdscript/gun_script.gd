@@ -26,8 +26,9 @@ func _process(delta):
 
 func _rotate_gun() -> void:
 	$Pivot_Point.look_at(get_global_mouse_position())
+
 func _update_position(delta : float) -> void:
-	$Pivot_Point/Mesh.position = lerp($Pivot_Point/Mesh.position, Vector2(13.0,0.0), 4.0 * delta);
+	$Pivot_Point/Mesh.position = lerp($Pivot_Point/Mesh.position, Vector2(53.0,0.0), 4.0 * delta);
 
 func _get_firing_angle() -> float:
 	return t_angle
@@ -44,7 +45,8 @@ func _get_fire_position()-> Marker2D: # Orphaned code, it's being used atm -Joey
 func _capture_box(box, id):
 	if target_box == null:
 		target_box = box
-		send_package.emit(box)
+		send_package.emit(box) # send out a reference to the target_block
+		marker_2d.position.x = 90.0 # reset marker pos when picking up a new block
 
 func _get_marker() -> Marker2D:
 	return marker_2d
