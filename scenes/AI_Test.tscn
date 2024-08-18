@@ -71,7 +71,7 @@ position = Vector2(-535, -235)
 metadata/id = 0
 
 [node name="Base_Baddie" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("4_5w8em")]
-position = Vector2(268, -67)
+position = Vector2(-407, -15)
 player_object = NodePath("../PlayerBody")
 
 [connection signal="area_entered" from="PlayerBody" to="Base_Baddie" method="_on_player_body_area_entered"]

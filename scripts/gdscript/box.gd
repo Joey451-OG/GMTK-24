@@ -13,7 +13,8 @@ func _ready():
 	
 func _process(delta: float) -> void:
 	if canClick and Input.is_action_just_pressed("leftClick"):
-		if self.get_meta("id") == null || self.get_meta("id") == 0:
+		# Hacky solution to stop boxes being back into the invin when already in invin
+		if self.get_meta("id") == null || self.get_meta("id") == 0: 
 			self.set_meta("id", id)
 			clicked.emit(self, id) 
 		else:

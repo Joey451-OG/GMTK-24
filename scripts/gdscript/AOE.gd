@@ -122,7 +122,7 @@ func _tracked_box(delta: float):
 	
 # Signaled Functions
 func _update_box_list(box, id) -> void:
-	if box.get_meta("id") not in box_list.keys() and box_list.size() < pivot_num:
+	if box.get_meta("id") not in box_list.keys() and box_list.size() < pivot_num and !box.get_meta("isThrown"):
 		box_list[id] = box
 		tracked_box = null
 		number_of_tracked_boxes = 0
