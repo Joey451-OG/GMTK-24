@@ -27,6 +27,8 @@ func _process(delta: float) -> void:
 		print("CLICKED BOX:", self.get_meta("id"))
 	
 
+# signal functions
+
 func _on_area_2d_mouse_entered() -> void:
 	glowish.visible = true
 	canClick = true
