@@ -1,13 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://dn57h06nvqlu1"]
+[gd_scene load_steps=12 format=3 uid="uid://dn57h06nvqlu1"]
 
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_fnfun"]
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_j3cqg"]
 [ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="2_280rl"]
 [ext_resource type="PackedScene" uid="uid://iuq1db2md4b8" path="res://scenes/area_or_influence_demo.tscn" id="2_ooey3"]
 [ext_resource type="Script" path="res://scripts/gdscript/radio.gd" id="4_m03vv"]
-[ext_resource type="AudioStream" uid="uid://b320h1l6hydw" path="res://music/track.mp3" id="5_hhpf8"]
-[ext_resource type="AudioStream" uid="uid://c1d0h81alhcy" path="res://music/bullet_time_loop.wav" id="6_8edg6"]
 [ext_resource type="Script" path="res://scripts/gdscript/example_enimy.gd" id="7_efxka"]
+[ext_resource type="AudioStream" uid="uid://bc5nqwtkwrn6k" path="res://music/avecaBulletTimeLoop.wav" id="7_g5l8h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nls3r"]
 
@@ -95,12 +94,9 @@ shape = SubResource("RectangleShape2D_1skss")
 [node name="Radio" type="Node" parent="."]
 script = ExtResource("4_m03vv")
 
-[node name="Title" type="AudioStreamPlayer" parent="Radio"]
-stream = ExtResource("5_hhpf8")
-volume_db = 6.925
-
-[node name="BulletTimeLoop" type="AudioStreamPlayer" parent="Radio"]
-stream = ExtResource("6_8edg6")
+[node name="AvecaBulletTimeLoop" type="AudioStreamPlayer" parent="Radio"]
+stream = ExtResource("7_g5l8h")
+volume_db = 1.0
 
 [node name="Example enimy" type="Area2D" parent="."]
 script = ExtResource("7_efxka")
