@@ -15,13 +15,13 @@ func _process(delta):
 	t_angle = $Pivot_Point.rotation
 	
 	# Snapping box to marker pos
-	if target_box != null:
+	if target_box != null and !target_box.get_meta("isThrown"):
 		if !isInPosition:
 			target_box.global_position = lerp(target_box.global_position, marker_2d.global_position, 7.4 * delta)
 		else:
 			target_box.global_position = marker_2d.global_position
 		
-		if (target_box.global_position.x - marker_2d.global_position.x) < 0.01:
+		if (target_box.global_position.x - marker_2d.global_position.x) < 0.01 and not isInPosition:
 			isInPosition = true
 
 func _rotate_gun() -> void:
@@ -29,6 +29,9 @@ func _rotate_gun() -> void:
 
 func _update_position(delta : float) -> void:
 	$Pivot_Point/Mesh.position = lerp($Pivot_Point/Mesh.position, Vector2(53.0,0.0), 4.0 * delta);
+
+func _get_fire_vector() -> Vector2:
+	return -(self.global_position - get_global_mouse_position())/self.global_position.distance_to(get_global_mouse_position()) # this is normalized
 
 func _get_firing_angle() -> float:
 	return t_angle

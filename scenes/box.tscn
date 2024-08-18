@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://gtw41siuxe3q"]
+[gd_scene load_steps=7 format=3 uid="uid://gtw41siuxe3q"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/box.gd" id="1_cyl5u"]
 
@@ -17,14 +17,18 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_waypf"]
 gradient = SubResource("Gradient_jet82")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4ayb"]
-size = Vector2(42, 38.6377)
-
-[node name="Box" type="Node2D"]
+[node name="RigidBody2D" type="RigidBody2D"]
+physics_interpolation_mode = 1
+disable_mode = 2
+collision_layer = 128
+collision_mask = 128
+can_sleep = false
+continuous_cd = 2
 script = ExtResource("1_cyl5u")
-metadata/isThrown = false
-metadata/notInBT = true
-metadata/isFired = false
+
+[node name="Phys_Box" type="CollisionShape2D" parent="."]
+scale = Vector2(0.210143, 0.259716)
+shape = SubResource("RectangleShape2D_qqcc4")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 128
@@ -41,14 +45,6 @@ texture = SubResource("GradientTexture1D_uqfot")
 [node name="Sprite2D" type="Sprite2D" parent="Area2D/CollisionShape2D2"]
 scale = Vector2(0.763672, 148.5)
 texture = SubResource("GradientTexture1D_waypf")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-
-[node name="Area2D" type="Area2D" parent="RigidBody2D"]
-
-[node name="hitbox" type="CollisionShape2D" parent="RigidBody2D/Area2D"]
-shape = SubResource("RectangleShape2D_m4ayb")
-debug_color = Color(0.405519, 0.607573, 1.92523e-07, 0.42)
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

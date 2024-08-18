@@ -15,7 +15,7 @@ var scale_clamp := [0.6, 4.0]
 var tracked_box : Node2D
 var selected_box_time : float
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if tracked_box != null: 
 		_scale_box(delta)
 		_bullet_time(delta)
@@ -50,7 +50,7 @@ func _bullet_time(delta: float):
 	# Bullet Time
 	if Input.is_action_pressed("rightClick"):
 		#enter_bullet_time.emit() # Uncomment this when music is setup
-		if bt_amount > 0.00000001:
+		if bt_amount > 0.00001:
 			# slow down time
 			Engine.time_scale = time_scale
 			bt_amount *= bt_drain_rate
@@ -74,29 +74,30 @@ func _bullet_time(delta: float):
 		# | set box metadata |
 		# These tags are mostly unessisary with the current system
 		# but I have a hunch they may come in handy
-		tracked_box.set_meta("isThrown", true)
 		tracked_box.set_meta("notInBT", true)
-		
+		tracked_box.set_meta("isThrown", true)
 
 func _fire_projectile(delta: float):
 	# play firing animation
+	$PlayerBody/GunScene.isInPosition = false
 	$PlayerBody/GunScene._fire_animation()
 	
 	# set metadata for projectile
+	if !tracked_box.get_meta("isFired"):
+		tracked_box.linear_velocity += $PlayerBody/GunScene._get_fire_vector() * 20
 	tracked_box.set_meta("isFired", true)
 	
-	# Start timer	
+	# Start timer
 	selected_box_time += (2.4) * delta
 	
 	# right now we can get the angle at which the gun is pointing.
-	# we need a way to add a magnitude and apply it as velocity. - Joey
+	# we need a way to add a magnitude and apply it as velocity. - Vroey
 	#selected_box_velocity = $PlayerBody/GunScene._get_firing_angle()
 	
 	if selected_box_time > despawn_time:
 		_despawn_box_object(tracked_box)
 		selected_box_time = 0.0
 		$PlayerBody/GunScene.wasAnimationPlayed = false
-		$PlayerBody/GunScene.isInPosition = false
 
 func _despawn_box_object(target : Node2D):
 	despawn_partical.global_position = target.global_position
