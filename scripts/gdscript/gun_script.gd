@@ -31,10 +31,12 @@ func _update_position(delta : float) -> void:
 
 func _get_firing_angle() -> float:
 	return t_angle
+	
 func _fire_animation() -> void:
 	if !wasAnimationPlayed: # hacky solution to stop the animation from playing until the bullet is fired [see level.gd _fire_projectile()] -Joey 
 		$Pivot_Point/Mesh.position -= Vector2(15.0,0.0)
 		wasAnimationPlayed = true
+
 func _get_fire_position()-> Marker2D: # Orphaned code, it's being used atm -Joey
 	return $Pivot_Point/Bullet_Point
 
