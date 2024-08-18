@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://sfpe5fkk4k6e"]
+[gd_scene load_steps=3 format=3 uid="uid://b13eyg2rr8ou0"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/gun_script.gd" id="1_r4qcp"]
 
@@ -8,13 +8,14 @@ size = Vector2(30, 10)
 [node name="GunScene" type="Node2D"]
 script = ExtResource("1_r4qcp")
 
-[node name="Pivot" type="Node2D" parent="."]
+[node name="Pivot_Point" type="Marker2D" parent="."]
 
-[node name="Bullet_Point" type="Marker2D" parent="Pivot"]
-position = Vector2(30, 0)
+[node name="Bullet_Point" type="Marker2D" parent="Pivot_Point"]
+position = Vector2(60, 0)
 
-[node name="Mesh" type="MeshInstance2D" parent="Pivot"]
-position = Vector2(15, 0)
+[node name="Mesh" type="MeshInstance2D" parent="Pivot_Point"]
+position = Vector2(60, 0)
 mesh = SubResource("QuadMesh_66n76")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Box_SnapPos" type="Marker2D" parent="Pivot_Point"]
+position = Vector2(60, 0)

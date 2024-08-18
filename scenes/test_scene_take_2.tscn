@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://djofw8cvuhejt"]
+
+[ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_q2c07"]
+[ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_ublff"]
+[ext_resource type="PackedScene" uid="uid://b13eyg2rr8ou0" path="res://scenes/Gun_Scene.tscn" id="2_bu43d"]
+[ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="3_l3gl2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbfmj"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_luvyq"]
+size = Vector2(20, 20)
+
+[node name="test_scene_take_2" type="Node2D"]
+script = ExtResource("1_ublff")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(555, 126)
+scale = Vector2(51.8, 0.5)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_cbfmj")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground"]
+mesh = SubResource("QuadMesh_luvyq")
+
+[node name="Ground3" type="StaticBody2D" parent="."]
+position = Vector2(502, 259)
+scale = Vector2(22.4251, -16.1829)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground3"]
+shape = SubResource("RectangleShape2D_cbfmj")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground3"]
+mesh = SubResource("QuadMesh_luvyq")
+
+[node name="Ground2" type="StaticBody2D" parent="."]
+position = Vector2(-474, 188)
+scale = Vector2(13.4, 20.7)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2"]
+shape = SubResource("RectangleShape2D_cbfmj")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground2"]
+mesh = SubResource("QuadMesh_luvyq")
+
+[node name="Ground4" type="StaticBody2D" parent="."]
+position = Vector2(-36, 262)
+scale = Vector2(51.8, 0.5)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground4"]
+shape = SubResource("RectangleShape2D_cbfmj")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground4"]
+mesh = SubResource("QuadMesh_luvyq")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(3, 0)
+
+[node name="PlayerBody" parent="." instance=ExtResource("1_q2c07")]
+
+[node name="GunScene" parent="PlayerBody" instance=ExtResource("2_bu43d")]
+position = Vector2(0, -31)
+
+[node name="Box" parent="." instance=ExtResource("3_l3gl2")]
+position = Vector2(525, 67)
+
+[node name="Box2" parent="." instance=ExtResource("3_l3gl2")]
+position = Vector2(375, 66)
+
+[node name="Box3" parent="." instance=ExtResource("3_l3gl2")]
+position = Vector2(244, 227)
+
+[node name="Box4" parent="." instance=ExtResource("3_l3gl2")]
+position = Vector2(-303, 227)
+
+[node name="Box5" parent="." instance=ExtResource("3_l3gl2")]
+position = Vector2(-384, -42)
+
+[connection signal="send_package" from="PlayerBody/GunScene" to="." method="_recive_box"]
+[connection signal="clicked" from="Box" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="clicked" from="Box2" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="clicked" from="Box3" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="clicked" from="Box4" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="clicked" from="Box5" to="PlayerBody/GunScene" method="_capture_box"]
