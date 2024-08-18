@@ -119,10 +119,11 @@ script = ExtResource("4_sup4y")
 
 [node name="Title" type="AudioStreamPlayer" parent="Radio"]
 stream = ExtResource("5_2wk0j")
-volume_db = 6.925
+volume_db = -26.166
 
 [node name="BulletTimeLoop" type="AudioStreamPlayer" parent="Radio"]
 stream = ExtResource("6_8muir")
+volume_db = -31.515
 
 [node name="Box" parent="." instance=ExtResource("7_vc1nn")]
 position = Vector2(-290, 177)
