@@ -1,7 +1,6 @@
 [gd_scene load_steps=35 format=3 uid="uid://dws5qvgdi3ubp"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/player_body.gd" id="1_ai1k4"]
-[ext_resource type="Script" path="res://scripts/gdscript/ui.gd" id="2_kajg5"]
 [ext_resource type="Texture2D" uid="uid://dphxlkugwaebq" path="res://assets/run_sprite_sheet.PNG" id="4_71vvh"]
 [ext_resource type="Texture2D" uid="uid://d36fvlqv0ry0m" path="res://assets/idle2_sprite_sheet.PNG" id="4_72lke"]
 [ext_resource type="Texture2D" uid="uid://dxgjfnjk7wf16" path="res://assets/squatjumprun_sprite_sheet.PNG" id="4_akcbn"]
@@ -36,6 +35,19 @@ point_count = 2
 
 [sub_resource type="QuadMesh" id="QuadMesh_y7wqc"]
 size = Vector2(30.7, 6.83)
+
+[sub_resource type="GDScript" id="GDScript_sj802"]
+script/source = "extends Node2D
+
+@export var cursor_asset := MeshInstance2D
+
+func _process(delta):
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	_update_cursor_position(delta)
+
+func _update_cursor_position(delta : float):
+	cursor_asset.global_position = get_global_mouse_position()
+"
 
 [sub_resource type="QuadMesh" id="QuadMesh_nid8f"]
 size = Vector2(10, 10)
@@ -288,7 +300,7 @@ mesh = SubResource("QuadMesh_y7wqc")
 
 [node name="UI" type="Node2D" parent="." node_paths=PackedStringArray("cursor_asset")]
 z_index = 10
-script = ExtResource("2_kajg5")
+script = SubResource("GDScript_sj802")
 cursor_asset = NodePath("Cursor")
 
 [node name="Cursor" type="MeshInstance2D" parent="UI"]
@@ -304,7 +316,7 @@ position = Vector2(0, -33)
 scale = Vector2(2.03125, 2.03125)
 sprite_frames = SubResource("SpriteFrames_cfan4")
 animation = &"idle"
-frame_progress = 0.173345
+frame_progress = 0.610749
 script = ExtResource("5_xro1r")
 
 [node name="hitbox" type="Area2D" parent="."]

@@ -29,20 +29,32 @@ func _scale_box(detla: float):
 	# turn the glow effect on to show which box is selected
 	tracked_box.glowish.visible = true
 	
+	var box_nodes = tracked_box.get_children(false)
+	
+	
 	# Scale up or down based on scroll whell
 	if Input.is_action_just_pressed("scrollUp"):
-		tracked_box.scale *= scale_factor + 1 # lerp this eventually
+		for child in box_nodes:
+			child.scale *= 1 + scale_factor
 		thrown_speed *= 1 - scale_factor
 		$PlayerBody/GunScene._get_marker().position.x *= (scale_factor / 2) + 1
+		tracked_box.set_meta("maker_pos", $PlayerBody/GunScene._get_marker().position.x)
 		
 	elif Input.is_action_just_pressed("scrollDown"):
-		tracked_box.scale *= 1 - scale_factor # lerp eventually
+		for child in box_nodes:
+			child.scale *= scale_factor - 1
 		thrown_speed *= 1 + scale_factor
-		$PlayerBody/GunScene._get_marker().position.x *= 1 - (scale_factor / 2) 
+		$PlayerBody/GunScene._get_marker().position.x *= 1 - (scale_factor / 2)
+	
 	
 	#clamp(s)
+	
 	#tracked_box.scale = Vector2(clampf(tracked_box.scale.x, scale_clamp[0], scale_clamp[1]), clampf(tracked_box.scale.y, scale_clamp[0], scale_clamp[1]))
-	thrown_speed = clampf(thrown_speed, 200, 1000)
+	box_nodes[0].scale = Vector2(clampf(box_nodes[0].scale.x, 0.2, 1), clampf(box_nodes[0].scale.y, 0.2, 1)) #Physics Hitbox
+	box_nodes[1].scale = Vector2(clampf(box_nodes[1].scale.x, scale_clamp[0], scale_clamp[1]), clampf(box_nodes[1].scale.y, scale_clamp[0], scale_clamp[1])) #Physics Hitbox
+	
+	
+	thrown_speed = clampf(thrown_speed, 200, 1200)
 	$PlayerBody/GunScene._get_marker().position.x = clampf($PlayerBody/GunScene._get_marker().position.x, 90.0, 190.0)
 
 func _charge_projectile(delta: float):

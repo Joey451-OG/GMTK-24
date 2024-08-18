@@ -49,8 +49,7 @@ func _capture_box(box):
 	if target_box == null:
 		target_box = box
 		send_package.emit(box) # send out a reference to the target_block
-		marker_2d.position.x = 90.0 # reset marker pos when picking up a new block
-
+		marker_2d.position.x = _get_marker().position.x # reset marker pos when picking up a new block
 func _get_marker() -> Marker2D:
 	return marker_2d
 

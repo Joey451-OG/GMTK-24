@@ -29,6 +29,7 @@ script = ExtResource("1_cyl5u")
 [node name="Phys_Box" type="CollisionShape2D" parent="."]
 scale = Vector2(0.210143, 0.259716)
 shape = SubResource("RectangleShape2D_qqcc4")
+debug_color = Color(0.972683, 0, 0.439326, 0.42)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 128
@@ -37,6 +38,7 @@ collision_mask = 128
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(0.210143, 0.259716)
 shape = SubResource("RectangleShape2D_qqcc4")
+debug_color = Color(3.46541e-06, 0.589426, 0.757135, 0.42)
 
 [node name="glowish" type="Sprite2D" parent="Area2D/CollisionShape2D2"]
 scale = Vector2(0.848524, 165)
