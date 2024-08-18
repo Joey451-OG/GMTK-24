@@ -189,6 +189,7 @@ position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_2yqc3")
 
 [node name="Debug_Col_Shape" type="MeshInstance2D" parent="CollisionShape2D"]
+visible = false
 mesh = SubResource("QuadMesh_3jw7b")
 texture = SubResource("PlaceholderTexture2D_gwps6")
 
@@ -197,6 +198,7 @@ position = Vector2(0, -30)
 shape = SubResource("RectangleShape2D_2yqc3")
 
 [node name="Debug_Col_Shape" type="MeshInstance2D" parent="CollisionShape2D2"]
+visible = false
 mesh = SubResource("QuadMesh_3jw7b")
 texture = SubResource("PlaceholderTexture2D_gwps6")
 

@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" path="res://scripts/gdscript/AOE.gd" id="1_7uic2"]
 
-[sub_resource type="Gradient" id="Gradient_ju1b7"]
+[sub_resource type="Gradient" id="Gradient_w1pf6"]
 colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0.899258, 0.899258, 0.899258, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_xc0wl"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q0yvs"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s175h"]
 width = 2
 height = 2
-color_ramp = SubResource("Gradient_ju1b7")
-noise = SubResource("FastNoiseLite_xc0wl")
+color_ramp = SubResource("Gradient_w1pf6")
+noise = SubResource("FastNoiseLite_q0yvs")
 
 [sub_resource type="Curve" id="Curve_jvtdw"]
 max_value = 100.0

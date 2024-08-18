@@ -17,7 +17,7 @@ func _process(delta):
 	# Snapping box to marker pos
 	if target_box != null:
 		if !isInPosition:
-			target_box.global_position = lerp(target_box.global_position, marker_2d.global_position, 4.4 * delta)
+			target_box.global_position = lerp(target_box.global_position, marker_2d.global_position, 7.4 * delta)
 		else:
 			target_box.global_position = marker_2d.global_position
 		

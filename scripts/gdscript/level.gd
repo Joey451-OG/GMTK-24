@@ -96,6 +96,7 @@ func _fire_projectile(delta: float):
 		_despawn_box_object(tracked_box)
 		selected_box_time = 0.0
 		$PlayerBody/GunScene.wasAnimationPlayed = false
+		$PlayerBody/GunScene.isInPosition = false
 
 func _despawn_box_object(target : Node2D):
 	despawn_partical.global_position = target.global_position
