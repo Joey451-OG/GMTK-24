@@ -12,8 +12,6 @@ extends Node2D
 @onready var bt_amount = bullet_time_amount
 @onready var bt_drain_rate = 1 - bullet_time_drain_rate
 
-
-
 var scale_clamp := [0.6, 4.0]
 var tracked_box : Node2D
 var selected_box_time : float

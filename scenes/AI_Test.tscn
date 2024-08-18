@@ -19,8 +19,7 @@ position = Vector2(0, -311)
 position = Vector2(0, -155)
 
 [node name="AOE" parent="PlayerBody" instance=ExtResource("2_1y5uc")]
-pivot_num = 5
-scale_factor = 0.6
+script = null
 
 [node name="Ground" type="StaticBody2D" parent="."]
 scale = Vector2(51.8, 0.5)

@@ -103,10 +103,8 @@ func _on_box_area_entered(box, inID) -> void:
 		_kill()
 
 func _kill():
-	if wasHit:
-		wasHit = false
-		self.queue_free()
-	
+	self.queue_free()
+
 func _spawn_projectile(asset, direction : Vector2):
 	projectile_list.append(projectile_asset.instantiate())
 	get_tree().root.add_child(projectile_list[proj_index])

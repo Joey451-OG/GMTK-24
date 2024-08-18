@@ -25,6 +25,7 @@ collision_mask = 128
 can_sleep = false
 continuous_cd = 2
 script = ExtResource("1_cyl5u")
+metadata/BOX_FLAG = 0
 
 [node name="Phys_Box" type="CollisionShape2D" parent="."]
 scale = Vector2(0.210143, 0.259716)
