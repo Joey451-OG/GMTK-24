@@ -126,7 +126,12 @@ stream = ExtResource("6_8muir")
 volume_db = -31.515
 
 [node name="Box" parent="." instance=ExtResource("7_vc1nn")]
+physics_interpolation_mode = 0
 position = Vector2(-290, 177)
+scale = Vector2(1, 1.08702)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
 
 [node name="Area2D2" type="Area2D" parent="Box"]
 
@@ -135,7 +140,12 @@ position = Vector2(0, -1.52588e-05)
 shape = SubResource("RectangleShape2D_rsflv")
 
 [node name="Box2" parent="." instance=ExtResource("7_vc1nn")]
+physics_interpolation_mode = 0
 position = Vector2(241, 185)
+scale = Vector2(1, 1.08702)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
 
 [node name="Area2D2" type="Area2D" parent="Box2"]
 
@@ -144,7 +154,12 @@ position = Vector2(0, -1.52588e-05)
 shape = SubResource("RectangleShape2D_rsflv")
 
 [node name="Box3" parent="." instance=ExtResource("7_vc1nn")]
+physics_interpolation_mode = 0
 position = Vector2(426, 89)
+scale = Vector2(1, 1.08702)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
 
 [node name="Area2D2" type="Area2D" parent="Box3"]
 
@@ -153,7 +168,12 @@ position = Vector2(0, -1.52588e-05)
 shape = SubResource("RectangleShape2D_rsflv")
 
 [node name="Box4" parent="." instance=ExtResource("7_vc1nn")]
+physics_interpolation_mode = 0
 position = Vector2(-105, -142)
+scale = Vector2(1, 1.08702)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
 
 [node name="Area2D2" type="Area2D" parent="Box4"]
 
@@ -162,7 +182,12 @@ position = Vector2(0, -1.52588e-05)
 shape = SubResource("RectangleShape2D_rsflv")
 
 [node name="Box5" parent="." instance=ExtResource("7_vc1nn")]
+physics_interpolation_mode = 0
 position = Vector2(-430, -171)
+scale = Vector2(1, 1.08702)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
 
 [node name="Area2D2" type="Area2D" parent="Box5"]
 

@@ -45,7 +45,7 @@ func _get_fire_position()-> Marker2D: # Orphaned code, it's being used atm -Joey
 	return $Pivot_Point/Bullet_Point
 
 # signal functions
-func _capture_box(box, id):
+func _capture_box(box):
 	if target_box == null:
 		target_box = box
 		send_package.emit(box) # send out a reference to the target_block
