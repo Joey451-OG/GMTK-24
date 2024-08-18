@@ -316,7 +316,7 @@ position = Vector2(0, -33)
 scale = Vector2(2.03125, 2.03125)
 sprite_frames = SubResource("SpriteFrames_cfan4")
 animation = &"idle"
-frame_progress = 0.610749
+frame_progress = 0.0109693
 script = ExtResource("5_xro1r")
 
 [node name="hitbox" type="Area2D" parent="."]

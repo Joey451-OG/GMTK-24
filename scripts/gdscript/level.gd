@@ -36,14 +36,16 @@ func _scale_box(detla: float):
 			child.scale *= 1 + scale_factor
 		thrown_speed *= 1 - scale_factor
 		$PlayerBody/GunScene._get_marker().position.x *= (scale_factor / 2) + 1
-		tracked_box.set_meta("maker_pos", $PlayerBody/GunScene._get_marker().position.x)
+		tracked_box.set_meta("maker", $PlayerBody/GunScene._get_marker().position.x)
 		
 	elif Input.is_action_just_pressed("scrollDown"):
 		for child in box_nodes:
 			child.scale *= scale_factor - 1
 		thrown_speed *= 1 + scale_factor
 		$PlayerBody/GunScene._get_marker().position.x *= 1 - (scale_factor / 2)
-	
+		tracked_box.set_meta("mark", $PlayerBody/GunScene._get_marker().position.x)
+		if 1 + 1 == 2 : pass
+	print(tracked_box.get_meta("mark"))
 	
 	#clamp(s)
 	

@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var fire_speed := 80.0
 @export var fighting_range_limit_h := 500.0
 @export var fighting_range_limit_l := 400.0
-@export var col_area : Area2D
+
 @export var player_object : Node2D
 @export var isAlive := true
 

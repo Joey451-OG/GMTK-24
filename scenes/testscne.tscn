@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://yerfmn4cen1t"]
 
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_u0mve"]
-[ext_resource type="PackedScene" uid="uid://b45fg47c4wgmb" path="res://scenes/area_or_influence_demo.tscn" id="2_fdhrw"]
+[ext_resource type="PackedScene" path="res://scenes/area_or_influence_demo.tscn" id="2_fdhrw"]
 [ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="3_il8n3"]
 [ext_resource type="Script" path="res://scripts/gdscript/radio.gd" id="4_sup4y"]
 [ext_resource type="AudioStream" uid="uid://b320h1l6hydw" path="res://music/track.mp3" id="5_2wk0j"]
@@ -71,9 +71,8 @@ shape = SubResource("RectangleShape2D_q50ga")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Ground4"]
 mesh = SubResource("QuadMesh_15mbp")
 
-[node name="Base_Baddie" parent="." node_paths=PackedStringArray("col_area", "player_object") instance=ExtResource("3_il8n3")]
+[node name="Base_Baddie" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("3_il8n3")]
 position = Vector2(613, 114)
-col_area = NodePath("Baddie_Hit_Box")
 player_object = NodePath("../PlayerBody")
 
 [node name="Baddie_Hit_Box" type="Area2D" parent="Base_Baddie"]
@@ -83,9 +82,8 @@ position = Vector2(-10, -42.5)
 shape = SubResource("RectangleShape2D_ri33f")
 debug_color = Color(0.791003, 0.428352, 0, 0.42)
 
-[node name="Base_Baddie2" parent="." node_paths=PackedStringArray("col_area", "player_object") instance=ExtResource("3_il8n3")]
+[node name="Base_Baddie2" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("3_il8n3")]
 position = Vector2(27, -114)
-col_area = NodePath("Baddie_Hit_Box")
 player_object = NodePath("../PlayerBody")
 
 [node name="Baddie_Hit_Box" type="Area2D" parent="Base_Baddie2"]
@@ -95,9 +93,8 @@ position = Vector2(-10, -42.5)
 shape = SubResource("RectangleShape2D_ri33f")
 debug_color = Color(0.791003, 0.428352, 0, 0.42)
 
-[node name="Base_Baddie3" parent="." node_paths=PackedStringArray("col_area", "player_object") instance=ExtResource("3_il8n3")]
+[node name="Base_Baddie3" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("3_il8n3")]
 position = Vector2(-512, -152)
-col_area = NodePath("Baddie_Hit_Box")
 player_object = NodePath("../PlayerBody")
 
 [node name="Baddie_Hit_Box" type="Area2D" parent="Base_Baddie3"]
