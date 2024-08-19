@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dws5qvgdi3ubp"]
+[gd_scene load_steps=33 format=3 uid="uid://dws5qvgdi3ubp"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/player_body.gd" id="1_ai1k4"]
 [ext_resource type="Texture2D" uid="uid://dphxlkugwaebq" path="res://assets/run_sprite_sheet.PNG" id="4_71vvh"]
@@ -8,21 +8,16 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yqc3"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_3jw7b"]
-size = Vector2(20, 20)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gwps6"]
-
-[sub_resource type="Gradient" id="Gradient_75ao2"]
+[sub_resource type="Gradient" id="Gradient_gwkbp"]
 colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0.899258, 0.899258, 0.899258, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_bmhv0"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yhdwe"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_by72q"]
 width = 2
 height = 2
-color_ramp = SubResource("Gradient_75ao2")
-noise = SubResource("FastNoiseLite_bmhv0")
+color_ramp = SubResource("Gradient_gwkbp")
+noise = SubResource("FastNoiseLite_yhdwe")
 
 [sub_resource type="Curve" id="Curve_7r8d1"]
 max_value = 100.0
@@ -181,12 +176,12 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a5evw"]
-radius = 9.0
-height = 56.0
+radius = 11.0
+height = 68.0
 
-[node name="PlayerBody" type="CharacterBody2D" node_paths=PackedStringArray("col_shape_1", "col_shape_2", "hover_partical_CPU_stationary", "hover_partical_CPU_trail", "falling_partical_CPU", "landing_partical_CPU", "hover_GUI_mesh")]
-collision_layer = 129
-collision_mask = 129
+[node name="PlayerBody" type="CharacterBody2D" node_paths=PackedStringArray("col_shape_1", "col_shape_2", "hover_partical_CPU_stationary", "hover_partical_CPU_trail", "falling_partical_CPU", "landing_partical_CPU", "hover_GUI_mesh") groups=["enemy_bullet"]]
+collision_layer = 128
+collision_mask = 128
 script = ExtResource("1_ai1k4")
 col_shape_1 = NodePath("CollisionShape2D")
 col_shape_2 = NodePath("CollisionShape2D2")
@@ -200,19 +195,9 @@ hover_GUI_mesh = NodePath("GUI_Elements/MeshInstance2D")
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_2yqc3")
 
-[node name="Debug_Col_Shape" type="MeshInstance2D" parent="CollisionShape2D"]
-visible = false
-mesh = SubResource("QuadMesh_3jw7b")
-texture = SubResource("PlaceholderTexture2D_gwps6")
-
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(0, -30)
 shape = SubResource("RectangleShape2D_2yqc3")
-
-[node name="Debug_Col_Shape" type="MeshInstance2D" parent="CollisionShape2D2"]
-visible = false
-mesh = SubResource("QuadMesh_3jw7b")
-texture = SubResource("PlaceholderTexture2D_gwps6")
 
 [node name="Land_Effect" type="CPUParticles2D" parent="."]
 rotation = -0.0026161
@@ -320,9 +305,12 @@ frame_progress = 0.158708
 script = ExtResource("5_xro1r")
 
 [node name="hitbox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 128
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(0, -29)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" groups=["enemy_bullet"]]
+position = Vector2(0, -28)
 shape = SubResource("CapsuleShape2D_a5evw")
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_body_entered"]

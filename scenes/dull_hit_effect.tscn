@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqhl73f8bvyxc"]
+
+[sub_resource type="Gradient" id="Gradient_j1qku"]
+colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0.899258, 0.899258, 0.899258, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qb63g"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f3jj3"]
+width = 2
+height = 2
+color_ramp = SubResource("Gradient_j1qku")
+noise = SubResource("FastNoiseLite_qb63g")
+
+[sub_resource type="Curve" id="Curve_ss7s3"]
+max_value = 100.0
+_data = [Vector2(0, 6.59341), 0.0, 0.0, 0, 0, Vector2(0.960674, 1.0989), -30.5632, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_bg2fh"]
+_data = [Vector2(0, 0.868132), 0.0, -0.669173, 0, 0, Vector2(1, 0.021978), -1.61586, 0.0, 0, 0]
+point_count = 2
+
+[node name="dull_impact_effect" type="CPUParticles2D"]
+rotation = -0.0026161
+emitting = false
+amount = 7
+one_shot = true
+speed_scale = 2.5
+explosiveness = 1.0
+randomness = 1.0
+texture = SubResource("NoiseTexture2D_f3jj3")
+direction = Vector2(0, -1)
+spread = 88.64
+gravity = Vector2(0, 13.05)
+initial_velocity_min = 50.5
+initial_velocity_max = 80.81
+damping_min = 12.121
+damping_max = 12.121
+damping_curve = SubResource("Curve_ss7s3")
+angle_min = 158.9
+angle_max = 449.8
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_bg2fh")

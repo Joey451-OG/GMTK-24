@@ -2,8 +2,9 @@ extends CharacterBody2D
 @export var wandering_speed := 170.0
 @export var fighting_speed := 100.0
 @export var fire_speed := 80.0
+@export var fire_rate := 2.0
 @export var fighting_range_limit_h := 500.0
-@export var fighting_range_limit_l := 400.0
+@export var fighting_range_limit_l := 200.0
 @export var box_handler : Node2D
 @export var player_object : Node2D
 @export var isAlive := true
@@ -19,7 +20,7 @@ extends CharacterBody2D
 var projectile_list = []
 var projectile_velocity_data_list = []
 
-var projectile_asset = preload("res://scenes/box.tscn")
+var projectile_asset = preload("res://scenes/enemy_projectile.tscn")
 
 var current_state := STATES.WANDER
 var current_speed := 0.0
@@ -27,6 +28,7 @@ var playerFound := false
 var wasHit := false
 var resetTime = 0.1
 
+var fire_time
 var x_direction
 var y_direction
 
@@ -44,6 +46,7 @@ func _ready():
 	self.add_to_group("baddies")
 	x_direction = wandering_speed
 	y_direction = 0.0
+	fire_time = 0.0
 
 func _process(delta):
 	_rotate_vision_ray(delta)
@@ -56,7 +59,6 @@ func _process(delta):
 	else:
 		resetTime = 0.001
 		wasHit = false
-	_update_spawned_projectiles(delta)
 
 func _rotate_vision_ray(delta : float):
 	view_cast.target_position = (player_object.position + Vector2(0.0,35.0)) - self.global_position
@@ -84,8 +86,10 @@ func _move_character(delta : float) -> void:
 			x_direction = -(dir_to_player_x/self.position.distance_to(player_object.global_position))*fighting_speed
 		else:
 			x_direction = 0.0
-			if Input.is_action_just_pressed("leftClick"):
-				_spawn_projectile(projectile_asset, Vector2(dir_to_player_x/self.position.distance_to(player_object.global_position), dir_to_player_y/self.position.distance_to(player_object.global_position)))
+			fire_time += 2.34 * delta
+			if fire_time > fire_rate:
+				_spawn_and_apply_force_to_box(Vector2.ZERO)
+				fire_time = 0.0
 	
 	if !is_on_floor():
 		y_direction += (60 * 60) * delta
@@ -98,21 +102,17 @@ func _move_character(delta : float) -> void:
 
 func _kill():
 	self.queue_free()
-
-func _spawn_projectile(asset, direction : Vector2):
-	projectile_list.append(projectile_asset.instantiate())
-	get_tree().root.add_child(projectile_list[proj_index])
-	projectile_list[-1].global_position = $bullet_point.global_position
-	
 	proj_index += 1
-	projectile_velocity_data_list.append(direction)
-
-func _update_spawned_projectiles(delta : float):
-	for p in projectile_list:
-		p.global_position += (projectile_velocity_data_list[0] * fire_speed * delta)
 
 func _on_projectile_enter(body):
 	if body.is_in_group("boxes"):
 		if body.get_meta("isFired"):
 			box_handler._despawn_box_object()
 			_kill()
+
+func _spawn_and_apply_force_to_box(dir_vector):
+	var p_asset = projectile_asset.instantiate()
+	get_tree().root.add_child(p_asset)
+	p_asset.global_position = self.global_position - Vector2(0.0, 45.0)
+	p_asset.linear_velocity = Vector2(dir_to_player_x*1500.0, dir_to_player_y*1500.0)/self.position.distance_to(player_object.global_position)
+	p_asset.add_to_group("enemy_bullet")

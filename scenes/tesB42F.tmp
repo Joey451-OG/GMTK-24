@@ -1,0 +1,219 @@
+[gd_scene load_steps=14 format=3 uid="uid://ky8228v11puv"]
+
+[ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_q2c07"]
+[ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_ublff"]
+[ext_resource type="PackedScene" uid="uid://crpl1witt5m7h" path="res://scenes/Gun_Scene.tscn" id="2_bu43d"]
+[ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="3_l3gl2"]
+[ext_resource type="Script" path="res://scripts/gdscript/box_handler.gd" id="5_6pidy"]
+[ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="6_8ukyx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbfmj"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_luvyq"]
+size = Vector2(20, 20)
+
+[sub_resource type="Gradient" id="Gradient_f1nf4"]
+colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0.899258, 0.899258, 0.899258, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6m20h"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qdsw4"]
+width = 2
+height = 2
+color_ramp = SubResource("Gradient_f1nf4")
+noise = SubResource("FastNoiseLite_6m20h")
+
+[sub_resource type="Curve" id="Curve_6h4j6"]
+max_value = 100.0
+_data = [Vector2(0, 6.59341), 0.0, 0.0, 0, 0, Vector2(0.960674, 1.0989), -30.5632, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_xf7lv"]
+_data = [Vector2(0, 1), 0.0, 0.195604, 0, 0, Vector2(1, 0.021978), -3.11189, 0.0, 0, 0]
+point_count = 2
+
+[node name="root" type="Node2D" node_paths=PackedStringArray("box_handler")]
+script = ExtResource("1_ublff")
+box_handler = NodePath("Box_Handler")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(555, 126)
+scale = Vector2(51.8, 0.5)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_cbfmj")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground"]
+mesh = SubResource("QuadMesh_luvyq")
+
+[node name="Ground3" type="StaticBody2D" parent="."]
+position = Vector2(502, 259)
+scale = Vector2(22.4251, -16.1829)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground3"]
+shape = SubResource("RectangleShape2D_cbfmj")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground3"]
+mesh = SubResource("QuadMesh_luvyq")
+
+[node name="Ground2" type="StaticBody2D" parent="."]
+position = Vector2(-474, 188)
+scale = Vector2(13.4, 20.7)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2"]
+shape = SubResource("RectangleShape2D_cbfmj")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground2"]
+mesh = SubResource("QuadMesh_luvyq")
+
+[node name="Ground4" type="StaticBody2D" parent="."]
+position = Vector2(-36, 262)
+scale = Vector2(51.8, 0.5)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground4"]
+shape = SubResource("RectangleShape2D_cbfmj")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground4"]
+mesh = SubResource("QuadMesh_luvyq")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(3, 0)
+
+[node name="PlayerBody" parent="." instance=ExtResource("1_q2c07")]
+max_health = 100.0
+gravity = 54.0
+jump_force = 800.0
+walk_speed = 360.0
+sprint_speed = 80.0
+coyote_time = 0.02
+hover_amount = 2.0
+hover_recovery = 5.56
+hover_force = 340.0
+
+[node name="GunScene" parent="PlayerBody" instance=ExtResource("2_bu43d")]
+position = Vector2(0, -31)
+
+[node name="Despawn_Effect2" type="CPUParticles2D" parent="PlayerBody"]
+rotation = -0.0026161
+emitting = false
+amount = 7
+one_shot = true
+speed_scale = 2.5
+explosiveness = 1.0
+randomness = 1.0
+texture = SubResource("NoiseTexture2D_qdsw4")
+direction = Vector2(0, -1)
+spread = 88.64
+gravity = Vector2(0, 13.05)
+initial_velocity_min = 50.5
+initial_velocity_max = 80.81
+damping_min = 12.121
+damping_max = 12.121
+damping_curve = SubResource("Curve_6h4j6")
+angle_min = 158.9
+angle_max = 449.8
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_xf7lv")
+
+[node name="Box" parent="." instance=ExtResource("3_l3gl2")]
+physics_interpolation_mode = 0
+position = Vector2(540, 27)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
+
+[node name="Box2" parent="." instance=ExtResource("3_l3gl2")]
+physics_interpolation_mode = 0
+position = Vector2(438, -114)
+rotation = -0.523598
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
+
+[node name="Box3" parent="." instance=ExtResource("3_l3gl2")]
+physics_interpolation_mode = 0
+position = Vector2(523, -129)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
+
+[node name="Box4" parent="." instance=ExtResource("3_l3gl2")]
+physics_interpolation_mode = 0
+position = Vector2(608, 54)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
+
+[node name="Box5" parent="." instance=ExtResource("3_l3gl2")]
+physics_interpolation_mode = 0
+position = Vector2(482, -12)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
+
+[node name="Box6" parent="." instance=ExtResource("3_l3gl2")]
+physics_interpolation_mode = 0
+position = Vector2(589, -48)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
+
+[node name="Box7" parent="." instance=ExtResource("3_l3gl2")]
+physics_interpolation_mode = 0
+position = Vector2(680, 22)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
+
+[node name="Box8" parent="." instance=ExtResource("3_l3gl2")]
+physics_interpolation_mode = 0
+position = Vector2(438, 42)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
+
+[node name="Box_Handler" type="Node2D" parent="." node_paths=PackedStringArray("Gun_Scene", "despawn_partical")]
+script = ExtResource("5_6pidy")
+Gun_Scene = NodePath("../PlayerBody/GunScene")
+despawn_partical = NodePath("../PlayerBody/Despawn_Effect2")
+
+[node name="Base_Baddie" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("6_8ukyx")]
+position = Vector2(-410, -26)
+box_handler = NodePath("../Box_Handler")
+player_object = NodePath("../PlayerBody")
+
+[node name="Base_Baddie7" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("6_8ukyx")]
+position = Vector2(122, 117)
+box_handler = NodePath("../Box_Handler")
+player_object = NodePath("../PlayerBody")
+
+[node name="Base_Baddie8" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("6_8ukyx")]
+position = Vector2(-270, 236)
+box_handler = NodePath("../Box_Handler")
+player_object = NodePath("../PlayerBody")
+
+[connection signal="send_package" from="PlayerBody/GunScene" to="." method="_recive_box"]
+[connection signal="area_entered" from="Box" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box2" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box2" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box3" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box3" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box4" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box4" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box5" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box5" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box6" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box6" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box7" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box7" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box8" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box8" to="PlayerBody/GunScene" method="_capture_box"]

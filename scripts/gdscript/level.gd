@@ -16,6 +16,7 @@ var selected_box_time : float
 var list_of_working_boxes := []
 
 func _process(delta: float) -> void:
+	_update_enemy_projectiles()
 	if tracked_box != null:  
 		_scale_box(delta)
 		_charge_projectile(delta)
@@ -74,3 +75,8 @@ func _charge_projectile(delta: float):
 # signal functions
 func _recive_box(box):
 	tracked_box = box
+
+func _update_enemy_projectiles():
+	var projectiles = get_tree().get_nodes_in_group("enemy_bullet")
+	for p in projectiles:
+		pass

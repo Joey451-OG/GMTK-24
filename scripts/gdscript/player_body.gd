@@ -11,6 +11,7 @@ extends CharacterBody2D
 
 @export var hover_GUI_mesh: MeshInstance2D
 
+@export var max_health := 100.0
 @export var gravity := 54.0
 @export var jump_force := 800.0
 @export var walk_speed := 360.0
@@ -25,6 +26,8 @@ extends CharacterBody2D
 
 var final_velocity: Vector2
 var target_camera_position: Vector2
+
+var crnt_health: float
 
 var in_air: bool
 var can_still_jump: bool
@@ -47,12 +50,18 @@ var temp_result: Vector2
 # signals
 signal area_entered(area: Area2D)
 
+func _on_death():
+	pass
+
 func _ready():
+	self.add_to_group("player")
 	just_jumped=true
 	can_hover=false
 	hover_a=hover_amount
+	crnt_health=max_health
 
 func _process(delta) -> void:
+	#print("PLAYER HEALTH: ", crnt_health)
 	final_velocity = _calculate_move_vector(delta)
 	target_camera_position = Vector2.ZERO
 	_update_hover_logic(delta)
@@ -60,6 +69,9 @@ func _process(delta) -> void:
 	_update_upper_collider_position(delta)
 	_update_lower_collider_position(delta)
 	_move(final_velocity)
+	
+	if crnt_health < 0.1:
+		_on_death()
 
 func _calculate_move_vector(delta : float) -> Vector2:
 	if !is_on_floor():
@@ -177,6 +189,10 @@ func _draw_debug_elements():
 func _on_box_clicked(node : Node2D, id : int):
 	$AOE._update_box_list(node, id)
 
-
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	area_entered.emit(area)
+
+func _on_body_entered(body):
+	if body.is_in_group("enemy_bullet") && body != self:
+		crnt_health -= max_health
+		crnt_health = clampf(crnt_health, 0.0, max_health)
