@@ -156,6 +156,7 @@ icon = SubResource("Texture2DRD_e72oy")
 [connection signal="button_down" from="main_ui/PLAY" to="." method="_play"]
 [connection signal="button_up" from="main_ui/SETTINGS" to="." method="_settings"]
 [connection signal="button_up" from="main_ui/LEVEL" to="." method="_level_select"]
+[connection signal="value_changed" from="settings_menu/HSlider" to="." method="_update_vol"]
 [connection signal="button_down" from="settings_menu/BACK" to="." method="_back"]
 [connection signal="toggled" from="settings_menu/CheckButton" to="." method="_windowed"]
 [connection signal="button_down" from="level_menu/LEVEL 1" to="." method="_load_level_0"]
