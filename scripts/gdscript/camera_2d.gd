@@ -13,7 +13,7 @@ func _ready() -> void:
 # Change Levels
 func _to_level_1(body: Node2D):
 	if body.is_in_group("player"):
-		get_tree().change_scene_to_file("res://levels/level0.tscn")
+		get_tree().change_scene_to_file("res://levels/level1.tscn")
 
 func _to_level_2(body: Node2D):
 	if body.is_in_group("player"):
@@ -35,3 +35,7 @@ func _on_camera_area_entered(body: Node2D, enable_index: int) -> void:
 	
 	for cam in cameras:
 		print(cam.enabled)
+
+
+func _on_death_box_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"): player._kill()

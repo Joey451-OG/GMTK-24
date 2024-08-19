@@ -186,6 +186,10 @@ func _move(target_velocity: Vector2) -> void: #sets target velocity and moves pl
 func _draw_debug_elements():
 	pass
 
+func _kill():
+	print("POW! YOU ARE DED!")
+	get_node("/root/root")._reset_scene()
+
 func _on_box_clicked(node : Node2D, id : int):
 	$AOE._update_box_list(node, id)
 
@@ -197,5 +201,4 @@ func _on_body_entered(body):
 		crnt_health -= max_health
 		crnt_health = clampf(crnt_health, 0.0, max_health)
 		if crnt_health == 0: 
-			print("POW! YOU ARE DED!")
-			get_node("/root/root")._reset_scene()
+			_kill()

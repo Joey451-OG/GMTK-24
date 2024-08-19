@@ -49,6 +49,7 @@ func _get_fire_position()-> Marker2D: # Orphaned code, it's being used atm -Joey
 func _capture_box(box):
 	if target_box == null:
 		target_box = box
+		target_box.set_meta("isFired", true)
 		send_package.emit(box) # send out a reference to the target_block
 		
 		# hard coded meta data system since the godot one kept shitting the bed
