@@ -5,8 +5,6 @@ extends Node2D
 @export var bullet_time_amount := 20
 @export var time_scale := 0.2
 @export var bullet_time_drain_rate := 0.2
-@export var despawn_time := 5.0
-@export var despawn_partical := CPUParticles2D
 @export var box_handler : Node2D
 
 @onready var bt_amount = bullet_time_amount
@@ -71,6 +69,7 @@ func _charge_projectile(delta: float):
 		
 		box_handler._recive_box(tracked_box, thrown_speed)
 		tracked_box = null
+
 
 # signal functions
 func _recive_box(box):

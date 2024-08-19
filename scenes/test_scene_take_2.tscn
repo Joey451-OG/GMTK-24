@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://qoro2fxkoh01"]
+[gd_scene load_steps=14 format=3 uid="uid://ky8228v11puv"]
 
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_q2c07"]
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_ublff"]
-[ext_resource type="PackedScene" uid="uid://sfpe5fkk4k6e" path="res://scenes/Gun_Scene.tscn" id="2_bu43d"]
+[ext_resource type="PackedScene" uid="uid://crpl1witt5m7h" path="res://scenes/Gun_Scene.tscn" id="2_bu43d"]
 [ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="3_l3gl2"]
 [ext_resource type="Script" path="res://scripts/gdscript/box_handler.gd" id="5_6pidy"]
 [ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="6_8ukyx"]
@@ -32,9 +32,8 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.195604, 0, 0, Vector2(1, 0.021978), -3.11189, 0.0, 0, 0]
 point_count = 2
 
-[node name="root" type="Node2D" node_paths=PackedStringArray("despawn_partical", "box_handler")]
+[node name="root" type="Node2D" node_paths=PackedStringArray("box_handler")]
 script = ExtResource("1_ublff")
-despawn_partical = NodePath("PlayerBody/Despawn_Effect2")
 box_handler = NodePath("Box_Handler")
 
 [node name="Ground" type="StaticBody2D" parent="."]
@@ -172,20 +171,24 @@ metadata/isThrown = false
 metadata/notInBT = true
 metadata/isFired = false
 
-[node name="Box_Handler" type="Node2D" parent="." node_paths=PackedStringArray("Gun_Scene")]
+[node name="Box_Handler" type="Node2D" parent="." node_paths=PackedStringArray("Gun_Scene", "despawn_partical")]
 script = ExtResource("5_6pidy")
 Gun_Scene = NodePath("../PlayerBody/GunScene")
+despawn_partical = NodePath("../PlayerBody/Despawn_Effect2")
 
-[node name="Base_Baddie" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("6_8ukyx")]
+[node name="Base_Baddie" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("6_8ukyx")]
 position = Vector2(-410, -26)
+box_handler = NodePath("../Box_Handler")
 player_object = NodePath("../PlayerBody")
 
-[node name="Base_Baddie7" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("6_8ukyx")]
+[node name="Base_Baddie7" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("6_8ukyx")]
 position = Vector2(122, 117)
+box_handler = NodePath("../Box_Handler")
 player_object = NodePath("../PlayerBody")
 
-[node name="Base_Baddie8" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("6_8ukyx")]
+[node name="Base_Baddie8" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("6_8ukyx")]
 position = Vector2(-270, 236)
+box_handler = NodePath("../Box_Handler")
 player_object = NodePath("../PlayerBody")
 
 [connection signal="send_package" from="PlayerBody/GunScene" to="." method="_recive_box"]

@@ -41,7 +41,3 @@ func _on_area_2d_mouse_exited() -> void:
 	
 func _hit_box_area_entered(area: Area2D) -> void:
 	area_entered.emit(self, get_instance_id())
-
-func _on_fatal_hit(body):
-	if body.is_in_group("baddies"):
-		self.queue_free()

@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var fire_speed := 80.0
 @export var fighting_range_limit_h := 500.0
 @export var fighting_range_limit_l := 400.0
-
+@export var box_handler : Node2D
 @export var player_object : Node2D
 @export var isAlive := true
 
@@ -114,4 +114,5 @@ func _update_spawned_projectiles(delta : float):
 func _on_projectile_enter(body):
 	if body.is_in_group("boxes"):
 		if body.get_meta("isFired"):
+			box_handler._despawn_box_object()
 			_kill()
