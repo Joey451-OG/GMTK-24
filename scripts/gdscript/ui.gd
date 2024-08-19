@@ -47,7 +47,7 @@ func _windowed(boolean):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		
+
 func _update_vol(val):
 	volume_v = val
 

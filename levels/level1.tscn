@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bbohbihpvs2j6"]
+[gd_scene load_steps=24 format=4 uid="uid://c73p0q02bvget"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_msfih"]
 [ext_resource type="Texture2D" uid="uid://8k188hxjnc4f" path="res://assets/gb_or_ss.png" id="2_gqrbl"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="6_2oolp"]
 [ext_resource type="PackedScene" uid="uid://covaquvadxhb2" path="res://scenes/box_handler.tscn" id="7_g51em"]
 [ext_resource type="Script" path="res://scripts/gdscript/camera_2d.gd" id="8_isdew"]
+[ext_resource type="PackedScene" uid="uid://5ce6ya46djxu" path="res://scenes/post_shaders.tscn" id="9_hkyob"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1x72b"]
 texture = ExtResource("2_gqrbl")
@@ -283,6 +284,7 @@ player = NodePath("../PlayerBody")
 transition_square = NodePath("CanvasLayer/ColorRect")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Node2D"]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Node2D/CanvasLayer"]
 offset_left = 405.0
@@ -321,6 +323,8 @@ position = Vector2(-843, -1042)
 enabled = false
 zoom = Vector2(1.5, 1.5)
 editor_draw_limits = true
+
+[node name="PostShaders" parent="." instance=ExtResource("9_hkyob")]
 
 [connection signal="send_package" from="PlayerBody/GunScene" to="." method="_recive_box"]
 [connection signal="clicked" from="Box" to="PlayerBody/GunScene" method="_capture_box"]
