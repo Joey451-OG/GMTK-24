@@ -80,8 +80,6 @@ _data = [Vector2(0, 0.868132), 0.0, -0.669173, 0, 0, Vector2(1, 0.021978), -1.61
 point_count = 2
 
 [node name="RigidBody2D" type="RigidBody2D"]
-collision_layer = 128
-collision_mask = 128
 mass = 0.5
 script = ExtResource("1_5fhhd")
 metadata/has_hit_surface = true
