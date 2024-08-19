@@ -218,7 +218,7 @@ position = Vector2(-432.001, 191.499)
 shape = SubResource("RectangleShape2D_va1cb")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="invis_collision"]
-position = Vector2(-638, 162)
+position = Vector2(-641, 234)
 rotation = 1.57079
 collision_layer = 129
 collision_mask = 129
@@ -228,7 +228,7 @@ position = Vector2(-635.999, -115.004)
 shape = SubResource("RectangleShape2D_364v7")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="invis_collision"]
-position = Vector2(220, 207)
+position = Vector2(217, 235)
 rotation = 4.71238
 collision_layer = 129
 collision_mask = 129
@@ -315,7 +315,7 @@ editor_draw_limits = true
 [connection signal="clicked" from="Box2" to="PlayerBody/GunScene" method="_capture_box"]
 [connection signal="clicked" from="Box5" to="PlayerBody/GunScene" method="_capture_box"]
 [connection signal="clicked" from="Box6" to="PlayerBody/GunScene" method="_capture_box"]
-[connection signal="body_entered" from="invis_collision/next_0" to="Node2D" method="_on_camera_area_entered" binds= [0]]
-[connection signal="body_entered" from="invis_collision/next_1" to="Node2D" method="_on_camera_area_entered" binds= [1]]
-[connection signal="body_entered" from="invis_collision/next_2" to="Node2D" method="_on_camera_area_entered" binds= [2]]
-[connection signal="body_entered" from="invis_collision/next_level" to="Node2D" method="_to_level_2"]
+[connection signal="body_entered" from="invis_collision/next_0" to="Node2D" method="_on_next_0_body_entered"]
+[connection signal="body_entered" from="invis_collision/next_1" to="Node2D" method="_on_next_1"]
+[connection signal="body_entered" from="invis_collision/next_2" to="Node2D" method="_on_next_2_body_entered"]
+[connection signal="body_entered" from="invis_collision/next_level" to="Node2D" method="_on_next_2_body_entered"]

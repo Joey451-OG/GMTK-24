@@ -8,22 +8,30 @@ var section_index := 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	cameras[0].enabled = true
-	valid_ids.append(player.get_instance_id())
 
-func _on_next_0_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") or body.get_instance_id() in valid_ids:
-		valid_ids.append(body.get_instance_id())
-		cameras[0].enabled = true
-		cameras[1].enabled = false
-	
-	for cam in cameras:
-		print(cam.enabled)
 
-func _on_next_1(body: Node2D) -> void:
-	if body.is_in_group("player") or body.get_instance_id() in valid_ids:
-		valid_ids.append(body.get_instance_id())
-		cameras[0].enabled = false
-		cameras[1].enabled = true
+# Change Levels
+func _to_level_1(body: Node2D):
+	if body.is_in_group("player"):
+		get_tree().change_scene_to_file("res://levels/level0.tscn")
+
+func _to_level_2(body: Node2D):
+	if body.is_in_group("player"):
+		get_tree().change_scene_to_file("res://levels/level2.tscn")
+
+
+# Change Cameras
+
+func _change_camera(index: int):
+	for i in range(cameras.size()):
+		if i == index:
+			cameras[i].enabled = true
+		else:
+			cameras[i].enabled = false
+
+func _on_camera_area_entered(body: Node2D, enable_index: int) -> void:
+	if body.is_in_group("player"):
+		_change_camera(enable_index)
 	
 	for cam in cameras:
 		print(cam.enabled)
