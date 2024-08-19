@@ -71,6 +71,8 @@ func _charge_projectile(delta: float):
 		box_handler._recive_box(tracked_box, thrown_speed)
 		tracked_box = null
 
+func _reset_scene():
+	get_tree().reload_current_scene()
 
 # signal functions
 func _recive_box(box):

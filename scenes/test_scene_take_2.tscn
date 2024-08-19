@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_ublff"]
 [ext_resource type="PackedScene" uid="uid://crpl1witt5m7h" path="res://scenes/Gun_Scene.tscn" id="2_bu43d"]
 [ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="3_l3gl2"]
-[ext_resource type="PackedScene" uid="uid://cimua4s4gyfer" path="res://scenes/box_handler.tscn" id="5_k846r"]
+[ext_resource type="PackedScene" path="res://scenes/box_handler.tscn" id="5_k846r"]
 [ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="6_8ukyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbfmj"]
@@ -32,7 +32,7 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.195604, 0, 0, Vector2(1, 0.021978), -3.11189, 0.0, 0, 0]
 point_count = 2
 
-[node name="root" type="Node2D" node_paths=PackedStringArray("box_handler")]
+[node name="root2" type="Node2D" node_paths=PackedStringArray("box_handler")]
 script = ExtResource("1_ublff")
 box_handler = NodePath("Box_Handler")
 

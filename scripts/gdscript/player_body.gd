@@ -196,3 +196,6 @@ func _on_body_entered(body):
 	if body.is_in_group("enemy_bullet") && body != self:
 		crnt_health -= max_health
 		crnt_health = clampf(crnt_health, 0.0, max_health)
+		if crnt_health == 0: 
+			print("POW! YOU ARE DED!")
+			get_node("/root/root")._reset_scene()
