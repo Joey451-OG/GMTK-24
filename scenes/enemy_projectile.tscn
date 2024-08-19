@@ -89,8 +89,7 @@ metadata/has_hit_surface = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy_projectile"]
 scale = Vector2(1.59375, 1.59375)
 sprite_frames = SubResource("SpriteFrames_2ww75")
-frame = 3
-frame_progress = 0.652695
+frame_progress = 0.655057
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.5)
