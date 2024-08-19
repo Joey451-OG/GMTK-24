@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var scale_factor := 0.2
+@export var scale_factor := 0.08
 @export var thrown_speed := 2.0
 @export var bullet_time_amount := 20
 @export var time_scale := 0.2
@@ -40,13 +40,12 @@ func _scale_box(detla: float):
 		
 	elif Input.is_action_just_pressed("scrollDown"):
 		for child in box_nodes:
-			child.scale *= scale_factor - 1
-		thrown_speed *= 1 + scale_factor
+			child.scale *= 1 - scale_factor
+		thrown_speed *= 1 + (scale_factor * 4)
 		$PlayerBody/GunScene._get_marker().position.x *= 1 - (scale_factor / 2)
 		
 		# hard coded meta data system since the godot one kept shitting the bed
 		$PlayerBody/GunScene.marks[tracked_box.get_instance_id()] = $PlayerBody/GunScene._get_marker().position.x
-		if 1 + 1 == 2 : pass
 		
 	print($PlayerBody/GunScene.marks)
 
