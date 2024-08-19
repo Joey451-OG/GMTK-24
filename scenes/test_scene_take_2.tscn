@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://ky8228v11puv"]
+[gd_scene load_steps=14 format=3 uid="uid://qoro2fxkoh01"]
 
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_q2c07"]
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_ublff"]
-[ext_resource type="PackedScene" uid="uid://crpl1witt5m7h" path="res://scenes/Gun_Scene.tscn" id="2_bu43d"]
+[ext_resource type="PackedScene" uid="uid://sfpe5fkk4k6e" path="res://scenes/Gun_Scene.tscn" id="2_bu43d"]
 [ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="3_l3gl2"]
 [ext_resource type="Script" path="res://scripts/gdscript/box_handler.gd" id="5_6pidy"]
 [ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="6_8ukyx"]
@@ -117,35 +117,57 @@ scale_amount_curve = SubResource("Curve_xf7lv")
 
 [node name="Box" parent="." instance=ExtResource("3_l3gl2")]
 physics_interpolation_mode = 0
-position = Vector2(525, 67)
+position = Vector2(540, 27)
 metadata/isThrown = false
 metadata/notInBT = true
 metadata/isFired = false
 
 [node name="Box2" parent="." instance=ExtResource("3_l3gl2")]
 physics_interpolation_mode = 0
-position = Vector2(164, -33)
+position = Vector2(438, -114)
+rotation = -0.523598
 metadata/isThrown = false
 metadata/notInBT = true
 metadata/isFired = false
 
 [node name="Box3" parent="." instance=ExtResource("3_l3gl2")]
 physics_interpolation_mode = 0
-position = Vector2(-556, -57)
+position = Vector2(523, -129)
 metadata/isThrown = false
 metadata/notInBT = true
 metadata/isFired = false
 
 [node name="Box4" parent="." instance=ExtResource("3_l3gl2")]
 physics_interpolation_mode = 0
-position = Vector2(231, 222)
+position = Vector2(608, 54)
 metadata/isThrown = false
 metadata/notInBT = true
 metadata/isFired = false
 
 [node name="Box5" parent="." instance=ExtResource("3_l3gl2")]
 physics_interpolation_mode = 0
-position = Vector2(-306, 228)
+position = Vector2(482, -12)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
+
+[node name="Box6" parent="." instance=ExtResource("3_l3gl2")]
+physics_interpolation_mode = 0
+position = Vector2(589, -48)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
+
+[node name="Box7" parent="." instance=ExtResource("3_l3gl2")]
+physics_interpolation_mode = 0
+position = Vector2(680, 22)
+metadata/isThrown = false
+metadata/notInBT = true
+metadata/isFired = false
+
+[node name="Box8" parent="." instance=ExtResource("3_l3gl2")]
+physics_interpolation_mode = 0
+position = Vector2(438, 42)
 metadata/isThrown = false
 metadata/notInBT = true
 metadata/isFired = false
@@ -158,9 +180,28 @@ Gun_Scene = NodePath("../PlayerBody/GunScene")
 position = Vector2(-410, -26)
 player_object = NodePath("../PlayerBody")
 
+[node name="Base_Baddie7" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("6_8ukyx")]
+position = Vector2(122, 117)
+player_object = NodePath("../PlayerBody")
+
+[node name="Base_Baddie8" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("6_8ukyx")]
+position = Vector2(-270, 236)
+player_object = NodePath("../PlayerBody")
+
 [connection signal="send_package" from="PlayerBody/GunScene" to="." method="_recive_box"]
+[connection signal="area_entered" from="Box" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box2" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box2" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box3" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box3" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box4" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box4" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box5" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box5" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box6" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box6" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box7" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box7" to="PlayerBody/GunScene" method="_capture_box"]
+[connection signal="area_entered" from="Box8" to="Base_Baddie" method="_on_box_area_entered"]
+[connection signal="clicked" from="Box8" to="PlayerBody/GunScene" method="_capture_box"]

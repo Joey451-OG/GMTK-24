@@ -7,6 +7,7 @@ var tracked_box : RigidBody2D
 func _recive_box(box: RigidBody2D, speed: float):
 	tracked_box = box
 	tracked_box.set_meta("isThrown", false)
+	tracked_box.set_meta("isFired", true)
 	Gun_Scene.target_box = null
 	
 	tracked_box.linear_velocity = Gun_Scene._get_fire_vector() * speed

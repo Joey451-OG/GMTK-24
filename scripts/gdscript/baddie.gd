@@ -95,13 +95,6 @@ func _move_character(delta : float) -> void:
 	velocity.y = y_direction
 	move_and_slide()
 
-func _on_baddie_hit_box_area_entered(area: Area2D) -> void:
-	wasHit = true
-
-func _on_box_area_entered(box, inID) -> void:
-	if box.get_meta("isFired"):
-		_kill()
-
 func _kill():
 	self.queue_free()
 
@@ -116,3 +109,9 @@ func _spawn_projectile(asset, direction : Vector2):
 func _update_spawned_projectiles(delta : float):
 	for p in projectile_list:
 		p.global_position += (projectile_velocity_data_list[0] * fire_speed * delta)
+
+func _on_projectile_enter(body):
+	if body.is_in_group("boxes"):
+		if body.get_meta("isFired"):
+			_kill()
+	

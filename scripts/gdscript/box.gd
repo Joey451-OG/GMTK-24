@@ -14,6 +14,8 @@ signal area_entered(box: Node2D, instance_id: int)
 func _ready():
 	glowish.visible = false
 	
+	self.add_to_group("boxes")
+	
 	# contrustors for metadata
 	self.set_meta("isThrown", false)
 	self.set_meta("isFired", false)
@@ -25,8 +27,6 @@ func _process(delta: float) -> void:
 	if canClick and Input.is_action_just_pressed("leftClick"):
 		if distance_to_mouse < range: 
 			clicked.emit(self) 
-		
-	
 
 # signal functions
 func _on_area_2d_mouse_entered() -> void:

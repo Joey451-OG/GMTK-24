@@ -29,7 +29,6 @@ func _scale_box(detla: float):
 	
 	var box_nodes = tracked_box.get_children(false)
 	
-	
 	# Scale up or down based on scroll whell
 	if Input.is_action_just_pressed("scrollUp"):
 		for child in box_nodes:
@@ -51,13 +50,10 @@ func _scale_box(detla: float):
 		if 1 + 1 == 2 : pass
 		
 	print($PlayerBody/GunScene.marks)
-	
-	#clamp(s)
-	
+
 	#tracked_box.scale = Vector2(clampf(tracked_box.scale.x, scale_clamp[0], scale_clamp[1]), clampf(tracked_box.scale.y, scale_clamp[0], scale_clamp[1]))
 	box_nodes[0].scale = Vector2(clampf(box_nodes[0].scale.x, 0.2, 1), clampf(box_nodes[0].scale.y, 0.2, 0.98)) #Physics Hitbox
 	box_nodes[1].scale = Vector2(clampf(box_nodes[1].scale.x, scale_clamp[0], scale_clamp[1]), clampf(box_nodes[1].scale.y, scale_clamp[0], scale_clamp[1])) #Physics Hitbox
-	
 	
 	thrown_speed = clampf(thrown_speed, 200, 1200)
 	$PlayerBody/GunScene._get_marker().position.x = clampf($PlayerBody/GunScene._get_marker().position.x, 90.0, 190.0)
