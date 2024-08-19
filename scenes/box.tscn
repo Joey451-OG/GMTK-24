@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://gtw41siuxe3q"]
+[gd_scene load_steps=8 format=3 uid="uid://gtw41siuxe3q"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/box.gd" id="1_cyl5u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bstw4"]
+size = Vector2(180.829, 138.613)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qqcc4"]
 size = Vector2(241.065, 182.06)
@@ -29,8 +32,9 @@ metadata/BOX_FLAG = 0
 metadata/mark = 90.0
 
 [node name="Phys_Box" type="CollisionShape2D" parent="."]
+position = Vector2(2.98023e-07, -1.01328e-06)
 scale = Vector2(0.210143, 0.259716)
-shape = SubResource("RectangleShape2D_qqcc4")
+shape = SubResource("RectangleShape2D_bstw4")
 debug_color = Color(0.972683, 0, 0.439326, 0.42)
 
 [node name="Hitbox" type="Area2D" parent="."]

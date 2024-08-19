@@ -21,8 +21,7 @@ func _ready():
 	self.set_meta("isFired", false)
 	
 func _process(delta: float) -> void:
-	var temp = get_node("/root/root/PlayerBody") # make sure every root node in every scene is called 'root'. The stupid game engine can't handle finding the playercontroller itself so *I* have to do it for itasdlkf;jadsflkajsd
-	distance_to_mouse = temp.global_position.distance_to(get_global_mouse_position())
+	var temp = get_node("/root/root/PlayerBody") # make sure every root node in every scene is called 'root'. The stupid game engine can't handle finding the playercontroller itself so *I* have to do it for itasdlkf;jadsflkajsd	distance_to_mouse = temp.global_position.distance_to(get_global_mouse_position())
 	
 	if canClick and Input.is_action_just_pressed("leftClick"):
 		if distance_to_mouse < range: 
