@@ -153,6 +153,8 @@ text = "BACK
 "
 icon = SubResource("Texture2DRD_e72oy")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="button_down" from="main_ui/PLAY" to="." method="_play"]
 [connection signal="button_up" from="main_ui/SETTINGS" to="." method="_settings"]
 [connection signal="button_up" from="main_ui/LEVEL" to="." method="_level_select"]

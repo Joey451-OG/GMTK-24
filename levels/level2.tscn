@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://5544cflnecwk"]
+[gd_scene load_steps=22 format=4 uid="uid://5i0q65nbf4lf"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_hxsq5"]
 [ext_resource type="Texture2D" uid="uid://8k188hxjnc4f" path="res://assets/gb_or_ss.png" id="2_5vffn"]
@@ -311,6 +311,8 @@ limit_top = -127
 limit_right = 4000
 limit_bottom = 1696
 editor_draw_limits = true
+
+[node name="PostShaders" parent="." instance=ExtResource("5_2roit")]
 
 [connection signal="send_package" from="PlayerBody/GunScene" to="." method="_recive_box"]
 [connection signal="clicked" from="Box" to="PlayerBody/GunScene" method="_capture_box"]

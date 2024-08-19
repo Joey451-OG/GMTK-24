@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://d3qr07vri170p"]
+[gd_scene load_steps=19 format=4 uid="uid://d3qr07vri170p"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_f63i0"]
 [ext_resource type="Texture2D" uid="uid://8k188hxjnc4f" path="res://assets/gb_or_ss.png" id="2_rjcl0"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="5_warsu"]
 [ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="6_qjq5k"]
 [ext_resource type="PackedScene" uid="uid://covaquvadxhb2" path="res://scenes/box_handler.tscn" id="8_wjtp4"]
+[ext_resource type="PackedScene" uid="uid://5ce6ya46djxu" path="res://scenes/post_shaders.tscn" id="9_2iarj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1x72b"]
 texture = ExtResource("2_rjcl0")
@@ -198,6 +199,8 @@ editor_draw_limits = true
 [node name="Camera2D2" type="Camera2D" parent="Node2D"]
 position = Vector2(2069, 302)
 zoom = Vector2(1.5, 1.5)
+
+[node name="PostShaders" parent="." instance=ExtResource("9_2iarj")]
 
 [connection signal="send_package" from="PlayerBody/GunScene" to="." method="_recive_box"]
 [connection signal="clicked" from="Box" to="PlayerBody/GunScene" method="_capture_box"]
