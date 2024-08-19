@@ -1,0 +1,164 @@
+[gd_scene load_steps=3 format=3 uid="uid://br17xhjkbqcui"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/ui.gd" id="1_ok621"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_e72oy"]
+
+[node name="Ui" type="CanvasLayer" node_paths=PackedStringArray("main_menu", "level_menu", "settings_menu")]
+script = ExtResource("1_ok621")
+main_menu = NodePath("main_ui")
+level_menu = NodePath("level_menu")
+settings_menu = NodePath("settings_menu")
+
+[node name="main_ui" type="CanvasGroup" parent="."]
+
+[node name="bakaground" type="ColorRect" parent="main_ui"]
+custom_minimum_size = Vector2(27.58, 0)
+offset_left = -109.0
+offset_top = -86.0
+offset_right = 1412.0
+offset_bottom = 842.0
+scale = Vector2(2.04, 2.24)
+color = Color(0.389287, 0.389287, 0.389287, 1)
+
+[node name="PLAY" type="Button" parent="main_ui"]
+custom_minimum_size = Vector2(390, 80)
+offset_left = 34.0
+offset_top = 31.0
+offset_right = 424.0
+offset_bottom = 111.0
+text = "PLAY"
+icon = SubResource("Texture2DRD_e72oy")
+
+[node name="SETTINGS" type="Button" parent="main_ui"]
+custom_minimum_size = Vector2(390, 80)
+offset_left = 34.0
+offset_top = 141.0
+offset_right = 424.0
+offset_bottom = 221.0
+text = "SETTINGS"
+icon = SubResource("Texture2DRD_e72oy")
+
+[node name="LEVEL" type="Button" parent="main_ui"]
+custom_minimum_size = Vector2(390, 80)
+offset_left = 34.0
+offset_top = 253.0
+offset_right = 424.0
+offset_bottom = 333.0
+text = "LEVEL SELECT
+"
+icon = SubResource("Texture2DRD_e72oy")
+
+[node name="settings_menu" type="CanvasGroup" parent="."]
+visible = false
+position = Vector2(7, 2)
+
+[node name="HSlider" type="HSlider" parent="settings_menu"]
+custom_minimum_size = Vector2(390.3, 26.73)
+offset_left = 27.0
+offset_top = 82.0
+offset_right = 417.3
+offset_bottom = 108.73
+
+[node name="RichTextLabel" type="RichTextLabel" parent="settings_menu"]
+physics_interpolation_mode = 1
+custom_minimum_size = Vector2(123.89, 0)
+offset_left = 184.0
+offset_top = 55.0
+offset_right = 307.89
+offset_bottom = 95.0
+text = "VOLUME"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="settings_menu"]
+physics_interpolation_mode = 1
+custom_minimum_size = Vector2(105.56, 0)
+offset_left = 167.0
+offset_top = 136.0
+offset_right = 272.56
+offset_bottom = 176.0
+text = "FULL SCREEN"
+
+[node name="BACK" type="Button" parent="settings_menu"]
+custom_minimum_size = Vector2(390, 0)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 27.0
+offset_top = 409.0
+offset_right = 417.0
+offset_bottom = 489.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "BACK
+"
+icon = SubResource("Texture2DRD_e72oy")
+
+[node name="CheckButton" type="CheckButton" parent="settings_menu"]
+offset_left = 195.0
+offset_top = 166.0
+offset_right = 239.0
+offset_bottom = 190.0
+
+[node name="level_menu" type="CanvasGroup" parent="."]
+visible = false
+
+[node name="LEVEL 1" type="Button" parent="level_menu"]
+custom_minimum_size = Vector2(390, 80)
+offset_left = 34.0
+offset_top = 31.0
+offset_right = 424.0
+offset_bottom = 111.0
+text = "LEVEL 1"
+icon = SubResource("Texture2DRD_e72oy")
+
+[node name="LEVEL 2" type="Button" parent="level_menu"]
+custom_minimum_size = Vector2(390, 80)
+offset_left = 34.0
+offset_top = 141.0
+offset_right = 424.0
+offset_bottom = 221.0
+text = "LEVEL 2"
+icon = SubResource("Texture2DRD_e72oy")
+
+[node name="LEVEL 3" type="Button" parent="level_menu"]
+custom_minimum_size = Vector2(390, 80)
+offset_left = 34.0
+offset_top = 253.0
+offset_right = 424.0
+offset_bottom = 333.0
+text = "LEVEL 3
+"
+icon = SubResource("Texture2DRD_e72oy")
+
+[node name="BACK" type="Button" parent="level_menu"]
+custom_minimum_size = Vector2(390, 0)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = 411.0
+offset_right = 424.0
+offset_bottom = 491.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "BACK
+"
+icon = SubResource("Texture2DRD_e72oy")
+
+[connection signal="button_down" from="main_ui/PLAY" to="." method="_play"]
+[connection signal="button_up" from="main_ui/SETTINGS" to="." method="_settings"]
+[connection signal="button_up" from="main_ui/LEVEL" to="." method="_level_select"]
+[connection signal="button_down" from="settings_menu/BACK" to="." method="_back"]
+[connection signal="toggled" from="settings_menu/CheckButton" to="." method="_windowed"]
+[connection signal="button_down" from="level_menu/LEVEL 1" to="." method="_load_level_0"]
+[connection signal="button_down" from="level_menu/LEVEL 2" to="." method="_load_level_1"]
+[connection signal="button_down" from="level_menu/LEVEL 3" to="." method="_load_level_2"]
+[connection signal="button_down" from="level_menu/BACK" to="." method="_back"]

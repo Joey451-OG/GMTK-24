@@ -32,7 +32,7 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.195604, 0, 0, Vector2(1, 0.021978), -3.11189, 0.0, 0, 0]
 point_count = 2
 
-[node name="root2" type="Node2D" node_paths=PackedStringArray("box_handler")]
+[node name="root" type="Node2D" node_paths=PackedStringArray("box_handler")]
 script = ExtResource("1_ublff")
 box_handler = NodePath("Box_Handler")
 
@@ -177,16 +177,6 @@ despawn_partical = NodePath("../PlayerBody/Despawn_Effect2")
 
 [node name="Base_Baddie" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("6_8ukyx")]
 position = Vector2(-410, -26)
-box_handler = NodePath("../Box_Handler")
-player_object = NodePath("../PlayerBody")
-
-[node name="Base_Baddie7" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("6_8ukyx")]
-position = Vector2(122, 117)
-box_handler = NodePath("../Box_Handler")
-player_object = NodePath("../PlayerBody")
-
-[node name="Base_Baddie8" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("6_8ukyx")]
-position = Vector2(-270, 236)
 box_handler = NodePath("../Box_Handler")
 player_object = NodePath("../PlayerBody")
 

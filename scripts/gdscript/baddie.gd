@@ -80,9 +80,9 @@ func _move_character(delta : float) -> void:
 		elif rc_right.is_colliding() or !rc_right_f.is_colliding():
 			x_direction = -wandering_speed
 	if current_state == STATES.FIGHT:
-		if (self.position.distance_to(player_object.global_position) > fighting_range_limit_h):
-			x_direction = (dir_to_player_x/self.position.distance_to(player_object.global_position))*wandering_speed
-		elif (self.position.distance_to(player_object.global_position) < fighting_range_limit_l):
+		if (self.position.distance_to(player_object.global_position) > fighting_range_limit_h) && rc_left.is_colliding() or !rc_left_f.is_colliding():
+			x_direction = (dir_to_player_x/self.position.distance_to(player_object.global_position))*wandering_speed 
+		elif (self.position.distance_to(player_object.global_position) < fighting_range_limit_l) && rc_right.is_colliding() or !rc_right_f.is_colliding():
 			x_direction = -(dir_to_player_x/self.position.distance_to(player_object.global_position))*fighting_speed
 		else:
 			x_direction = 0.0
