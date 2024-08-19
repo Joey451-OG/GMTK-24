@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bbohbihpvs2j6"]
+[gd_scene load_steps=23 format=4 uid="uid://c73p0q02bvget"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_msfih"]
 [ext_resource type="Texture2D" uid="uid://8k188hxjnc4f" path="res://assets/gb_or_ss.png" id="2_gqrbl"]
@@ -276,10 +276,22 @@ position = Vector2(23, 3.5)
 shape = SubResource("RectangleShape2D_ukmx6")
 debug_color = Color(0.479829, 0.58759, 0, 0.42)
 
-[node name="Node2D" type="Node2D" parent="." node_paths=PackedStringArray("cameras", "player")]
+[node name="Node2D" type="Node2D" parent="." node_paths=PackedStringArray("cameras", "player", "transition_square")]
 script = ExtResource("8_isdew")
 cameras = [NodePath("Camera2D"), NodePath("Camera2D2"), NodePath("Camera2D3")]
 player = NodePath("../PlayerBody")
+transition_square = NodePath("CanvasLayer/ColorRect")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="Node2D/CanvasLayer"]
+offset_left = 405.0
+offset_top = -1851.0
+offset_right = 445.0
+offset_bottom = -1811.0
+rotation = 0.261799
+scale = Vector2(-155.843, 116.261)
+color = Color(0, 0, 0, 1)
 
 [node name="Camera2D" type="Camera2D" parent="Node2D"]
 position = Vector2(-553, 247)

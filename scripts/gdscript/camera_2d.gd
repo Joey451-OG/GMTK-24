@@ -3,12 +3,13 @@ extends Node2D
 @export var cameras : Array[Camera2D]
 @export var player : CharacterBody2D
 
+@export var transition_square : CanvasItem
+
 var valid_ids = []
 var section_index := 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	cameras[0].enabled = true
-
 
 # Change Levels
 func _to_level_1(body: Node2D):
@@ -18,7 +19,6 @@ func _to_level_1(body: Node2D):
 func _to_level_2(body: Node2D):
 	if body.is_in_group("player"):
 		get_tree().change_scene_to_file("res://levels/level2.tscn")
-
 
 # Change Cameras
 
@@ -39,3 +39,9 @@ func _on_camera_area_entered(body: Node2D, enable_index: int) -> void:
 
 func _on_death_box_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"): player._kill()
+	
+func _transition_state(activated, delta : float):
+	if activated:
+		transition_square.position = lerp(transition_square.position, Vector2(-100.0,0.0), 6.34 * delta)
+	else:
+		transition_square.position = lerp(transition_square.position, Vector2(2000.0,0.0), 6.34 * delta)
