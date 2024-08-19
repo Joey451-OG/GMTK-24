@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ky8228v11puv"]
+[gd_scene load_steps=15 format=3 uid="uid://ky8228v11puv"]
 
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_q2c07"]
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_ublff"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="3_l3gl2"]
 [ext_resource type="PackedScene" uid="uid://covaquvadxhb2" path="res://scenes/box_handler.tscn" id="5_k846r"]
 [ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="6_8ukyx"]
+[ext_resource type="PackedScene" uid="uid://5ce6ya46djxu" path="res://scenes/post_shaders.tscn" id="7_k18a6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbfmj"]
 
@@ -179,6 +180,8 @@ despawn_partical = NodePath("../PlayerBody/Despawn_Effect2")
 position = Vector2(-410, -26)
 box_handler = NodePath("../Box_Handler")
 player_object = NodePath("../PlayerBody")
+
+[node name="PostShaders" parent="." instance=ExtResource("7_k18a6")]
 
 [connection signal="send_package" from="PlayerBody/GunScene" to="." method="_recive_box"]
 [connection signal="clicked" from="Box" to="PlayerBody/GunScene" method="_capture_box"]
