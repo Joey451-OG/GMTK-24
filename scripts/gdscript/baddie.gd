@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var box_handler : Node2D
 @export var player_object : Node2D
 @export var isAlive := true
+@export var projectile_speed := 1000
 
 @onready var rc_right = $Wall_checks/Right
 @onready var rc_left = $Wall_checks/Left
@@ -118,5 +119,5 @@ func _spawn_and_apply_force_to_box(dir_vector):
 	var p_asset = projectile_asset.instantiate()
 	get_tree().root.add_child(p_asset)
 	p_asset.global_position = self.global_position - Vector2(0.0, 45.0)
-	p_asset.linear_velocity = Vector2(dir_to_player_x*1500.0, dir_to_player_y*1500.0)/self.position.distance_to(player_object.global_position)
+	p_asset.linear_velocity = Vector2(dir_to_player_x * projectile_speed, dir_to_player_y * projectile_speed)/self.position.distance_to(player_object.global_position)
 	p_asset.add_to_group("enemy_bullet")
