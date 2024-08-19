@@ -41,6 +41,7 @@ enum STATES{
 }
 
 func _ready():
+	self.add_to_group("baddies")
 	x_direction = wandering_speed
 	y_direction = 0.0
 
@@ -114,4 +115,3 @@ func _on_projectile_enter(body):
 	if body.is_in_group("boxes"):
 		if body.get_meta("isFired"):
 			_kill()
-	

@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var glowish: Sprite2D = $Area2D/CollisionShape2D2/glowish
+@onready var glowish: Sprite2D = $Hitbox/CollisionShape2D2/glowish
 @onready var id = randi()
 @onready var range := 200.0
 @onready var temp = get_node("/root/")
@@ -41,3 +41,7 @@ func _on_area_2d_mouse_exited() -> void:
 	
 func _hit_box_area_entered(area: Area2D) -> void:
 	area_entered.emit(self, get_instance_id())
+
+func _on_fatal_hit(body):
+	if body.is_in_group("baddies"):
+		self.queue_free()
