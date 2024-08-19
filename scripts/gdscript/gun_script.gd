@@ -6,6 +6,7 @@ extends Node2D
 var isInPosition := false
 var wasAnimationPlayed := false
 var t_angle: float
+var marks = {}
 
 signal send_package(Node2D)
 
@@ -49,8 +50,13 @@ func _capture_box(box):
 	if target_box == null:
 		target_box = box
 		send_package.emit(box) # send out a reference to the target_block
-		marker_2d.position.x = target_box.get_meta("mark") # reset marker pos when picking up a new block
-		print(marker_2d.position.x)
+		
+		# hard coded meta data system since the godot one kept shitting the bed
+		if target_box.get_instance_id() in marks.keys():
+			marker_2d.position.x = marks[target_box.get_instance_id()]
+		else:
+			marker_2d.position.x = 90.0
+		
 func _get_marker() -> Marker2D:
 	return marker_2d
 

@@ -36,26 +36,37 @@ func _scale_box(detla: float):
 			child.scale *= 1 + scale_factor
 		thrown_speed *= 1 - scale_factor
 		$PlayerBody/GunScene._get_marker().position.x *= (scale_factor / 2) + 1
-		tracked_box.set_meta("maker", $PlayerBody/GunScene._get_marker().position.x)
+		
+		# hard coded meta data system since the godot one kept shitting the bed
+		$PlayerBody/GunScene.marks[tracked_box.get_instance_id()] = $PlayerBody/GunScene._get_marker().position.x
 		
 	elif Input.is_action_just_pressed("scrollDown"):
 		for child in box_nodes:
 			child.scale *= scale_factor - 1
 		thrown_speed *= 1 + scale_factor
 		$PlayerBody/GunScene._get_marker().position.x *= 1 - (scale_factor / 2)
-		tracked_box.set_meta("mark", $PlayerBody/GunScene._get_marker().position.x)
+		
+		# hard coded meta data system since the godot one kept shitting the bed
+		$PlayerBody/GunScene.marks[tracked_box.get_instance_id()] = $PlayerBody/GunScene._get_marker().position.x
 		if 1 + 1 == 2 : pass
-	print(tracked_box.get_meta("mark"))
+		
+	print($PlayerBody/GunScene.marks)
 	
 	#clamp(s)
 	
 	#tracked_box.scale = Vector2(clampf(tracked_box.scale.x, scale_clamp[0], scale_clamp[1]), clampf(tracked_box.scale.y, scale_clamp[0], scale_clamp[1]))
-	box_nodes[0].scale = Vector2(clampf(box_nodes[0].scale.x, 0.2, 1), clampf(box_nodes[0].scale.y, 0.2, 1)) #Physics Hitbox
+	box_nodes[0].scale = Vector2(clampf(box_nodes[0].scale.x, 0.2, 1), clampf(box_nodes[0].scale.y, 0.2, 0.98)) #Physics Hitbox
 	box_nodes[1].scale = Vector2(clampf(box_nodes[1].scale.x, scale_clamp[0], scale_clamp[1]), clampf(box_nodes[1].scale.y, scale_clamp[0], scale_clamp[1])) #Physics Hitbox
 	
 	
 	thrown_speed = clampf(thrown_speed, 200, 1200)
 	$PlayerBody/GunScene._get_marker().position.x = clampf($PlayerBody/GunScene._get_marker().position.x, 90.0, 190.0)
+
+func _get_distance_to_mouse():
+	## Spaget to fix an inconsistent bug where the error: Invalid access to property or key 'global_position' on 
+	## a base object of type 'Nil' would happen when a baddie and the player exsisted in the same scene
+	return $PlayerBody.global_position.distance_to(get_global_mouse_position())
+	
 
 func _charge_projectile(delta: float):
 	if Input.is_action_pressed("rightClick"):

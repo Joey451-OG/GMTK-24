@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://ky8228v11puv"]
+[gd_scene load_steps=14 format=3 uid="uid://ky8228v11puv"]
 
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="1_q2c07"]
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_ublff"]
 [ext_resource type="PackedScene" uid="uid://crpl1witt5m7h" path="res://scenes/Gun_Scene.tscn" id="2_bu43d"]
 [ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="3_l3gl2"]
 [ext_resource type="Script" path="res://scripts/gdscript/box_handler.gd" id="5_6pidy"]
+[ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="6_8ukyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbfmj"]
 
@@ -31,7 +32,7 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.195604, 0, 0, Vector2(1, 0.021978), -3.11189, 0.0, 0, 0]
 point_count = 2
 
-[node name="test_scene_take_2" type="Node2D" node_paths=PackedStringArray("despawn_partical", "box_handler")]
+[node name="root" type="Node2D" node_paths=PackedStringArray("despawn_partical", "box_handler")]
 script = ExtResource("1_ublff")
 despawn_partical = NodePath("PlayerBody/Despawn_Effect2")
 box_handler = NodePath("Box_Handler")
@@ -114,42 +115,37 @@ angle_max = 449.8
 scale_amount_max = 8.0
 scale_amount_curve = SubResource("Curve_xf7lv")
 
-[node name="Box" parent="." node_paths=PackedStringArray("PlayerBody") instance=ExtResource("3_l3gl2")]
+[node name="Box" parent="." instance=ExtResource("3_l3gl2")]
 physics_interpolation_mode = 0
 position = Vector2(525, 67)
-PlayerBody = NodePath("../PlayerBody")
 metadata/isThrown = false
 metadata/notInBT = true
 metadata/isFired = false
 
-[node name="Box2" parent="." node_paths=PackedStringArray("PlayerBody") instance=ExtResource("3_l3gl2")]
+[node name="Box2" parent="." instance=ExtResource("3_l3gl2")]
 physics_interpolation_mode = 0
 position = Vector2(164, -33)
-PlayerBody = NodePath("../PlayerBody")
 metadata/isThrown = false
 metadata/notInBT = true
 metadata/isFired = false
 
-[node name="Box3" parent="." node_paths=PackedStringArray("PlayerBody") instance=ExtResource("3_l3gl2")]
+[node name="Box3" parent="." instance=ExtResource("3_l3gl2")]
 physics_interpolation_mode = 0
 position = Vector2(-556, -57)
-PlayerBody = NodePath("../PlayerBody")
 metadata/isThrown = false
 metadata/notInBT = true
 metadata/isFired = false
 
-[node name="Box4" parent="." node_paths=PackedStringArray("PlayerBody") instance=ExtResource("3_l3gl2")]
+[node name="Box4" parent="." instance=ExtResource("3_l3gl2")]
 physics_interpolation_mode = 0
 position = Vector2(231, 222)
-PlayerBody = NodePath("../PlayerBody")
 metadata/isThrown = false
 metadata/notInBT = true
 metadata/isFired = false
 
-[node name="Box5" parent="." node_paths=PackedStringArray("PlayerBody") instance=ExtResource("3_l3gl2")]
+[node name="Box5" parent="." instance=ExtResource("3_l3gl2")]
 physics_interpolation_mode = 0
 position = Vector2(-306, 228)
-PlayerBody = NodePath("../PlayerBody")
 metadata/isThrown = false
 metadata/notInBT = true
 metadata/isFired = false
@@ -157,6 +153,10 @@ metadata/isFired = false
 [node name="Box_Handler" type="Node2D" parent="." node_paths=PackedStringArray("Gun_Scene")]
 script = ExtResource("5_6pidy")
 Gun_Scene = NodePath("../PlayerBody/GunScene")
+
+[node name="Base_Baddie" parent="." node_paths=PackedStringArray("player_object") instance=ExtResource("6_8ukyx")]
+position = Vector2(-410, -26)
+player_object = NodePath("../PlayerBody")
 
 [connection signal="send_package" from="PlayerBody/GunScene" to="." method="_recive_box"]
 [connection signal="clicked" from="Box" to="PlayerBody/GunScene" method="_capture_box"]

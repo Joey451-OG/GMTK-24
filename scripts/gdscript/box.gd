@@ -3,7 +3,7 @@ extends Node2D
 @onready var glowish: Sprite2D = $Area2D/CollisionShape2D2/glowish
 @onready var id = randi()
 @onready var range := 200.0
-@export var PlayerBody : CharacterBody2D
+@onready var temp = get_node("/root/")
 
 var canClick = false
 var distance_to_mouse : float
@@ -19,7 +19,8 @@ func _ready():
 	self.set_meta("isFired", false)
 	
 func _process(delta: float) -> void:
-	distance_to_mouse = PlayerBody.global_position.distance_to(get_global_mouse_position())
+	var temp = get_node("/root/root/PlayerBody") # make sure every root node in every scene is called 'root'. The stupid game engine can't handle finding the playercontroller itself so *I* have to do it for itasdlkf;jadsflkajsd
+	distance_to_mouse = temp.global_position.distance_to(get_global_mouse_position())
 	
 	if canClick and Input.is_action_just_pressed("leftClick"):
 		if distance_to_mouse < range: 
@@ -28,7 +29,6 @@ func _process(delta: float) -> void:
 	
 
 # signal functions
-
 func _on_area_2d_mouse_entered() -> void:
 	if distance_to_mouse < range:
 		glowish.visible = true
