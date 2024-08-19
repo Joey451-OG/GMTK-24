@@ -22,11 +22,11 @@ func _process(delta: float) -> void:
 		selected_box_time += (2.4) * delta
 
 		if selected_box_time > despawn_time:
-			_despawn_box_object()
+			_despawn_box_object(tracked_box)
 			selected_box_time = 0.0
 			isTimerRunning = false
 			
-func _despawn_box_object():
-	despawn_partical.global_position = tracked_box.global_position
+func _despawn_box_object(box: Node2D):
+	despawn_partical.global_position = box.global_position
 	despawn_partical.emitting = true
-	tracked_box.queue_free()
+	box.queue_free()

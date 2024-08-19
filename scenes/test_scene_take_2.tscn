@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_ublff"]
 [ext_resource type="PackedScene" uid="uid://crpl1witt5m7h" path="res://scenes/Gun_Scene.tscn" id="2_bu43d"]
 [ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="3_l3gl2"]
-[ext_resource type="Script" path="res://scripts/gdscript/box_handler.gd" id="5_6pidy"]
+[ext_resource type="PackedScene" uid="uid://cimua4s4gyfer" path="res://scenes/box_handler.tscn" id="5_k846r"]
 [ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="6_8ukyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbfmj"]
@@ -12,16 +12,16 @@
 [sub_resource type="QuadMesh" id="QuadMesh_luvyq"]
 size = Vector2(20, 20)
 
-[sub_resource type="Gradient" id="Gradient_f1nf4"]
+[sub_resource type="Gradient" id="Gradient_5ji8k"]
 colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0.899258, 0.899258, 0.899258, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_6m20h"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6u3qo"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qdsw4"]
 width = 2
 height = 2
-color_ramp = SubResource("Gradient_f1nf4")
-noise = SubResource("FastNoiseLite_6m20h")
+color_ramp = SubResource("Gradient_5ji8k")
+noise = SubResource("FastNoiseLite_6u3qo")
 
 [sub_resource type="Curve" id="Curve_6h4j6"]
 max_value = 100.0
@@ -171,8 +171,7 @@ metadata/isThrown = false
 metadata/notInBT = true
 metadata/isFired = false
 
-[node name="Box_Handler" type="Node2D" parent="." node_paths=PackedStringArray("Gun_Scene", "despawn_partical")]
-script = ExtResource("5_6pidy")
+[node name="Box_Handler" parent="." node_paths=PackedStringArray("Gun_Scene", "despawn_partical") instance=ExtResource("5_k846r")]
 Gun_Scene = NodePath("../PlayerBody/GunScene")
 despawn_partical = NodePath("../PlayerBody/Despawn_Effect2")
 
@@ -192,19 +191,11 @@ box_handler = NodePath("../Box_Handler")
 player_object = NodePath("../PlayerBody")
 
 [connection signal="send_package" from="PlayerBody/GunScene" to="." method="_recive_box"]
-[connection signal="area_entered" from="Box" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box" to="PlayerBody/GunScene" method="_capture_box"]
-[connection signal="area_entered" from="Box2" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box2" to="PlayerBody/GunScene" method="_capture_box"]
-[connection signal="area_entered" from="Box3" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box3" to="PlayerBody/GunScene" method="_capture_box"]
-[connection signal="area_entered" from="Box4" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box4" to="PlayerBody/GunScene" method="_capture_box"]
-[connection signal="area_entered" from="Box5" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box5" to="PlayerBody/GunScene" method="_capture_box"]
-[connection signal="area_entered" from="Box6" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box6" to="PlayerBody/GunScene" method="_capture_box"]
-[connection signal="area_entered" from="Box7" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box7" to="PlayerBody/GunScene" method="_capture_box"]
-[connection signal="area_entered" from="Box8" to="Base_Baddie" method="_on_box_area_entered"]
 [connection signal="clicked" from="Box8" to="PlayerBody/GunScene" method="_capture_box"]

@@ -107,7 +107,11 @@ func _kill():
 func _on_projectile_enter(body):
 	if body.is_in_group("boxes"):
 		if body.get_meta("isFired"):
-			box_handler._despawn_box_object()
+			box_handler._despawn_box_object(body)
+			for block in projectile_list:
+				box_handler._despawn_box_object(block)
+			projectile_list = []
+			projectile_velocity_data_list = []
 			_kill()
 
 func _spawn_and_apply_force_to_box(dir_vector):

@@ -17,7 +17,7 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_waypf"]
 gradient = SubResource("Gradient_jet82")
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="Box" type="RigidBody2D"]
 physics_interpolation_mode = 1
 disable_mode = 2
 collision_layer = 128
@@ -34,8 +34,8 @@ shape = SubResource("RectangleShape2D_qqcc4")
 debug_color = Color(0.972683, 0, 0.439326, 0.42)
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 128
-collision_mask = 128
+collision_layer = 129
+collision_mask = 129
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 scale = Vector2(0.210143, 0.259716)
