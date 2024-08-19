@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://clh0138n0di41"]
+[gd_scene load_steps=16 format=3 uid="uid://clh0138n0di41"]
 
 [ext_resource type="Texture2D" uid="uid://d07ltv0ic271d" path="res://assets/mailbox_1.png" id="1_jh0i4"]
 [ext_resource type="Script" path="res://scripts/gdscript/baddie.gd" id="1_tsaa8"]
@@ -58,6 +58,9 @@ _data = {
 radius = 4.0
 height = 64.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_54nan"]
+size = Vector2(18, 72)
+
 [node name="Base_Baddie" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 128
@@ -111,3 +114,13 @@ collision_mask = 128
 
 [node name="bullet_point" type="Marker2D" parent="."]
 position = Vector2(-25, -44)
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(-2, -36)
+shape = SubResource("RectangleShape2D_54nan")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_projectile_enter"]

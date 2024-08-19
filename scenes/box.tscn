@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/gdscript/box.gd" id="1_cyl5u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qqcc4"]
-size = Vector2(191, 145)
+size = Vector2(241.065, 182.06)
 
 [sub_resource type="Gradient" id="Gradient_c7a7s"]
 colors = PackedColorArray(0, 1, 0, 1, 0, 1, 0, 1)
@@ -17,28 +17,39 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_waypf"]
 gradient = SubResource("Gradient_jet82")
 
-[node name="Box" type="Node2D"]
-scale = Vector2(1, 1.08702)
+[node name="RigidBody2D" type="RigidBody2D"]
+physics_interpolation_mode = 1
+disable_mode = 2
+collision_layer = 128
+collision_mask = 128
+can_sleep = false
+continuous_cd = 2
 script = ExtResource("1_cyl5u")
-metadata/isThrown = false
-metadata/notInBT = true
-metadata/isFired = false
+metadata/BOX_FLAG = 0
+metadata/mark = 90.0
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Phys_Box" type="CollisionShape2D" parent="."]
+scale = Vector2(0.210143, 0.259716)
+shape = SubResource("RectangleShape2D_qqcc4")
+debug_color = Color(0.972683, 0, 0.439326, 0.42)
+
+[node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 128
 collision_mask = 128
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 scale = Vector2(0.210143, 0.259716)
 shape = SubResource("RectangleShape2D_qqcc4")
+debug_color = Color(3.46541e-06, 0.589426, 0.757135, 0.42)
 
-[node name="glowish" type="Sprite2D" parent="Area2D/CollisionShape2D2"]
+[node name="glowish" type="Sprite2D" parent="Hitbox/CollisionShape2D2"]
 scale = Vector2(0.848524, 165)
 texture = SubResource("GradientTexture1D_uqfot")
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D/CollisionShape2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="Hitbox/CollisionShape2D2"]
 scale = Vector2(0.763672, 148.5)
 texture = SubResource("GradientTexture1D_waypf")
 
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_fatal_hit"]
+[connection signal="mouse_entered" from="Hitbox" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Hitbox" to="." method="_on_area_2d_mouse_exited"]

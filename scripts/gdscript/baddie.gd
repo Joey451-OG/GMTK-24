@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var fire_speed := 80.0
 @export var fighting_range_limit_h := 500.0
 @export var fighting_range_limit_l := 400.0
-@export var col_area : Area2D
+@export var box_handler : Node2D
 @export var player_object : Node2D
 @export var isAlive := true
 
@@ -41,6 +41,7 @@ enum STATES{
 }
 
 func _ready():
+	self.add_to_group("baddies")
 	x_direction = wandering_speed
 	y_direction = 0.0
 
@@ -95,18 +96,9 @@ func _move_character(delta : float) -> void:
 	velocity.y = y_direction
 	move_and_slide()
 
-func _on_baddie_hit_box_area_entered(area: Area2D) -> void:
-	wasHit = true
-
-func _on_box_area_entered(box, inID) -> void:
-	if box.get_meta("isFired"):
-		_kill()
-
 func _kill():
-	if wasHit:
-		wasHit = false
-		self.queue_free()
-	
+	self.queue_free()
+
 func _spawn_projectile(asset, direction : Vector2):
 	projectile_list.append(projectile_asset.instantiate())
 	get_tree().root.add_child(projectile_list[proj_index])
@@ -118,3 +110,9 @@ func _spawn_projectile(asset, direction : Vector2):
 func _update_spawned_projectiles(delta : float):
 	for p in projectile_list:
 		p.global_position += (projectile_velocity_data_list[0] * fire_speed * delta)
+
+func _on_projectile_enter(body):
+	if body.is_in_group("boxes"):
+		if body.get_meta("isFired"):
+			box_handler._despawn_box_object()
+			_kill()
