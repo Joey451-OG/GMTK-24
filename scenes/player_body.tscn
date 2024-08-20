@@ -319,5 +319,6 @@ collision_mask = 129
 position = Vector2(0, -28)
 shape = SubResource("CapsuleShape2D_a5evw")
 
+[connection signal="on_right_click" from="AnimatedSprite2D" to="." method="_on_right_click"]
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_body_entered"]

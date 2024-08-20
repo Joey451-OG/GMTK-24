@@ -4,11 +4,14 @@ extends Node2D
 @onready var target_box : Node2D
 
 var isInPosition := false
-var wasAnimationPlayed := false
+var wasAnimationPlayed := true
 var t_angle: float
 var marks = {}
 
 signal send_package(Node2D)
+
+func _ready() -> void:
+	pass
 
 func _process(delta):
 	_rotate_gun()
@@ -27,6 +30,15 @@ func _process(delta):
 
 func _rotate_gun() -> void:
 	$Pivot_Point.look_at(get_global_mouse_position())
+	
+	var angle = fmod((fmod(rad_to_deg(t_angle), 360.0) + 360), 360.0)
+	
+	if angle < 270 and angle > 90:
+		$Pivot_Point/Gun.flip_v = true
+	else:
+		$Pivot_Point/Gun.flip_v = false
+	
+	#print(angle)
 
 func _update_position(delta : float) -> void:
 	$Pivot_Point/Gun.position = lerp($Pivot_Point/Gun.position, Vector2(53.0,0.0), 4.0 * delta);

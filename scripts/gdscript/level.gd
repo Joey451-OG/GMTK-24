@@ -68,7 +68,7 @@ func _charge_projectile(delta: float):
 	if Input.is_action_pressed("rightClick"):
 		tracked_box.set_meta("isThrown", true)
 		tracked_box.set_meta("isFired", true)
-		
+		$PlayerBody/GunScene._fire_animation()
 		box_handler._recive_box(tracked_box, thrown_speed)
 		tracked_box = null
 
@@ -78,6 +78,7 @@ func _reset_scene():
 # signal functions
 func _recive_box(box):
 	tracked_box = box
+	$PlayerBody/GunScene.wasAnimationPlayed = false
 
 func _update_enemy_projectiles():
 	var projectiles = get_tree().get_nodes_in_group("enemy_bullet")

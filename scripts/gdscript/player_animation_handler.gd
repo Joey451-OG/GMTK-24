@@ -3,6 +3,7 @@ extends AnimatedSprite2D
 @onready var player_body: CharacterBody2D = $".."
 
 var isFacingRight := true
+var current_state
 
 enum STATES {
 	IDLE,
@@ -10,7 +11,7 @@ enum STATES {
 	JUMP,
 }
 
-var current_state
+signal on_right_click
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,7 +26,7 @@ func _process(delta: float) -> void:
 	elif Input.is_action_pressed("Right"):
 		current_state = STATES.WALK
 		isFacingRight = true
-	elif Input.is_action_pressed("Forward"):
+	elif Input.is_action_pressed("Forward") or Input.is_action_pressed("Jump"):
 		current_state = STATES.JUMP
 	else:
 		current_state = STATES.IDLE
