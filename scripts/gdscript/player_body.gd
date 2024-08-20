@@ -89,7 +89,7 @@ func _calculate_move_vector(delta : float) -> Vector2:
 		else:
 			in_air = false
 	
-	if is_on_floor() && Input.is_action_pressed("Forward") || can_still_jump && Input.is_action_pressed("Forward"):	
+	if is_on_floor() && (Input.is_action_pressed("Forward") or Input.is_action_pressed("Jump")) || can_still_jump && (Input.is_action_pressed("Forward") or Input.is_action_pressed("Jump")):	
 		t_velocity_y-=jump_force
 		landing_partical_CPU.emitting = true
 		just_jumped = true
@@ -188,7 +188,7 @@ func _draw_debug_elements():
 
 func _kill():
 	print("POW! YOU ARE DED!")
-	get_node("/root/root")._reset_scene()
+	get_node("/root/root")._reset_scene() # Make sure each level's root node is named 'root'
 
 func _on_box_clicked(node : Node2D, id : int):
 	$AOE._update_box_list(node, id)

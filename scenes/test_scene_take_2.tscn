@@ -177,6 +177,7 @@ Gun_Scene = NodePath("../PlayerBody/GunScene")
 despawn_partical = NodePath("../PlayerBody/Despawn_Effect2")
 
 [node name="Base_Baddie" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("6_8ukyx")]
+visible = false
 position = Vector2(-410, -26)
 box_handler = NodePath("../Box_Handler")
 player_object = NodePath("../PlayerBody")

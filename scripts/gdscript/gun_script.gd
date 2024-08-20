@@ -29,7 +29,7 @@ func _rotate_gun() -> void:
 	$Pivot_Point.look_at(get_global_mouse_position())
 
 func _update_position(delta : float) -> void:
-	$Pivot_Point/Mesh.position = lerp($Pivot_Point/Mesh.position, Vector2(53.0,0.0), 4.0 * delta);
+	$Pivot_Point/Gun.position = lerp($Pivot_Point/Gun.position, Vector2(53.0,0.0), 4.0 * delta);
 
 func _get_fire_vector() -> Vector2:
 	return -(self.global_position - get_global_mouse_position())/self.global_position.distance_to(get_global_mouse_position()) # this is normalized
@@ -39,7 +39,7 @@ func _get_firing_angle() -> float:
 	
 func _fire_animation() -> void:
 	if !wasAnimationPlayed: # hacky solution to stop the animation from playing until the bullet is fired [see level.gd _fire_projectile()] -Joey 
-		$Pivot_Point/Mesh.position -= Vector2(15.0,0.0)
+		$Pivot_Point/Gun.position -= Vector2(15.0,0.0)
 		wasAnimationPlayed = true
 
 func _get_fire_position()-> Marker2D: # Orphaned code, it's being used atm -Joey
