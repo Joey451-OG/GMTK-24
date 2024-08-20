@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://c73p0q02bvget"]
+[gd_scene load_steps=37 format=4 uid="uid://c73p0q02bvget"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_msfih"]
 [ext_resource type="Texture2D" uid="uid://8k188hxjnc4f" path="res://assets/gb_or_ss.png" id="2_gqrbl"]
@@ -107,6 +107,9 @@ size = Vector2(1096, 382.997)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_364v7"]
 size = Vector2(670.001, 219.999)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cubi7"]
+size = Vector2(86.0001, 449)
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ihb67"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ni7n6"]
@@ -114,6 +117,9 @@ size = Vector2(697, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ohbk1"]
 size = Vector2(168, 33.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmf7w"]
+size = Vector2(132.5, 159)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r14vj"]
 size = Vector2(158, 128)
@@ -262,6 +268,16 @@ collision_mask = 129
 position = Vector2(-635.999, -115.004)
 shape = SubResource("RectangleShape2D_364v7")
 
+[node name="StaticBody2D4" type="StaticBody2D" parent="invis_collision"]
+position = Vector2(-638, 162)
+rotation = 1.57079
+collision_layer = 129
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="invis_collision/StaticBody2D4"]
+position = Vector2(-1186, 3.49274)
+shape = SubResource("RectangleShape2D_cubi7")
+
 [node name="StaticBody2D2" type="StaticBody2D" parent="invis_collision"]
 position = Vector2(220, 207)
 rotation = 4.71238
@@ -289,6 +305,16 @@ collision_mask = 129
 [node name="CollisionShape2D" type="CollisionShape2D" parent="invis_collision/next_1"]
 position = Vector2(-21, -9.75)
 shape = SubResource("RectangleShape2D_ohbk1")
+debug_color = Color(0.479829, 0.58759, 0, 0.42)
+
+[node name="next_3" type="Area2D" parent="invis_collision"]
+position = Vector2(-310, -836)
+collision_layer = 129
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="invis_collision/next_3"]
+position = Vector2(-37, -76.5)
+shape = SubResource("RectangleShape2D_jmf7w")
 debug_color = Color(0.479829, 0.58759, 0, 0.42)
 
 [node name="next_2" type="Area2D" parent="invis_collision"]
@@ -358,8 +384,6 @@ enabled = false
 zoom = Vector2(1.5, 1.5)
 editor_draw_limits = true
 
-[node name="PostShaders" parent="." instance=ExtResource("9_hkyob")]
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_ul5k5")
 script = ExtResource("12_860ul")
@@ -409,6 +433,9 @@ stream = ExtResource("18_l6nyb")
 position = Vector2(514, 267)
 stream = ExtResource("19_xgxek")
 
+[node name="PostShaders" parent="." instance=ExtResource("9_hkyob")]
+visible = false
+
 [connection signal="send_package" from="PlayerBody/GunScene" to="." method="_recive_box"]
 [connection signal="clicked" from="Box" to="PlayerBody/GunScene" method="_capture_box"]
 [connection signal="clicked" from="Box2" to="PlayerBody/GunScene" method="_capture_box"]
@@ -416,6 +443,7 @@ stream = ExtResource("19_xgxek")
 [connection signal="clicked" from="Box6" to="PlayerBody/GunScene" method="_capture_box"]
 [connection signal="body_entered" from="invis_collision/next_0" to="Node2D" method="_on_camera_area_entered" binds= [0]]
 [connection signal="body_entered" from="invis_collision/next_1" to="Node2D" method="_on_camera_area_entered" binds= [1]]
+[connection signal="body_entered" from="invis_collision/next_3" to="Node2D" method="_on_camera_area_entered" binds= [1]]
 [connection signal="body_entered" from="invis_collision/next_2" to="Node2D" method="_on_camera_area_entered" binds= [2]]
 [connection signal="body_entered" from="invis_collision/next_level" to="Node2D" method="_to_level_2"]
 [connection signal="finished" from="AudioStreamPlayer2D/TwoMediumTwoToppingPizzasWithDoublePepperoni" to="AudioStreamPlayer2D" method="_on_two_medium_two_topping_pizzas_with_double_pepperoni_finished"]

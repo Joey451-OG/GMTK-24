@@ -34,8 +34,8 @@ func _scale_box(detla: float):
 	# Scale up or down based on scroll whell
 	if Input.is_action_just_pressed("scrollUp"):
 		for child in box_nodes:
-			if child.name == "Phys_Box": child.scale *= 1 + (scale_factor) # fine tuned values, don't change please bitte und danke
-			else: child.scale *= 1 + scale_factor
+			#if child.name == "Phys_Box": child.scale *= 1 + (scale_factor) # fine tuned values, don't change please bitte und danke
+			child.scale *= 1 + scale_factor
 		thrown_speed *= 1 - scale_factor
 		$PlayerBody/GunScene._get_marker().position.x *= (scale_factor / 2) + 1
 		
@@ -44,8 +44,8 @@ func _scale_box(detla: float):
 		
 	elif Input.is_action_just_pressed("scrollDown"):
 		for child in box_nodes:
-			if child.name == "Phys_Box": child.scale *= 1 - (scale_factor * 2) # fine tuned values, don't change please bitte und danke
-			else: child.scale *= 1 - scale_factor
+			#if child.name == "Phys_Box": child.scale *= 1 - (scale_factor * 2) # fine tuned values, don't change please bitte und danke
+			child.scale *= 1 - scale_factor
 		thrown_speed *= 1 + (scale_factor * 4)
 		$PlayerBody/GunScene._get_marker().position.x *= 1 - (scale_factor / 2)
 		

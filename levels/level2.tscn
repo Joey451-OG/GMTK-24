@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://5i0q65nbf4lf"]
+[gd_scene load_steps=34 format=4 uid="uid://5i0q65nbf4lf"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_hxsq5"]
 [ext_resource type="Texture2D" uid="uid://8k188hxjnc4f" path="res://assets/gb_or_ss.png" id="2_5vffn"]
@@ -101,6 +101,12 @@ _data = [Vector2(0, 0.413534), 0.0, -0.118108, 0, 0, Vector2(1, 0), -1.41331, 0.
 point_count = 2
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ihb67"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7w38u"]
+size = Vector2(584.001, 211.996)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krdwc"]
+size = Vector2(4025, 174)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ohbk1"]
 size = Vector2(32, 65)
@@ -256,6 +262,25 @@ rotation = 1.57079
 [node name="CollisionShape2D" type="CollisionShape2D" parent="invis_collision/StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_ihb67")
 
+[node name="StaticBody2D2" type="StaticBody2D" parent="invis_collision"]
+position = Vector2(2219, -295)
+rotation = 1.57079
+collision_layer = 129
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="invis_collision/StaticBody2D2"]
+position = Vector2(-125.998, -317)
+shape = SubResource("RectangleShape2D_7w38u")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="invis_collision"]
+position = Vector2(2219, -295)
+collision_layer = 129
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="invis_collision/StaticBody2D3"]
+position = Vector2(-1713.5, -240)
+shape = SubResource("RectangleShape2D_krdwc")
+
 [node name="next_level" type="Area2D" parent="invis_collision"]
 position = Vector2(1226, 247)
 collision_layer = 129
@@ -357,8 +382,6 @@ limit_right = 4000
 limit_bottom = 1696
 editor_draw_limits = true
 
-[node name="PostShaders" parent="." instance=ExtResource("5_2roit")]
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_rf55s")
 script = ExtResource("12_sjwto")
@@ -416,6 +439,9 @@ texture = ExtResource("4_v3mo0")
 position = Vector2(3906, 1092)
 rotation = -3.14159
 texture = ExtResource("4_v3mo0")
+
+[node name="PostShaders" parent="." instance=ExtResource("5_2roit")]
+visible = false
 
 [connection signal="send_package" from="PlayerBody/GunScene" to="." method="_recive_box"]
 [connection signal="clicked" from="Box" to="PlayerBody/GunScene" method="_capture_box"]

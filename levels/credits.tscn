@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://dyvevli7e26k7"]
+[gd_scene load_steps=46 format=4 uid="uid://dyvevli7e26k7"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_i0pp7"]
 [ext_resource type="Texture2D" uid="uid://8k188hxjnc4f" path="res://assets/gb_or_ss.png" id="2_mdlq4"]
@@ -25,8 +25,10 @@
 [ext_resource type="AudioStream" uid="uid://bjpo7x1j3c4v3" path="res://music/level2.mp3" id="17_y28d2"]
 [ext_resource type="AudioStream" uid="uid://clo05otne70yw" path="res://music/Two Medium Two Topping Pizzas with Double Pepperoni.wav" id="18_ds8xt"]
 [ext_resource type="Texture2D" uid="uid://do4j8qnetk3bg" path="res://assets/concept_art/maryland_flag.png" id="18_gukkc"]
+[ext_resource type="Texture2D" uid="uid://8p4ha77oanwj" path="res://assets/concept_art/aveca_paino.png" id="19_anp8v"]
 [ext_resource type="AudioStream" uid="uid://3nlhetgit5sm" path="res://music/AvecaStampCollectingRobot.mp3" id="19_tqdjm"]
 [ext_resource type="AudioStream" uid="uid://5l0lqtdtokqd" path="res://music/sfx/jump.wav" id="20_bj4be"]
+[ext_resource type="Texture2D" uid="uid://onalosf68v8s" path="res://assets/concept_art/logo_concept.png" id="20_matqe"]
 [ext_resource type="AudioStream" uid="uid://dimwrjgnm5jph" path="res://music/sfx/hit.wav" id="21_m3ppe"]
 [ext_resource type="Script" path="res://scripts/gdscript/animation_player.gd" id="29_egar3"]
 
@@ -174,6 +176,21 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="Animation" id="Animation_t05fd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-703, 84)]
+}
+
 [sub_resource type="Animation" id="Animation_y3rph"]
 resource_name = "credits"
 length = 129.0
@@ -188,21 +205,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-703, 84), Vector2(-704, -2196)]
-}
-
-[sub_resource type="Animation" id="Animation_t05fd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-703, 84)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ffkbx"]
@@ -277,10 +279,10 @@ horizontal_alignment = 2
 
 [node name="leftclick5" type="Label" parent="Node2D"]
 z_index = -1
-offset_left = 168.0
-offset_top = 792.0
-offset_right = 449.0
-offset_bottom = 809.0
+offset_left = -273.0
+offset_top = 778.0
+offset_right = 8.0
+offset_bottom = 795.0
 theme_override_fonts/font = ExtResource("4_q0ybl")
 theme_override_font_sizes/font_size = 0
 text = "Lee - Tileset"
@@ -288,13 +290,24 @@ horizontal_alignment = 2
 
 [node name="leftclick6" type="Label" parent="Node2D"]
 z_index = -1
-offset_left = 174.0
-offset_top = 821.0
-offset_right = 455.0
-offset_bottom = 844.0
+offset_left = 173.0
+offset_top = 740.0
+offset_right = 454.0
+offset_bottom = 763.0
 theme_override_fonts/font = ExtResource("4_q0ybl")
 theme_override_font_sizes/font_size = 0
 text = "Turmanü - Level Dressing"
+horizontal_alignment = 2
+
+[node name="leftclick19" type="Label" parent="Node2D"]
+z_index = -1
+offset_left = 176.0
+offset_top = 936.0
+offset_right = 457.0
+offset_bottom = 959.0
+theme_override_fonts/font = ExtResource("4_q0ybl")
+theme_override_font_sizes/font_size = 0
+text = "deepcolde - font & logo design"
 horizontal_alignment = 2
 
 [node name="Musician" type="Label" parent="Node2D"]
@@ -332,10 +345,10 @@ horizontal_alignment = 2
 
 [node name="leftclick9" type="Label" parent="Node2D"]
 z_index = -1
-offset_left = 185.0
-offset_top = 1379.0
-offset_right = 466.0
-offset_bottom = 1402.0
+offset_left = -229.0
+offset_top = 1176.0
+offset_right = 52.0
+offset_bottom = 1199.0
 theme_override_fonts/font = ExtResource("4_q0ybl")
 theme_override_font_sizes/font_size = 0
 text = "Aveca - Credits Track"
@@ -451,6 +464,17 @@ theme_override_font_sizes/font_size = 0
 text = "Sunny"
 horizontal_alignment = 1
 
+[node name="leftclick20" type="Label" parent="Node2D"]
+z_index = -1
+offset_left = 10.0
+offset_top = 1933.0
+offset_right = 291.0
+offset_bottom = 1950.0
+theme_override_fonts/font = ExtResource("4_q0ybl")
+theme_override_font_sizes/font_size = 0
+text = "Start"
+horizontal_alignment = 1
+
 [node name="leftclick17" type="Label" parent="Node2D"]
 z_index = -1
 offset_left = 18.0
@@ -503,7 +527,7 @@ position = Vector2(-36, 881)
 texture = ExtResource("12_7y6co")
 
 [node name="TurmanTileset" type="Sprite2D" parent="Node2D"]
-position = Vector2(389, 913)
+position = Vector2(389, 819)
 texture = ExtResource("3_k1c6i")
 
 [node name="MusicRandom" type="Sprite2D" parent="Node2D"]
@@ -527,13 +551,23 @@ scale = Vector2(0.46562, 0.46562)
 texture = ExtResource("16_txwug")
 
 [node name="Gmtk-jam-2024" type="Sprite2D" parent="Node2D"]
-position = Vector2(154, 2110)
+position = Vector2(154, 2130)
 scale = Vector2(0.208058, 0.208058)
 texture = ExtResource("17_tva2a")
 
 [node name="MarylandFlag" type="Sprite2D" parent="Node2D"]
 position = Vector2(212, 1148)
 texture = ExtResource("18_gukkc")
+
+[node name="AvecaPaino" type="Sprite2D" parent="Node2D"]
+position = Vector2(48, 1293)
+scale = Vector2(0.420604, 0.420604)
+texture = ExtResource("19_anp8v")
+
+[node name="LogoConcept" type="Sprite2D" parent="Node2D"]
+position = Vector2(277, 1029)
+scale = Vector2(0.398333, 0.398333)
+texture = ExtResource("20_matqe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-553, 247)
@@ -544,6 +578,7 @@ position_smoothing_speed = 10.0
 editor_draw_limits = true
 
 [node name="PostShaders" parent="." instance=ExtResource("12_g56bj")]
+visible = false
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_g3rrh")
