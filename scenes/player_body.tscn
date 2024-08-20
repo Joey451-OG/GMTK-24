@@ -3,7 +3,9 @@
 [ext_resource type="Script" path="res://scripts/gdscript/player_body.gd" id="1_ai1k4"]
 [ext_resource type="Texture2D" uid="uid://dwt7wiw4y08pl" path="res://assets/squatjumpfall2.PNG" id="2_2t5fg"]
 [ext_resource type="Texture2D" uid="uid://b42mxhmej2kbc" path="res://assets/death.PNG" id="2_7srnn"]
-[ext_resource type="Texture2D" uid="uid://ba3ubmvinnttf" path="res://assets/floor_particle.png" id="2_38ntt"]
+[ext_resource type="Texture2D" uid="uid://b1y6u5qkcxa3q" path="res://assets/floor_particle.png" id="2_38ntt"]
+[ext_resource type="Shader" path="res://scripts/glsl/crosshair.gdshader" id="3_jhhro"]
+[ext_resource type="Texture2D" uid="uid://b6vfk306hqo3x" path="res://assets/crosshair.png" id="3_ml5h5"]
 [ext_resource type="Texture2D" uid="uid://dphxlkugwaebq" path="res://assets/run_sprite_sheet.PNG" id="4_71vvh"]
 [ext_resource type="Texture2D" uid="uid://d36fvlqv0ry0m" path="res://assets/idle2_sprite_sheet.PNG" id="4_72lke"]
 [ext_resource type="Script" path="res://scripts/gdscript/player_animation_handler.gd" id="5_xro1r"]
@@ -39,18 +41,12 @@ func _process(delta):
 	_update_cursor_position(delta)
 
 func _update_cursor_position(delta : float):
-	cursor_asset.global_position = get_global_mouse_position()
+	cursor_asset.position = get_local_mouse_position()
 "
 
-[sub_resource type="QuadMesh" id="QuadMesh_nid8f"]
-size = Vector2(10, 10)
-
-[sub_resource type="Gradient" id="Gradient_yave6"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.135447, 0.685817, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_u3x74"]
-gradient = SubResource("Gradient_yave6")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r0k83"]
+shader = ExtResource("3_jhhro")
+shader_parameter/CROSSHAIR_MASK = ExtResource("3_ml5h5")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lcbev"]
 atlas = ExtResource("2_7srnn")
@@ -341,10 +337,15 @@ z_index = 10
 script = SubResource("GDScript_sj802")
 cursor_asset = NodePath("Cursor")
 
-[node name="Cursor" type="MeshInstance2D" parent="UI"]
-rotation = 2.35619
-mesh = SubResource("QuadMesh_nid8f")
-texture = SubResource("GradientTexture1D_u3x74")
+[node name="Cursor" type="Node2D" parent="UI"]
+
+[node name="ColorRect" type="ColorRect" parent="UI/Cursor"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_r0k83")
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 collision_mask = 128
