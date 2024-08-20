@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bqhl73f8bvyxc"]
 
-[ext_resource type="Texture2D" uid="uid://ba3ubmvinnttf" path="res://assets/floor_particle.png" id="1_1qvbx"]
+[ext_resource type="Texture2D" uid="uid://b1y6u5qkcxa3q" path="res://assets/floor_particle.png" id="1_1qvbx"]
 
 [sub_resource type="Curve" id="Curve_ss7s3"]
 max_value = 100.0

@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=4 uid="uid://d3qr07vri170p"]
+[gd_scene load_steps=17 format=4 uid="uid://d3qr07vri170p"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_f63i0"]
 [ext_resource type="Texture2D" uid="uid://8k188hxjnc4f" path="res://assets/gb_or_ss.png" id="2_rjcl0"]
 [ext_resource type="Script" path="res://scripts/gdscript/camera_2d.gd" id="3_b85oi"]
 [ext_resource type="PackedScene" uid="uid://dws5qvgdi3ubp" path="res://scenes/player_body.tscn" id="3_n53ac"]
+[ext_resource type="Texture2D" uid="uid://p1gq7s7ky6br" path="res://assets/packing-peanut-particle.png" id="5_7ltcl"]
 [ext_resource type="PackedScene" uid="uid://crpl1witt5m7h" path="res://scenes/Gun_Scene.tscn" id="5_a4ma4"]
 [ext_resource type="PackedScene" uid="uid://clh0138n0di41" path="res://scenes/base_baddie.tscn" id="5_warsu"]
 [ext_resource type="PackedScene" uid="uid://gtw41siuxe3q" path="res://scenes/box.tscn" id="6_qjq5k"]
@@ -62,24 +63,13 @@ physics_layer_0/collision_layer = 129
 physics_layer_0/collision_mask = 129
 sources/0 = SubResource("TileSetAtlasSource_1x72b")
 
-[sub_resource type="Gradient" id="Gradient_f1nf4"]
-colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0.899258, 0.899258, 0.899258, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_6m20h"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y4fjq"]
-width = 2
-height = 2
-color_ramp = SubResource("Gradient_f1nf4")
-noise = SubResource("FastNoiseLite_6m20h")
-
 [sub_resource type="Curve" id="Curve_vdmpk"]
 max_value = 100.0
 _data = [Vector2(0, 6.59341), 0.0, 0.0, 0, 0, Vector2(0.960674, 1.0989), -30.5632, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_71exn"]
-_data = [Vector2(0, 1), 0.0, 0.195604, 0, 0, Vector2(1, 0.021978), -3.11189, 0.0, 0, 0]
+_data = [Vector2(0, 0.413534), 0.0, -0.118108, 0, 0, Vector2(1, 0), -1.41331, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ihb67"]
@@ -116,12 +106,12 @@ one_shot = true
 speed_scale = 2.5
 explosiveness = 1.0
 randomness = 1.0
-texture = SubResource("NoiseTexture2D_y4fjq")
+texture = ExtResource("5_7ltcl")
 direction = Vector2(0, -1)
 spread = 88.64
 gravity = Vector2(0, 13.05)
-initial_velocity_min = 50.5
-initial_velocity_max = 80.81
+initial_velocity_min = 106.84
+initial_velocity_max = 106.84
 damping_min = 12.121
 damping_max = 12.121
 damping_curve = SubResource("Curve_vdmpk")
