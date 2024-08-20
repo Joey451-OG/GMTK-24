@@ -3,22 +3,12 @@
 [ext_resource type="Script" path="res://scripts/gdscript/player_body.gd" id="1_ai1k4"]
 [ext_resource type="Texture2D" uid="uid://dwt7wiw4y08pl" path="res://assets/squatjumpfall2.PNG" id="2_2t5fg"]
 [ext_resource type="Texture2D" uid="uid://b42mxhmej2kbc" path="res://assets/death.PNG" id="2_7srnn"]
+[ext_resource type="Texture2D" uid="uid://ba3ubmvinnttf" path="res://assets/floor_particle.png" id="2_38ntt"]
 [ext_resource type="Texture2D" uid="uid://dphxlkugwaebq" path="res://assets/run_sprite_sheet.PNG" id="4_71vvh"]
 [ext_resource type="Texture2D" uid="uid://d36fvlqv0ry0m" path="res://assets/idle2_sprite_sheet.PNG" id="4_72lke"]
 [ext_resource type="Script" path="res://scripts/gdscript/player_animation_handler.gd" id="5_xro1r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yqc3"]
-
-[sub_resource type="Gradient" id="Gradient_gwkbp"]
-colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0.899258, 0.899258, 0.899258, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_yhdwe"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_by72q"]
-width = 2
-height = 2
-color_ramp = SubResource("Gradient_gwkbp")
-noise = SubResource("FastNoiseLite_yhdwe")
 
 [sub_resource type="Curve" id="Curve_7r8d1"]
 max_value = 100.0
@@ -26,11 +16,18 @@ _data = [Vector2(0, 6.59341), 0.0, 0.0, 0, 0, Vector2(0.960674, 1.0989), -30.563
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_cvyej"]
-_data = [Vector2(0, 0.868132), 0.0, -0.669173, 0, 0, Vector2(1, 0.021978), -1.61586, 0.0, 0, 0]
+_data = [Vector2(0, 0.0286654), 0.0, 0.060494, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="QuadMesh" id="QuadMesh_y7wqc"]
 size = Vector2(30.7, 6.83)
+
+[sub_resource type="Gradient" id="Gradient_mtyoj"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.027451, 0.0941176, 0.129412, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n8g2g"]
+gradient = SubResource("Gradient_mtyoj")
 
 [sub_resource type="GDScript" id="GDScript_sj802"]
 script/source = "extends Node2D
@@ -262,7 +259,7 @@ one_shot = true
 speed_scale = 2.5
 explosiveness = 1.0
 randomness = 1.0
-texture = SubResource("NoiseTexture2D_by72q")
+texture = ExtResource("2_38ntt")
 direction = Vector2(0, -1)
 spread = 88.64
 gravity = Vector2(0, 13.05)
@@ -273,7 +270,8 @@ damping_max = 12.121
 damping_curve = SubResource("Curve_7r8d1")
 angle_min = 158.9
 angle_max = 449.8
-scale_amount_max = 8.0
+scale_amount_min = 10.38
+scale_amount_max = 10.39
 scale_amount_curve = SubResource("Curve_cvyej")
 
 [node name="Falling_Effect" type="CPUParticles2D" parent="."]
@@ -282,7 +280,7 @@ emitting = false
 amount = 23
 speed_scale = 1.85
 randomness = 1.0
-texture = SubResource("NoiseTexture2D_by72q")
+texture = ExtResource("2_38ntt")
 emission_shape = 1
 emission_sphere_radius = 10.05
 direction = Vector2(0, -1)
@@ -301,7 +299,7 @@ amount = 23
 speed_scale = 1.85
 randomness = 1.0
 local_coords = true
-texture = SubResource("NoiseTexture2D_by72q")
+texture = ExtResource("2_38ntt")
 emission_shape = 1
 emission_sphere_radius = 15.22
 direction = Vector2(0, -1)
@@ -314,11 +312,10 @@ scale_amount_max = 9.0
 scale_amount_curve = SubResource("Curve_cvyej")
 
 [node name="Hover_Effect_2" type="CPUParticles2D" parent="Hover_Effect_1"]
-emitting = false
 amount = 23
 speed_scale = 1.85
 randomness = 1.0
-texture = SubResource("NoiseTexture2D_by72q")
+texture = ExtResource("2_38ntt")
 emission_shape = 1
 emission_sphere_radius = 10.05
 direction = Vector2(0, 1)
@@ -337,6 +334,7 @@ scale_amount_curve = SubResource("Curve_cvyej")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="GUI_Elements"]
 position = Vector2(0, -81)
 mesh = SubResource("QuadMesh_y7wqc")
+texture = SubResource("GradientTexture1D_n8g2g")
 
 [node name="UI" type="Node2D" parent="." node_paths=PackedStringArray("cursor_asset")]
 z_index = 10

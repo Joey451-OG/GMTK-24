@@ -53,3 +53,31 @@ func _update_vol(val):
 
 func _on_h_slider_value_changed(value):
 	pass # Replace with function body.
+
+func _on_button_1_hover():
+	pass
+
+func _on_button_2_hover():
+	pass
+	
+func _on_button_3_hover():
+	pass
+	
+func _on_button_4_hover():
+	pass
+	
+func _on_button_5_hover():
+	pass
+
+func _on_button_6_hover():
+	pass
+	
+func _on_button_7_hover():
+	pass
+
+func _on_button_8_hover():
+	pass
+
+
+func _on_level_mouse_entered():
+	pass # Replace with function body.

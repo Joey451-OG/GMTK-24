@@ -350,19 +350,27 @@ icon = SubResource("Texture2DRD_e72oy")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [node name="PostShaders" parent="." instance=ExtResource("3_w1c41")]
-visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(637, 360)
 
 [connection signal="button_down" from="main_ui/PLAY" to="." method="_play"]
+[connection signal="mouse_entered" from="main_ui/PLAY" to="." method="_on_button_1_hover"]
 [connection signal="button_up" from="main_ui/LEVEL" to="." method="_level_select"]
+[connection signal="mouse_entered" from="main_ui/LEVEL" to="." method="_on_level_mouse_entered"]
+[connection signal="mouse_entered" from="main_ui/LEVEL" to="." method="_on_button_2_hover"]
 [connection signal="button_up" from="main_ui/SETTINGS" to="." method="_settings"]
+[connection signal="mouse_entered" from="main_ui/SETTINGS" to="." method="_on_button_3_hover"]
 [connection signal="value_changed" from="settings_menu/HSlider" to="." method="_update_vol"]
 [connection signal="value_changed" from="settings_menu/HSlider2" to="." method="_update_vol"]
 [connection signal="button_down" from="settings_menu/BACK" to="." method="_back"]
+[connection signal="mouse_entered" from="settings_menu/BACK" to="." method="_on_button_4_hover"]
 [connection signal="toggled" from="settings_menu/CheckButton" to="." method="_windowed"]
 [connection signal="button_down" from="level_menu/LEVEL 1" to="." method="_load_level_0"]
+[connection signal="mouse_entered" from="level_menu/LEVEL 1" to="." method="_on_button_4_hover"]
 [connection signal="button_down" from="level_menu/LEVEL 2" to="." method="_load_level_1"]
+[connection signal="mouse_entered" from="level_menu/LEVEL 2" to="." method="_on_button_5_hover"]
 [connection signal="button_down" from="level_menu/LEVEL 3" to="." method="_load_level_2"]
+[connection signal="mouse_entered" from="level_menu/LEVEL 3" to="." method="_on_button_6_hover"]
 [connection signal="button_down" from="level_menu/BACK" to="." method="_back"]
+[connection signal="mouse_entered" from="level_menu/BACK" to="." method="_on_button_7_hover"]
