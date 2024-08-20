@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://dws5qvgdi3ubp"]
+[gd_scene load_steps=41 format=3 uid="uid://dws5qvgdi3ubp"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/player_body.gd" id="1_ai1k4"]
 [ext_resource type="Texture2D" uid="uid://dwt7wiw4y08pl" path="res://assets/squatjumpfall2.PNG" id="2_2t5fg"]
+[ext_resource type="Texture2D" uid="uid://b42mxhmej2kbc" path="res://assets/death.PNG" id="2_7srnn"]
 [ext_resource type="Texture2D" uid="uid://dphxlkugwaebq" path="res://assets/run_sprite_sheet.PNG" id="4_71vvh"]
 [ext_resource type="Texture2D" uid="uid://d36fvlqv0ry0m" path="res://assets/idle2_sprite_sheet.PNG" id="4_72lke"]
 [ext_resource type="Script" path="res://scripts/gdscript/player_animation_handler.gd" id="5_xro1r"]
@@ -53,6 +54,30 @@ colors = PackedColorArray(0.135447, 0.685817, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_u3x74"]
 gradient = SubResource("Gradient_yave6")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcbev"]
+atlas = ExtResource("2_7srnn")
+region = Rect2(0, 0, 54, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kur1x"]
+atlas = ExtResource("2_7srnn")
+region = Rect2(54, 0, 54, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7qbo"]
+atlas = ExtResource("2_7srnn")
+region = Rect2(108, 0, 54, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qflfy"]
+atlas = ExtResource("2_7srnn")
+region = Rect2(162, 0, 54, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw6i6"]
+atlas = ExtResource("2_7srnn")
+region = Rect2(216, 0, 54, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3213"]
+atlas = ExtResource("2_7srnn")
+region = Rect2(270, 0, 54, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dwi1j"]
 atlas = ExtResource("2_2t5fg")
@@ -116,6 +141,29 @@ region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cfan4"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcbev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kur1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7qbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qflfy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw6i6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3213")
+}],
+"loop": true,
+"name": &"death",
+"speed": 8.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dwi1j")
@@ -307,7 +355,8 @@ collision_mask = 128
 position = Vector2(0, -33)
 scale = Vector2(2.03125, 2.03125)
 sprite_frames = SubResource("SpriteFrames_cfan4")
-animation = &"running"
+animation = &"death"
+frame_progress = 0.690348
 script = ExtResource("5_xro1r")
 
 [node name="hitbox" type="Area2D" parent="."]
