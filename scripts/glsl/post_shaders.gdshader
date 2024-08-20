@@ -134,8 +134,6 @@ void fragment()
 	
 	uv = warp(UV);
 	
-	// CRT monitors don't have pixels but groups of red, green and blue dots or lines, called grille. We isolate the texture's color channels 
-	// and divide it up in 3 offsetted lines to show the red, green and blue colors next to each other, with a small black gap between.
 	if (grille_opacity > 0.0){
 		
 		float g_r = smoothstep(0.85, 0.95, abs(sin(uv.x * (resolution.x * 3.14159265))));
@@ -149,57 +147,41 @@ void fragment()
 		
 	}
 	
-	// Apply the grille to the texture's color channels and apply Brightness. Since the grille and the scanlines (below) make the image very dark you
-	// can compensate by increasing the brightness.
 	text.r = clamp(r * brightness, 0.0, 1.0);
 	text.g = clamp(g * brightness, 0.0, 1.0);
 	text.b = clamp(b * brightness, 0.0, 1.0);
 	
-	// Scanlines are the horizontal lines that make up the image on a CRT monitor. 
-	// Here we are actual setting the black gap between each line, which I guess is not the right definition of the word, but you get the idea  
 	float scanlines = 0.5;
 	if (scanlines_opacity > 0.0)
 	{
-		// Same technique as above, create lines with sine and applying it to the texture. Smoothstep to allow setting the line size.
 		scanlines = smoothstep(scanlines_width, scanlines_width + 0.5, abs(sin(uv.y * (resolution.y * 3.14159265))));
 		text.rgb = mix(text.rgb, text.rgb * vec3(scanlines), scanlines_opacity);
 	}
 	
-	// Apply the banded noise.
 	if (noise_opacity > 0.0)
 	{
-		// Generate a noise pattern that is very stretched horizontally, and animate it with noise_speed
 		float noise = smoothstep(0.4, 0.5, noise(uv * vec2(2.0, 200.0) + vec2(10.0, (TIME * (noise_speed))) ) );
 		
-		// We use roll_line (set above) to define how big the noise should be vertically (multiplying cuts off all black parts).
-		// We also add in some basic noise with random() to break up the noise pattern above. The noise is sized according to 
-		// the resolution value set in the inspector. If you don't like this look you can 
-		// change "ceil(uv * resolution) / resolution" to only "uv" to make it less pixelated. Or multiply resolution with som value
-		// greater than 1.0 to make them smaller.
 		roll_line *= noise * scanlines * clamp(random((ceil(uv * resolution) / resolution) + vec2(TIME * 0.8, 0.0)).x + 0.8, 0.0, 1.0);
 		// Add it to the texture based on noise_opacity
 		text.rgb = clamp(mix(text.rgb, text.rgb + roll_line, noise_opacity), vec3(0.0), vec3(1.0));
 	}
 	
-	// Apply static noise by generating it over the whole screen in the same way as above
 	if (static_noise_intensity > 0.0)
 	{
 		text.rgb += clamp(random((ceil(uv * resolution) / resolution) + fract(TIME)).x, 0.0, 1.0) * static_noise_intensity;
 	}
 	
-	// Apply a black border to hide imperfections caused by the warping.
-	// Also apply the vignette
 	text.rgb *= border(uv);
 	text.rgb *= vignette(uv);
-	// Hides the black border and make that area transparent. Good if you want to add the the texture on top an image of a TV or monitor.
+
 	if (clip_warp)
 	{
 		text.a = border(uv);
 	}
 	
-	// Apply discoloration to get a VHS look (lower saturation and higher contrast)
-	// You can play with the values below or expose them in the Inspector.
-	float saturation = 0.5;
+
+	float saturation = 0.12;
 	float contrast = 1.2;
 	if (discolor)
 	{
