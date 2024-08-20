@@ -197,7 +197,7 @@ position = Vector2(5.96046e-08, -31)
 scale = Vector2(1.95455, 1.95455)
 sprite_frames = SubResource("SpriteFrames_q8y8g")
 animation = &"idle"
-frame_progress = 0.911872
+frame_progress = 0.290565
 script = ExtResource("4_ui201")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
