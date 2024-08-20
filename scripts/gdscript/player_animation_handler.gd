@@ -48,5 +48,3 @@ func _switch_board():
 		STATES.IDLE:
 			self.play("idle")
 		
-		
-	
