@@ -169,7 +169,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 8.0
 }]
 
 [sub_resource type="Animation" id="Animation_qceuj"]
@@ -196,8 +196,8 @@ script = ExtResource("1_tsaa8")
 position = Vector2(5.96046e-08, -31)
 scale = Vector2(1.95455, 1.95455)
 sprite_frames = SubResource("SpriteFrames_q8y8g")
-animation = &"attack"
-frame_progress = 0.397501
+animation = &"idle"
+frame_progress = 0.911872
 script = ExtResource("4_ui201")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
