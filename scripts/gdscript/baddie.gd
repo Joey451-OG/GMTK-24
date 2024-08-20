@@ -67,8 +67,10 @@ func _rotate_vision_ray(delta : float):
 func _manage_states(delta : float) -> void:
 	if view_cast.get_collider() != player_object:
 		current_state = STATES.WANDER
+		$AnimatedSprite2D.current_state = $AnimatedSprite2D.STATES.IDLE
 	elif view_cast.get_collider() == player_object:
 		current_state = STATES.FIGHT
+		$AnimatedSprite2D.current_state = $AnimatedSprite2D.STATES.ATTACK
 
 func _move_character(delta : float) -> void:
 	dir_to_player_x = (player_object.global_position.x - self.global_position.x)

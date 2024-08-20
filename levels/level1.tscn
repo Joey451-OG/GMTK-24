@@ -159,28 +159,13 @@ position = Vector2(-362, -237)
 box_handler = NodePath("../Box_Handler")
 player_object = NodePath("../PlayerBody")
 
-[node name="Base_Baddie3" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("5_do3ir")]
-position = Vector2(-226, -299)
-box_handler = NodePath("../Box_Handler")
-player_object = NodePath("../PlayerBody")
-
 [node name="Base_Baddie4" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("5_do3ir")]
 position = Vector2(-354, -406)
 box_handler = NodePath("../Box_Handler")
 player_object = NodePath("../PlayerBody")
 
-[node name="Base_Baddie5" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("5_do3ir")]
-position = Vector2(-247, -624)
-box_handler = NodePath("../Box_Handler")
-player_object = NodePath("../PlayerBody")
-
 [node name="Base_Baddie6" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("5_do3ir")]
 position = Vector2(-373, -685)
-box_handler = NodePath("../Box_Handler")
-player_object = NodePath("../PlayerBody")
-
-[node name="Base_Baddie7" parent="." node_paths=PackedStringArray("box_handler", "player_object") instance=ExtResource("5_do3ir")]
-position = Vector2(-223, -743)
 box_handler = NodePath("../Box_Handler")
 player_object = NodePath("../PlayerBody")
 
