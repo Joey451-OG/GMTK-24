@@ -21,6 +21,9 @@ func _process(delta: float) -> void:
 		_scale_box(delta)
 		_charge_projectile(delta)
 	
+	if Input.is_action_pressed("Reset"):
+		get_node("/root/root")._reset_scene()
+	
 
 func _scale_box(detla: float):
 	# turn the glow effect on to show which box is selected
