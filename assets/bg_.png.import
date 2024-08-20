@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dhnyrysqpyo5j"
-path="res://.godot/imported/LUST.png-648fd2e19765f1beac5ce8c637b473a9.ctex"
+path="res://.godot/imported/bg_.png-c23655172b0b7080b8ef7c5a10cbc148.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/LUST.png"
-dest_files=["res://.godot/imported/LUST.png-648fd2e19765f1beac5ce8c637b473a9.ctex"]
+source_file="res://assets/bg_.png"
+dest_files=["res://.godot/imported/bg_.png-c23655172b0b7080b8ef7c5a10cbc148.ctex"]
 
 [params]
 

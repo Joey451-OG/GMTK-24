@@ -1,7 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://br17xhjkbqcui"]
+[gd_scene load_steps=7 format=3 uid="uid://br17xhjkbqcui"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/ui.gd" id="1_ok621"]
-[ext_resource type="Texture2D" uid="uid://dhnyrysqpyo5j" path="res://assets/LUST.png" id="2_r2j4s"]
+[ext_resource type="Texture2D" uid="uid://dhnyrysqpyo5j" path="res://assets/bg_.png" id="2_r2j4s"]
+[ext_resource type="PackedScene" uid="uid://5ce6ya46djxu" path="res://scenes/post_shaders.tscn" id="3_w1c41"]
+
+[sub_resource type="Environment" id="Environment_i5bbw"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 5.78
+glow_strength = 1.58
+glow_bloom = 1.0
+
+[sub_resource type="Theme" id="Theme_nd2hv"]
 
 [sub_resource type="Texture2DRD" id="Texture2DRD_e72oy"]
 
@@ -11,12 +21,33 @@ main_menu = NodePath("main_ui")
 level_menu = NodePath("level_menu")
 settings_menu = NodePath("settings_menu")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_i5bbw")
+
 [node name="main_ui" type="CanvasGroup" parent="."]
 
 [node name="Lust" type="Sprite2D" parent="main_ui"]
 texture_filter = 1
 texture_repeat = 2
+position = Vector2(628, 253)
+scale = Vector2(0.59, 0.59)
 texture = ExtResource("2_r2j4s")
+
+[node name="D_SHADOW" type="ColorRect" parent="main_ui"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 41.0
+offset_top = 37.0
+offset_right = 431.18
+offset_bottom = 116.5
+color = Color(0, 0, 0, 0.364706)
+
+[node name="PLAY_P" type="ColorRect" parent="main_ui"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 34.0
+offset_top = 31.0
+offset_right = 424.18
+offset_bottom = 110.5
+color = Color(0.125911, 0.125911, 0.125911, 1)
 
 [node name="PLAY" type="Button" parent="main_ui"]
 custom_minimum_size = Vector2(390, 80)
@@ -24,17 +55,26 @@ offset_left = 34.0
 offset_top = 31.0
 offset_right = 424.0
 offset_bottom = 111.0
+localize_numeral_system = false
+theme = SubResource("Theme_nd2hv")
 text = "PLAY"
 icon = SubResource("Texture2DRD_e72oy")
 
-[node name="SETTINGS" type="Button" parent="main_ui"]
-custom_minimum_size = Vector2(390, 80)
+[node name="D_SHADOW2" type="ColorRect" parent="main_ui"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 41.0
+offset_top = 260.0
+offset_right = 431.18
+offset_bottom = 339.5
+color = Color(0, 0, 0, 0.364706)
+
+[node name="PLAY_P2" type="ColorRect" parent="main_ui"]
+custom_minimum_size = Vector2(390.18, 79.5)
 offset_left = 34.0
-offset_top = 141.0
-offset_right = 424.0
-offset_bottom = 221.0
-text = "SETTINGS"
-icon = SubResource("Texture2DRD_e72oy")
+offset_top = 253.0
+offset_right = 424.18
+offset_bottom = 332.5
+color = Color(0.125911, 0.125911, 0.125911, 1)
 
 [node name="LEVEL" type="Button" parent="main_ui"]
 custom_minimum_size = Vector2(390, 80)
@@ -42,38 +82,115 @@ offset_left = 34.0
 offset_top = 253.0
 offset_right = 424.0
 offset_bottom = 333.0
+localize_numeral_system = false
+theme = SubResource("Theme_nd2hv")
 text = "LEVEL SELECT
 "
 icon = SubResource("Texture2DRD_e72oy")
 
+[node name="D_SHADOW3" type="ColorRect" parent="main_ui"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 41.0
+offset_top = 151.0
+offset_right = 431.18
+offset_bottom = 230.5
+color = Color(0, 0, 0, 0.364706)
+
+[node name="PLAY_P3" type="ColorRect" parent="main_ui"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 34.0
+offset_top = 141.0
+offset_right = 424.18
+offset_bottom = 220.5
+color = Color(0.125911, 0.125911, 0.125911, 1)
+
+[node name="SETTINGS" type="Button" parent="main_ui"]
+custom_minimum_size = Vector2(390, 80)
+offset_left = 34.0
+offset_top = 141.0
+offset_right = 424.0
+offset_bottom = 221.0
+localize_numeral_system = false
+theme = SubResource("Theme_nd2hv")
+text = "SETTINGS"
+icon = SubResource("Texture2DRD_e72oy")
+
 [node name="settings_menu" type="CanvasGroup" parent="."]
 visible = false
-position = Vector2(7, 2)
+position = Vector2(-15, 0)
+
+[node name="Lust" type="Sprite2D" parent="settings_menu"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(641, 253)
+scale = Vector2(0.59, 0.59)
+texture = ExtResource("2_r2j4s")
+
+[node name="D_SHADOW" type="ColorRect" parent="settings_menu"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 29.0
+offset_top = 25.0
+offset_right = 419.18
+offset_bottom = 104.5
+scale = Vector2(1.12, 3.12)
+color = Color(0, 0, 0, 0.364706)
+
+[node name="PLAY_P" type="ColorRect" parent="settings_menu"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 27.0
+offset_top = 21.0
+offset_right = 417.18
+offset_bottom = 100.5
+scale = Vector2(1.11105, 3.10802)
+color = Color(0.125911, 0.125911, 0.125911, 1)
 
 [node name="HSlider" type="HSlider" parent="settings_menu"]
 custom_minimum_size = Vector2(390.3, 26.73)
-offset_left = 27.0
-offset_top = 82.0
-offset_right = 417.3
-offset_bottom = 108.73
+offset_left = 44.0
+offset_top = 138.0
+offset_right = 434.3
+offset_bottom = 164.73
 
 [node name="RichTextLabel" type="RichTextLabel" parent="settings_menu"]
 physics_interpolation_mode = 1
 custom_minimum_size = Vector2(123.89, 0)
-offset_left = 184.0
-offset_top = 55.0
-offset_right = 307.89
-offset_bottom = 95.0
+offset_left = 201.0
+offset_top = 111.0
+offset_right = 324.89
+offset_bottom = 151.0
 text = "VOLUME"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="settings_menu"]
+[node name="HSlider2" type="HSlider" parent="settings_menu"]
+custom_minimum_size = Vector2(390.3, 26.73)
+offset_left = 44.0
+offset_top = 64.0
+offset_right = 434.3
+offset_bottom = 90.73
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="settings_menu"]
 physics_interpolation_mode = 1
-custom_minimum_size = Vector2(105.56, 0)
-offset_left = 167.0
-offset_top = 136.0
-offset_right = 272.56
-offset_bottom = 176.0
-text = "FULL SCREEN"
+custom_minimum_size = Vector2(123.89, 0)
+offset_left = 201.0
+offset_top = 37.0
+offset_right = 324.89
+offset_bottom = 77.0
+text = "MUSIC"
+
+[node name="D_SHADOW2" type="ColorRect" parent="settings_menu"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 50.0
+offset_top = 472.0
+offset_right = 440.18
+offset_bottom = 551.5
+color = Color(0, 0, 0, 0.364706)
+
+[node name="PLAY_P2" type="ColorRect" parent="settings_menu"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 44.0
+offset_top = 465.0
+offset_right = 434.18
+offset_bottom = 544.5
+color = Color(0.125911, 0.125911, 0.125911, 1)
 
 [node name="BACK" type="Button" parent="settings_menu"]
 custom_minimum_size = Vector2(390, 0)
@@ -82,10 +199,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 27.0
-offset_top = 409.0
-offset_right = 417.0
-offset_bottom = 489.0
+offset_left = 44.0
+offset_top = 465.0
+offset_right = 434.0
+offset_bottom = 545.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
@@ -94,14 +211,46 @@ text = "BACK
 "
 icon = SubResource("Texture2DRD_e72oy")
 
+[node name="RichTextLabel2" type="RichTextLabel" parent="settings_menu"]
+physics_interpolation_mode = 1
+custom_minimum_size = Vector2(105.56, 0)
+offset_left = 184.0
+offset_top = 192.0
+offset_right = 289.56
+offset_bottom = 232.0
+text = "FULL SCREEN"
+
 [node name="CheckButton" type="CheckButton" parent="settings_menu"]
-offset_left = 195.0
-offset_top = 166.0
-offset_right = 239.0
-offset_bottom = 190.0
+offset_left = 212.0
+offset_top = 222.0
+offset_right = 256.0
+offset_bottom = 246.0
 
 [node name="level_menu" type="CanvasGroup" parent="."]
 visible = false
+
+[node name="Lust" type="Sprite2D" parent="level_menu"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(641, 253)
+scale = Vector2(0.59, 0.59)
+texture = ExtResource("2_r2j4s")
+
+[node name="D_SHADOW" type="ColorRect" parent="level_menu"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 38.0
+offset_top = 36.0
+offset_right = 428.18
+offset_bottom = 115.5
+color = Color(0, 0, 0, 0.364706)
+
+[node name="PLAY_P" type="ColorRect" parent="level_menu"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 34.0
+offset_top = 31.0
+offset_right = 424.18
+offset_bottom = 110.5
+color = Color(0.125911, 0.125911, 0.125911, 1)
 
 [node name="LEVEL 1" type="Button" parent="level_menu"]
 custom_minimum_size = Vector2(390, 80)
@@ -111,6 +260,38 @@ offset_right = 424.0
 offset_bottom = 111.0
 text = "LEVEL 1"
 icon = SubResource("Texture2DRD_e72oy")
+
+[node name="D_SHADOW2" type="ColorRect" parent="level_menu"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 38.0
+offset_top = 258.0
+offset_right = 428.18
+offset_bottom = 337.5
+color = Color(0, 0, 0, 0.364706)
+
+[node name="PLAY_P2" type="ColorRect" parent="level_menu"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 34.0
+offset_top = 253.0
+offset_right = 424.18
+offset_bottom = 332.5
+color = Color(0.125911, 0.125911, 0.125911, 1)
+
+[node name="D_SHADOW3" type="ColorRect" parent="level_menu"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 38.0
+offset_top = 145.0
+offset_right = 428.18
+offset_bottom = 224.5
+color = Color(0, 0, 0, 0.364706)
+
+[node name="PLAY_P3" type="ColorRect" parent="level_menu"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 34.0
+offset_top = 141.0
+offset_right = 424.18
+offset_bottom = 220.5
+color = Color(0.125911, 0.125911, 0.125911, 1)
 
 [node name="LEVEL 2" type="Button" parent="level_menu"]
 custom_minimum_size = Vector2(390, 80)
@@ -130,6 +311,22 @@ offset_bottom = 333.0
 text = "LEVEL 3
 "
 icon = SubResource("Texture2DRD_e72oy")
+
+[node name="D_SHADOW4" type="ColorRect" parent="level_menu"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 38.0
+offset_top = 414.0
+offset_right = 428.18
+offset_bottom = 493.5
+color = Color(0, 0, 0, 0.364706)
+
+[node name="PLAY_P4" type="ColorRect" parent="level_menu"]
+custom_minimum_size = Vector2(390.18, 79.5)
+offset_left = 34.0
+offset_top = 411.0
+offset_right = 424.18
+offset_bottom = 490.5
+color = Color(0.125911, 0.125911, 0.125911, 1)
 
 [node name="BACK" type="Button" parent="level_menu"]
 custom_minimum_size = Vector2(390, 0)
@@ -152,10 +349,17 @@ icon = SubResource("Texture2DRD_e72oy")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
+[node name="PostShaders" parent="." instance=ExtResource("3_w1c41")]
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(637, 360)
+
 [connection signal="button_down" from="main_ui/PLAY" to="." method="_play"]
-[connection signal="button_up" from="main_ui/SETTINGS" to="." method="_settings"]
 [connection signal="button_up" from="main_ui/LEVEL" to="." method="_level_select"]
+[connection signal="button_up" from="main_ui/SETTINGS" to="." method="_settings"]
 [connection signal="value_changed" from="settings_menu/HSlider" to="." method="_update_vol"]
+[connection signal="value_changed" from="settings_menu/HSlider2" to="." method="_update_vol"]
 [connection signal="button_down" from="settings_menu/BACK" to="." method="_back"]
 [connection signal="toggled" from="settings_menu/CheckButton" to="." method="_windowed"]
 [connection signal="button_down" from="level_menu/LEVEL 1" to="." method="_load_level_0"]

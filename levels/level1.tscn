@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bbohbihpvs2j6"]
+[gd_scene load_steps=24 format=4 uid="uid://c73p0q02bvget"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/level.gd" id="1_msfih"]
 [ext_resource type="Texture2D" uid="uid://8k188hxjnc4f" path="res://assets/gb_or_ss.png" id="2_gqrbl"]
@@ -102,7 +102,7 @@ size = Vector2(158, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukmx6"]
 size = Vector2(34, 65)
 
-[node name="root" type="Node2D" node_paths=PackedStringArray("box_handler")]
+[node name="root2" type="Node2D" node_paths=PackedStringArray("box_handler")]
 script = ExtResource("1_msfih")
 box_handler = NodePath("Box_Handler")
 
