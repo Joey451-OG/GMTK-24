@@ -5,7 +5,9 @@ extends CanvasLayer
 @export var settings_menu := CanvasGroup 
 
 var volume_v: float
-var json_path = "res://volume.json"
+
+signal send_mus(val : float)
+signal send_sfx(val : float)
 
 func _ready():
 	volume_v = 1.0
@@ -23,7 +25,7 @@ func _load_level_1():
 	get_tree().change_scene_to_file("res://levels/level1.tscn")
 
 func _load_level_2():
-	get_tree().change_scene_to_file("res://levels/level1.tscn")
+	get_tree().change_scene_to_file("res://levels/level2.tscn")
 
 func _settings():
 	level_menu.visible = false
@@ -48,16 +50,8 @@ func _windowed(boolean):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-
-func _update_vol(val):
-	volume_v = val
 	
-	var file = FileAccess.open(json_path, FileAccess.WRITE)
-	
-	file.store_string(JSON.stringify(volume_v))
 
-func _on_h_slider_value_changed(value):
-	pass # Replace with function body.
 
 func _on_button_1_hover():
 	pass
@@ -86,3 +80,12 @@ func _on_button_8_hover():
 
 func _on_level_mouse_entered():
 	pass # Replace with function body.
+
+
+func _on_music_value_changed(value: float) -> void:
+	VolumeSingleton.mus_vol = value
+	send_mus.emit(value)
+
+func _on_sfx_value_changed(value: float) -> void:
+	VolumeSingleton.sfx_vol = value
+	send_sfx.emit(value)

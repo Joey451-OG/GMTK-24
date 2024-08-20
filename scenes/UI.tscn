@@ -1,9 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://br17xhjkbqcui"]
+[gd_scene load_steps=17 format=3 uid="uid://br17xhjkbqcui"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/ui.gd" id="1_ok621"]
 [ext_resource type="Texture2D" uid="uid://dhnyrysqpyo5j" path="res://assets/bg_.png" id="2_r2j4s"]
 [ext_resource type="FontFile" uid="uid://bd78jbxhdwig6" path="res://assets/fonts/HomeLimited.ttf" id="3_bij1g"]
 [ext_resource type="PackedScene" uid="uid://5ce6ya46djxu" path="res://scenes/post_shaders.tscn" id="3_w1c41"]
+[ext_resource type="Script" path="res://scripts/gdscript/radio.gd" id="4_clqgh"]
+[ext_resource type="AudioStream" uid="uid://clo05otne70yw" path="res://music/Two Medium Two Topping Pizzas with Double Pepperoni.wav" id="4_gqs2u"]
+[ext_resource type="AudioStream" uid="uid://fb3tvyc8syo" path="res://music/sfx/throwedit.wav" id="6_1njin"]
+[ext_resource type="AudioStream" uid="uid://dj7xhg7x3lt3k" path="res://music/level0.mp3" id="6_wumbs"]
+[ext_resource type="AudioStream" uid="uid://beqae8vasyn63" path="res://music/level1.mp3" id="7_0qgaf"]
+[ext_resource type="AudioStream" uid="uid://bjpo7x1j3c4v3" path="res://music/level2.mp3" id="8_n5v6k"]
+[ext_resource type="AudioStream" uid="uid://3nlhetgit5sm" path="res://music/AvecaStampCollectingRobot.mp3" id="9_bk5pq"]
+[ext_resource type="AudioStream" uid="uid://5l0lqtdtokqd" path="res://music/sfx/jump.wav" id="11_beots"]
+[ext_resource type="AudioStream" uid="uid://dimwrjgnm5jph" path="res://music/sfx/hit.wav" id="11_bhfxm"]
 
 [sub_resource type="Environment" id="Environment_i5bbw"]
 background_mode = 3
@@ -16,7 +25,7 @@ glow_bloom = 1.0
 
 [sub_resource type="Texture2DRD" id="Texture2DRD_e72oy"]
 
-[node name="Ui" type="CanvasLayer" node_paths=PackedStringArray("main_menu", "level_menu", "settings_menu")]
+[node name="root" type="CanvasLayer" node_paths=PackedStringArray("main_menu", "level_menu", "settings_menu")]
 script = ExtResource("1_ok621")
 main_menu = NodePath("main_ui")
 level_menu = NodePath("level_menu")
@@ -123,6 +132,7 @@ text = "SETTINGS"
 icon = SubResource("Texture2DRD_e72oy")
 
 [node name="settings_menu" type="CanvasGroup" parent="."]
+visible = false
 position = Vector2(-15, 0)
 
 [node name="Lust" type="Sprite2D" parent="settings_menu"]
@@ -156,6 +166,10 @@ offset_left = 44.0
 offset_top = 138.0
 offset_right = 434.3
 offset_bottom = 164.73
+min_value = 0.001
+max_value = 1.0
+step = 0.05
+value = 0.501
 
 [node name="RichTextLabel" type="RichTextLabel" parent="settings_menu"]
 physics_interpolation_mode = 1
@@ -173,6 +187,10 @@ offset_left = 44.0
 offset_top = 64.0
 offset_right = 434.3
 offset_bottom = 90.73
+min_value = 0.001
+max_value = 1.0
+step = 0.05
+value = 0.501
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="settings_menu"]
 physics_interpolation_mode = 1
@@ -367,6 +385,53 @@ text = "BACK
 icon = SubResource("Texture2DRD_e72oy")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_gqs2u")
+script = ExtResource("4_clqgh")
+
+[node name="Throwedit" type="AudioStreamPlayer2D" parent="AudioStreamPlayer2D"]
+position = Vector2(274, 621)
+stream = ExtResource("6_1njin")
+
+[node name="Level0" type="AudioStreamPlayer2D" parent="AudioStreamPlayer2D"]
+position = Vector2(199, 344)
+stream = ExtResource("6_wumbs")
+volume_db = 18.91
+max_distance = 1e+06
+bus = &"music"
+parameters/looping = true
+
+[node name="Level1" type="AudioStreamPlayer2D" parent="AudioStreamPlayer2D"]
+position = Vector2(153, 379)
+stream = ExtResource("7_0qgaf")
+volume_db = 9.98
+parameters/looping = true
+
+[node name="Level2" type="AudioStreamPlayer2D" parent="AudioStreamPlayer2D"]
+position = Vector2(169, 347)
+stream = ExtResource("8_n5v6k")
+volume_db = -33.09
+panning_strength = 0.0
+parameters/looping = true
+
+[node name="TwoMediumTwoToppingPizzasWithDoublePepperoni" type="AudioStreamPlayer2D" parent="AudioStreamPlayer2D"]
+position = Vector2(724, 466)
+stream = ExtResource("4_gqs2u")
+volume_db = 18.584
+bus = &"music"
+
+[node name="AvecaStampCollectingRobot" type="AudioStreamPlayer2D" parent="AudioStreamPlayer2D"]
+position = Vector2(634, 452)
+stream = ExtResource("9_bk5pq")
+volume_db = 13.657
+bus = &"music"
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="AudioStreamPlayer2D"]
+position = Vector2(808, 186)
+stream = ExtResource("11_bhfxm")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="AudioStreamPlayer2D"]
+position = Vector2(47, 570)
+stream = ExtResource("11_beots")
 
 [node name="PostShaders" parent="." instance=ExtResource("3_w1c41")]
 visible = false
@@ -374,6 +439,8 @@ visible = false
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(637, 360)
 
+[connection signal="send_mus" from="." to="AudioStreamPlayer2D" method="_on_root_send_mus"]
+[connection signal="send_sfx" from="." to="AudioStreamPlayer2D" method="_on_root_send_sfx"]
 [connection signal="button_down" from="main_ui/PLAY" to="." method="_play"]
 [connection signal="mouse_entered" from="main_ui/PLAY" to="." method="_on_button_1_hover"]
 [connection signal="button_up" from="main_ui/LEVEL" to="." method="_level_select"]
@@ -381,8 +448,8 @@ position = Vector2(637, 360)
 [connection signal="mouse_entered" from="main_ui/LEVEL" to="." method="_on_level_mouse_entered"]
 [connection signal="button_up" from="main_ui/SETTINGS" to="." method="_settings"]
 [connection signal="mouse_entered" from="main_ui/SETTINGS" to="." method="_on_button_3_hover"]
-[connection signal="value_changed" from="settings_menu/Sfx" to="." method="_update_vol"]
-[connection signal="value_changed" from="settings_menu/Music" to="." method="_update_vol"]
+[connection signal="value_changed" from="settings_menu/Sfx" to="." method="_on_sfx_value_changed"]
+[connection signal="value_changed" from="settings_menu/Music" to="." method="_on_music_value_changed"]
 [connection signal="button_down" from="settings_menu/BACK" to="." method="_back"]
 [connection signal="mouse_entered" from="settings_menu/BACK" to="." method="_on_button_4_hover"]
 [connection signal="toggled" from="settings_menu/CheckButton" to="." method="_windowed"]
@@ -394,3 +461,4 @@ position = Vector2(637, 360)
 [connection signal="mouse_entered" from="level_menu/LEVEL 3" to="." method="_on_button_6_hover"]
 [connection signal="button_down" from="level_menu/BACK" to="." method="_back"]
 [connection signal="mouse_entered" from="level_menu/BACK" to="." method="_on_button_7_hover"]
+[connection signal="finished" from="AudioStreamPlayer2D/TwoMediumTwoToppingPizzasWithDoublePepperoni" to="AudioStreamPlayer2D" method="_on_two_medium_two_topping_pizzas_with_double_pepperoni_finished"]

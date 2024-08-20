@@ -19,6 +19,10 @@ func _to_level_1(body: Node2D):
 func _to_level_2(body: Node2D):
 	if body.is_in_group("player"):
 		get_tree().change_scene_to_file("res://levels/level2.tscn")
+		
+func _load_credits(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		get_tree().change_scene_to_file("res://levels/credits.tscn")
 
 # Change Cameras
 

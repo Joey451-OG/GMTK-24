@@ -23,6 +23,7 @@ extends CharacterBody2D
 
 @export var camera: Camera2D
 @export var ceiling_collider: Area2D
+@export var audio_controller : AudioStreamPlayer2D
 
 var final_velocity: Vector2
 var target_camera_position: Vector2
@@ -90,6 +91,7 @@ func _calculate_move_vector(delta : float) -> Vector2:
 			in_air = false
 	
 	if is_on_floor() && (Input.is_action_pressed("Forward") or Input.is_action_pressed("Jump")) || can_still_jump && (Input.is_action_pressed("Forward") or Input.is_action_pressed("Jump")):	
+		audio_controller._play_jump()
 		t_velocity_y-=jump_force
 		landing_partical_CPU.emitting = true
 		just_jumped = true
@@ -198,6 +200,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 
 func _on_body_entered(body):
 	if body.is_in_group("enemy_bullet") && body != self:
+		audio_controller._play_hit()
 		crnt_health -= max_health
 		crnt_health = clampf(crnt_health, 0.0, max_health)
 		if crnt_health == 0: 
