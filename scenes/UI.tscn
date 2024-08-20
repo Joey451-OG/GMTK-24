@@ -59,6 +59,7 @@ offset_bottom = 111.0
 localize_numeral_system = false
 theme = SubResource("Theme_nd2hv")
 theme_override_fonts/font = ExtResource("3_bij1g")
+theme_override_font_sizes/font_size = 36
 text = "PLAY"
 icon = SubResource("Texture2DRD_e72oy")
 
@@ -87,6 +88,7 @@ offset_bottom = 333.0
 localize_numeral_system = false
 theme = SubResource("Theme_nd2hv")
 theme_override_fonts/font = ExtResource("3_bij1g")
+theme_override_font_sizes/font_size = 36
 text = "LEVEL SELECT
 "
 icon = SubResource("Texture2DRD_e72oy")
@@ -116,11 +118,11 @@ offset_bottom = 221.0
 localize_numeral_system = false
 theme = SubResource("Theme_nd2hv")
 theme_override_fonts/font = ExtResource("3_bij1g")
+theme_override_font_sizes/font_size = 36
 text = "SETTINGS"
 icon = SubResource("Texture2DRD_e72oy")
 
 [node name="settings_menu" type="CanvasGroup" parent="."]
-visible = false
 position = Vector2(-15, 0)
 
 [node name="Lust" type="Sprite2D" parent="settings_menu"]
@@ -148,7 +150,7 @@ offset_bottom = 100.5
 scale = Vector2(1.11105, 3.10802)
 color = Color(0.125911, 0.125911, 0.125911, 1)
 
-[node name="HSlider" type="HSlider" parent="settings_menu"]
+[node name="Sfx" type="HSlider" parent="settings_menu"]
 custom_minimum_size = Vector2(390.3, 26.73)
 offset_left = 44.0
 offset_top = 138.0
@@ -162,9 +164,10 @@ offset_left = 201.0
 offset_top = 111.0
 offset_right = 324.89
 offset_bottom = 151.0
-text = "VOLUME"
+theme_override_fonts/normal_font = ExtResource("3_bij1g")
+text = "SFX"
 
-[node name="HSlider2" type="HSlider" parent="settings_menu"]
+[node name="Music" type="HSlider" parent="settings_menu"]
 custom_minimum_size = Vector2(390.3, 26.73)
 offset_left = 44.0
 offset_top = 64.0
@@ -178,6 +181,7 @@ offset_left = 201.0
 offset_top = 37.0
 offset_right = 324.89
 offset_bottom = 77.0
+theme_override_fonts/normal_font = ExtResource("3_bij1g")
 text = "MUSIC"
 
 [node name="D_SHADOW2" type="ColorRect" parent="settings_menu"]
@@ -211,6 +215,8 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_bij1g")
+theme_override_font_sizes/font_size = 36
 text = "BACK
 "
 icon = SubResource("Texture2DRD_e72oy")
@@ -220,8 +226,9 @@ physics_interpolation_mode = 1
 custom_minimum_size = Vector2(105.56, 0)
 offset_left = 184.0
 offset_top = 192.0
-offset_right = 289.56
+offset_right = 310.0
 offset_bottom = 232.0
+theme_override_fonts/normal_font = ExtResource("3_bij1g")
 text = "FULL SCREEN"
 
 [node name="CheckButton" type="CheckButton" parent="settings_menu"]
@@ -263,6 +270,7 @@ offset_top = 31.0
 offset_right = 424.0
 offset_bottom = 111.0
 theme_override_fonts/font = ExtResource("3_bij1g")
+theme_override_font_sizes/font_size = 36
 text = "LEVEL 1"
 icon = SubResource("Texture2DRD_e72oy")
 
@@ -305,6 +313,7 @@ offset_top = 141.0
 offset_right = 424.0
 offset_bottom = 221.0
 theme_override_fonts/font = ExtResource("3_bij1g")
+theme_override_font_sizes/font_size = 36
 text = "LEVEL 2"
 icon = SubResource("Texture2DRD_e72oy")
 
@@ -315,6 +324,7 @@ offset_top = 253.0
 offset_right = 424.0
 offset_bottom = 333.0
 theme_override_fonts/font = ExtResource("3_bij1g")
+theme_override_font_sizes/font_size = 36
 text = "LEVEL 3
 "
 icon = SubResource("Texture2DRD_e72oy")
@@ -351,6 +361,7 @@ grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("3_bij1g")
+theme_override_font_sizes/font_size = 36
 text = "BACK
 "
 icon = SubResource("Texture2DRD_e72oy")
@@ -358,6 +369,7 @@ icon = SubResource("Texture2DRD_e72oy")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [node name="PostShaders" parent="." instance=ExtResource("3_w1c41")]
+visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(637, 360)
@@ -369,8 +381,8 @@ position = Vector2(637, 360)
 [connection signal="mouse_entered" from="main_ui/LEVEL" to="." method="_on_button_2_hover"]
 [connection signal="button_up" from="main_ui/SETTINGS" to="." method="_settings"]
 [connection signal="mouse_entered" from="main_ui/SETTINGS" to="." method="_on_button_3_hover"]
-[connection signal="value_changed" from="settings_menu/HSlider" to="." method="_update_vol"]
-[connection signal="value_changed" from="settings_menu/HSlider2" to="." method="_update_vol"]
+[connection signal="value_changed" from="settings_menu/Sfx" to="." method="_update_vol"]
+[connection signal="value_changed" from="settings_menu/Music" to="." method="_update_vol"]
 [connection signal="button_down" from="settings_menu/BACK" to="." method="_back"]
 [connection signal="mouse_entered" from="settings_menu/BACK" to="." method="_on_button_4_hover"]
 [connection signal="toggled" from="settings_menu/CheckButton" to="." method="_windowed"]

@@ -5,6 +5,7 @@ extends CanvasLayer
 @export var settings_menu := CanvasGroup 
 
 var volume_v: float
+var json_path = "res://volume.json"
 
 func _ready():
 	volume_v = 1.0
@@ -50,6 +51,10 @@ func _windowed(boolean):
 
 func _update_vol(val):
 	volume_v = val
+	
+	var file = FileAccess.open(json_path, FileAccess.WRITE)
+	
+	file.store_string(JSON.stringify(volume_v))
 
 func _on_h_slider_value_changed(value):
 	pass # Replace with function body.
